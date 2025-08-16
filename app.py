@@ -1,4 +1,6 @@
-﻿"""
+﻿
+
+"""
 Smart Resume AI - Main Application
 """
 import streamlit as st
@@ -38,6 +40,7 @@ import json
 import datetime
 from dotenv import load_dotenv
 import os
+from aimocktest import run_quiz  # Import the run_quiz function
 
 load_dotenv()  # Load from .env file
 google_api_key = os.getenv("GOOGLE_API_KEY")
@@ -88,12 +91,13 @@ class ResumeApp:
 
         self.pages = {
             "🏠 HOME": self.render_home,
-            "🔍 RESUME ANALYZER": self.render_analyzer,
             "📝 RESUME BUILDER": self.render_builder,
-            "📊 DASHBOARD": self.render_dashboard,
+            "🔍 RESUME ANALYZER": self.render_analyzer,
             "🎯 JOB SEARCH": self.render_job_search,
+            "📊 DASHBOARD": self.render_dashboard,
             "💬 FEEDBACK": self.render_feedback_page,
-            "ℹ️ ABOUT": self.render_about
+            "🤖 Smart Quiz ": self.render_quiz, 
+
         }
 
         # Initialize dashboard manager
@@ -471,6 +475,71 @@ class ResumeApp:
         }
         </style>
         """, unsafe_allow_html=True)
+        
+    def render_quiz(self):
+        """Render the AI Quiz page"""
+        try:
+            # Add a header for consistency with your app
+            apply_modern_styles()
+    
+        # Page Header
+            page_header(
+            "AI-Powered Quiz",
+            "Choose your preferred learning experience and challenge yourself across various domains with our advanced assessment system."
+        )
+            st.markdown("""
+    <style>
+    /* Center align and style tab container */
+    .stTabs [data-baseweb="tab-list"] {
+        justify-content: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        gap: 10px;
+    }
+
+    /* Base style for each tab */
+    .stTabs [data-baseweb="tab"] {
+        background-color: #f0f0f0;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 10px 24px;
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+        transition: all 0.2s ease-in-out;
+    }
+
+    /* Hover effect */
+    .stTabs [data-baseweb="tab"]:hover {
+        background-color: #e0f5ec;
+        border-color: #00bfa5;
+        color: #111;
+        transform: translateY(-2px);
+        cursor: pointer;
+    }
+
+    /* Selected/active tab style */
+    .stTabs [aria-selected="true"] {
+        background-color: #00bfa5 !important;
+        color: white !important;
+        border: 1px solid #00bfa5;
+        font-weight: 700;
+        box-shadow: 0px 4px 12px rgba(0, 191, 165, 0.2);
+    }
+    </style>
+""", unsafe_allow_html=True)
+            st.markdown("---")
+            
+            # Call the quiz function
+            run_quiz()
+            
+        except Exception as e:
+            st.error(f"❌ Error loading quiz: {str(e)}")
+            st.info("Please ensure the quiz module is properly configured.")
+            
+            # Optional: Add a refresh button
+            if st.button("🔄 Refresh Quiz"):
+                st.rerun()
 
     def add_footer(self):
         """Add a footer to all pages"""
@@ -504,38 +573,38 @@ class ResumeApp:
     #         print(f"Error loading image {image_name}: {e}")
     #         return None
 
-    def export_to_excel(self):
-        """Export resume data to Excel"""
-        conn = get_database_connection()
+    # def export_to_excel(self):
+    #     """Export resume data to Excel"""
+    #     conn = get_database_connection()
 
-        # Get resume data with analysis
-        query = """
-            SELECT
-                rd.name, rd.email, rd.phone, rd.linkedin, rd.github, rd.portfolio,
-                rd.summary, rd.target_role, rd.target_category,
-                rd.education, rd.experience, rd.projects, rd.skills,
-                ra.ats_score, ra.keyword_match_score, ra.format_score, ra.section_score,
-                ra.missing_skills, ra.recommendations,
-                rd.created_at
-            FROM resume_data rd
-            LEFT JOIN resume_analysis ra ON rd.id = ra.resume_id
-        """
+    #     # Get resume data with analysis
+    #     query = """
+    #         SELECT
+    #             rd.name, rd.email, rd.phone, rd.linkedin, rd.github, rd.portfolio,
+    #             rd.summary, rd.target_role, rd.target_category,
+    #             rd.education, rd.experience, rd.projects, rd.skills,
+    #             ra.ats_score, ra.keyword_match_score, ra.format_score, ra.section_score,
+    #             ra.missing_skills, ra.recommendations,
+    #             rd.created_at
+    #         FROM resume_data rd
+    #         LEFT JOIN resume_analysis ra ON rd.id = ra.resume_id
+    #     """
 
-        try:
-            # Read data into DataFrame
-            df = pd.read_sql_query(query, conn)
+    #     try:
+    #         # Read data into DataFrame
+    #         df = pd.read_sql_query(query, conn)
 
-            # Create Excel writer object
-            output = io.BytesIO()
-            with pd.ExcelWriter(output, engine='openpyxl') as writer:
-                df.to_excel(writer, index=False, sheet_name='Resume Data')
+    #         # Create Excel writer object
+    #         output = io.BytesIO()
+    #         with pd.ExcelWriter(output, engine='openpyxl') as writer:
+    #             df.to_excel(writer, index=False, sheet_name='Resume Data')
 
-            return output.getvalue()
-        except Exception as e:
-            print(f"Error exporting to Excel: {str(e)}")
-            return None
-        finally:
-            conn.close()
+    #         return output.getvalue()
+    #     except Exception as e:
+    #         print(f"Error exporting to Excel: {str(e)}")
+    #         return None
+    #     finally:
+    #         conn.close()
 
     def render_dashboard(self):
         """Render the dashboard page"""
@@ -589,8 +658,56 @@ class ResumeApp:
     #     return False
 
     def render_builder(self):
-        st.title("Resume Builder 📝")
-        st.write("Create your professional resume")
+        apply_modern_styles()
+    
+        # Page Header
+        page_header(
+            "Resume Builder",
+            "Create your professional resume"
+        )
+        st.markdown("""
+    <style>
+    /* Center align and style tab container */
+    .stTabs [data-baseweb="tab-list"] {
+        justify-content: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        gap: 10px;
+    }
+
+    /* Base style for each tab */
+    .stTabs [data-baseweb="tab"] {
+        background-color: #f0f0f0;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 10px 24px;
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+        transition: all 0.2s ease-in-out;
+    }
+
+    /* Hover effect */
+    .stTabs [data-baseweb="tab"]:hover {
+        background-color: #e0f5ec;
+        border-color: #00bfa5;
+        color: #111;
+        transform: translateY(-2px);
+        cursor: pointer;
+    }
+
+    /* Selected/active tab style */
+    .stTabs [aria-selected="true"] {
+        background-color: #00bfa5 !important;
+        color: white !important;
+        border: 1px solid #00bfa5;
+        font-weight: 700;
+        box-shadow: 0px 4px 12px rgba(0, 191, 165, 0.2);
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+        
 
         # Template selection
         template_options = ["Modern", "Professional", "Minimal", "Creative"]
@@ -887,6 +1004,88 @@ class ResumeApp:
         st.session_state.form_data.update({
             'summary': summary
         })
+        
+        # Custom Sections
+        st.subheader("Custom Sections")
+        
+        if 'custom_sections' not in st.session_state.form_data:
+            st.session_state.form_data['custom_sections'] = []
+        
+        if st.button("Add More "):
+            st.session_state.form_data['custom_sections'].append({
+                'section_name': '',
+                'items': []
+            })
+        
+        for section_idx, custom_section in enumerate(st.session_state.form_data['custom_sections']):
+            with st.expander(f"Custom Section {section_idx + 1}", expanded=True):
+                # Section name
+                custom_section['section_name'] = st.text_input(
+                    "Section Name", 
+                    key=f"custom_section_name_{section_idx}",
+                    value=custom_section.get('section_name', ''),
+                    help="e.g., Certifications, Awards, Volunteer Work, Publications"
+                )
+                
+                # Initialize items if not exists
+                if 'items' not in custom_section:
+                    custom_section['items'] = []
+                
+                # Add item button
+                if st.button(f"Add Item to {custom_section.get('section_name', 'Section')}", key=f"add_item_{section_idx}"):
+                    custom_section['items'].append({
+                        'title': '',
+                        'details': '',
+                        'date': '',
+                        'description': ''
+                    })
+                
+                # Display items
+                for item_idx, item in enumerate(custom_section['items']):
+                    st.markdown(f"**Item {item_idx + 1}**")
+                    
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        item['title'] = st.text_input(
+                            "Title/Name", 
+                            key=f"custom_item_title_{section_idx}_{item_idx}",
+                            value=item.get('title', ''),
+                            help="e.g., Certificate name, Award title, Organization name"
+                        )
+                    with col2:
+                        item['date'] = st.text_input(
+                            "Date (optional)", 
+                            key=f"custom_item_date_{section_idx}_{item_idx}",
+                            value=item.get('date', ''),
+                            help="When you received/completed this"
+                        )
+                    
+                    item['details'] = st.text_input(
+                        "Details/Organization", 
+                        key=f"custom_item_details_{section_idx}_{item_idx}",
+                        value=item.get('details', ''),
+                        help="Issuing organization, location, or additional details"
+                    )
+                    
+                    item['description'] = st.text_area(
+                        "Description (optional)", 
+                        key=f"custom_item_desc_{section_idx}_{item_idx}",
+                        value=item.get('description', ''),
+                        height=80,
+                        help="Brief description of the achievement, work, or certification"
+                    )
+                    
+                    if st.button(f"Remove Item", key=f"remove_custom_item_{section_idx}_{item_idx}"):
+                        custom_section['items'].pop(item_idx)
+                        st.rerun()
+                    
+                    st.divider()
+                
+                if st.button(f"Remove Section", key=f"remove_custom_section_{section_idx}"):
+                    st.session_state.form_data['custom_sections'].pop(section_idx)
+                    st.rerun()
+                
+                st.markdown("---")
 
         # Generate Resume button
         if st.button("Generate Resume 📄", type="primary"):
@@ -997,236 +1196,7 @@ class ResumeApp:
 
         # st.toast("Check out these repositories: [30-Days-Of-Rust](https://github.com/Hunterdii/30-Days-Of-Rust)", icon="ℹ️")
 
-    def render_about(self):
-        def get_image_as_base64(file_path):
-            try:
-                with open(file_path, "rb") as image_file:
-                    encoded = base64.b64encode(image_file.read()).decode()
-                    return f"data:image/jpeg;base64,{encoded}"
-            except:
-                return None
-    
-        apply_modern_styles()
-    
-        st.markdown("""
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-            <style>
-                .profile-card {
-                    background: rgba(45, 45, 45, 0.95);
-                    padding: 2rem;
-                    border-radius: 20px;
-                    text-align: center;
-                    color: white;
-                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-                    margin: 1.5rem 0;
-                    height: 100%;
-                }
-                .profile-card img {
-                    width: 120px;
-                    height: 120px;
-                    border-radius: 50%;
-                    object-fit: cover;
-                    margin-bottom: 1rem;
-                    border: 4px solid #4CAF50;
-                }
-                .profile-card h3 {
-                    font-size: 1.8rem;
-                    margin-bottom: 0.5rem;
-                    color: white;
-                }
-                .profile-card p {
-                    font-size: 1rem;
-                    margin: 0.5rem 0;
-                    color: #ccc;
-                }
-                .social-links {
-                    margin-top: 1rem;
-                    display: flex;
-                    justify-content: center;
-                    gap: 1rem;
-                }
-                .social-links a {
-                    color: #4CAF50;
-                    font-size: 1.5rem;
-                    text-decoration: none;
-                    transition: all 0.3s ease;
-                }
-                .social-links a:hover {
-                    color: white;
-                }
-                .vision-title {
-                    font-size: 2rem;
-                    color: white;
-                    margin-bottom: 1rem;
-                }
-                .vision-text {
-                    color: #ddd;
-                    line-height: 1.8;
-                    font-size: 1.1rem;
-                    font-style: italic;
-                    margin: 1.5rem 0;
-                    text-align: left;
-                }
-                .features-grid {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                    gap: 2rem;
-                    margin: 2rem auto;
-                    max-width: 1200px;
-                }
-                .feature-card {
-                    padding: 2rem;
-                    background: rgba(50, 50, 50, 0.9);
-                    border-radius: 15px;
-                    text-align: center;
-                    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-                }
-                .feature-icon {
-                    font-size: 2.5rem;
-                    color: #4CAF50;
-                    margin-bottom: 1rem;
-                }
-                .feature-title {
-                    font-size: 1.5rem;
-                    color: white;
-                    margin: 1rem 0;
-                }
-                .feature-description {
-                    color: #ddd;
-                    line-height: 1.6;
-                }
-                .cta-button {
-                color: black;
-                background-color: white;
-                border: 1px solid black;
-                padding: 10px 20px;
-                text-decoration: none;
-                font-weight: bold;
-                border-radius: 5px;
-                display: inline-block;
-                }            
-
-                }
-                .cta-button:hover {
-                    background-color: #45a049;
-                }
-            </style>
-        """, unsafe_allow_html=True)
-            # Team Section Title
-        st.markdown("""
-            <h2 class="team-section-title">Meet Our Team</h2>
-        """, unsafe_allow_html=True)
-
-        # 4 team members
-        team_members = [
-            {
-                "name": "Aksh Patel",
-                "title": "Python Developer & ML Enthusiast",
-                "image": "https://avatars.githubusercontent.com/u/175792629?s=400&u=408184a732a11cd6164d14052a56dbebf4c11e49&v=4",
-                "github": "https://github.com/akshpatel26",
-                "linkedin": "https://www.linkedin.com/in/aksh-patel-a1932a285/",
-                "email": "mailto:akshpatel2602@gmail.com",
-                "bio": "I created Smart Resume AI to revolutionize how job seekers approach their career journey. Skilled in AI and backend systems."
-            },
-            {
-                "name": "Ayush Patel",
-                "title": "Full Stack Developer & Python Developer ",
-                "image": "https://avatars.githubusercontent.com/u/193797621?v=4",  # Replace with real image URL
-                "github": "https://github.com/iamayushpatel",
-                "linkedin": "https://www.linkedin.com/in/iamayushpatel",
-                "email": "mailto:gargi@example.com",
-                "bio": "I'm passionate about designing user-centric interfaces that simplify workflows and enhance user experiences across platforms."
-            },
-            {
-                "name": "Prinsi Patel",
-                "title": "Data Scientist",
-                "image": "",
-                "github": "https://github.com/princypatel1712",
-                "linkedin": "https://www.linkedin.com/in/prinsi-patel-940265284",
-                "email": "mailto:tantodmahir@gmail.com",
-                "bio": "Specialized in predictive analytics, statistical modeling, and data visualization to solve real-world business challenges."
-            },
-            {
-                "name": "Prerana Patel",
-                "title": "Data Scientist",
-                "image": "",
-                "github": "",
-                "linkedin": "",
-                "email": "mailto:tantodmahir@gmail.com",
-                "bio": "Specialized in predictive analytics, statistical modeling, and data visualization to solve real-world business challenges."
-            },
-        ]
-        
-        # Render 2 members per row
-        for i in range(0, len(team_members), 2):
-            row = st.columns(2)
-            for j in range(2):
-                if i + j < len(team_members):
-                    member = team_members[i + j]
-                    with row[j]:
-                        st.markdown(
-                            f"""
-                            <div class="profile-card">
-                                <img src="{member['image']}" alt="{member['name']}" onerror="this.onerror=null; this.src='https://via.placeholder.com/150';">
-                                <h3>{member['name']}</h3>
-                                <p>{member['title']}</p>
-                                <p>{member['bio']}</p>
-                                <div class="social-links">
-                                    <a href="{member['github']}" target="_blank"><i class="fab fa-github"></i></a>
-                                    <a href="{member['linkedin']}" target="_blank"><i class="fab fa-linkedin"></i></a>
-                                    <a href="{member['email']}" target="_blank"><i class="fas fa-envelope"></i></a>
-                                </div>
-                            </div>
-                            """,
-                            unsafe_allow_html=True,
-                        )
-    
-        # Vision Section
-        st.markdown("""
-            <div class="vision-section">
-                <h2 class="vision-title">Our Vision</h2>
-                <p class="vision-text">
-                    "Smart Resume AI is our shared vision of using intelligent systems to empower job seekers. 
-                    We believe in equal opportunity through technology and strive to build tools that reflect that goal."
-                </p>
-            </div>
-        """, unsafe_allow_html=True)
-    
-        # Features Section
-        st.markdown("""
-            <div class="features-grid">
-                <div class="feature-card">
-                    <i class="fas fa-robot feature-icon"></i>
-                    <h3 class="feature-title">AI-Powered Analysis</h3>
-                    <p class="feature-description">
-                        Advanced AI algorithms provide detailed insights and suggestions to optimize your resume for maximum impact.
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-chart-line feature-icon"></i>
-                    <h3 class="feature-title">Data-Driven Insights</h3>
-                    <p class="feature-description">
-                        Make informed decisions with our analytics-based recommendations and industry insights.
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-shield-alt feature-icon"></i>
-                    <h3 class="feature-title">Privacy First</h3>
-                    <p class="feature-description">
-                        Your data security is our priority. We ensure your information is always protected and private.
-                    </p>
-                </div>
-            </div>
-            <div style="text-align: center; margin: 3rem 0;">
-                <a href="?page=analyzer" class="cta-button">
-                    Start Your Journey
-                    <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
-                </a>
-            </div>
-        """, unsafe_allow_html=True)
-    
-    
-            # st.toast("Check out these repositories: [Iriswise](https://github.com/Hunterdii/Iriswise)", icon="ℹ️")
+  
     
     def render_analyzer(self):
         """Render the resume analyzer page"""
@@ -1237,6 +1207,47 @@ class ResumeApp:
             "Resume Analyzer",
             "Get instant AI-powered feedback to optimize your resume"
         )
+        st.markdown("""
+    <style>
+    /* Center align and style tab container */
+    .stTabs [data-baseweb="tab-list"] {
+        justify-content: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        gap: 10px;
+    }
+
+    /* Base style for each tab */
+    .stTabs [data-baseweb="tab"] {
+        background-color: #f0f0f0;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 10px 24px;
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+        transition: all 0.2s ease-in-out;
+    }
+
+    /* Hover effect */
+    .stTabs [data-baseweb="tab"]:hover {
+        background-color: #e0f5ec;
+        border-color: #00bfa5;
+        color: #111;
+        transform: translateY(-2px);
+        cursor: pointer;
+    }
+
+    /* Selected/active tab style */
+    .stTabs [aria-selected="true"] {
+        background-color: #00bfa5 !important;
+        color: white !important;
+        border: 1px solid #00bfa5;
+        font-weight: 700;
+        box-shadow: 0px 4px 12px rgba(0, 191, 165, 0.2);
+    }
+    </style>
+""", unsafe_allow_html=True)
 
         # Create tabs for Normal Analyzer and AI Analyzer
         analyzer_tabs = st.tabs(["Standard Analyzer", "AI Analyzer"])
@@ -1358,7 +1369,7 @@ class ResumeApp:
                             return
 
                         # Show snowflake effect
-                        st.snow()
+                        # st.snow()
 
                         # Save resume data to database
                         resume_data = {
@@ -1408,207 +1419,183 @@ class ResumeApp:
                             st.warning(
                                 "Please upload a proper resume for ATS analysis.")
                             return
-                        # Display results in a modern card layout
-                    col1, col2 = st.columns(2)
-
-                    with col1:
-                        # ATS Score Card with circular progress
-                        st.markdown("""
-                        <div class="feature-card">
-                            <h2>ATS Score</h2>
-                            <div style="position: relative; width: 150px; height: 150px; margin: 0 auto;">
-                                <div style="
-                                    position: absolute;
-                                    width: 150px;
-                                    height: 150px;
-                                    border-radius: 50%;
-                                    background: conic-gradient(
-                                        #4CAF50 0% {score}%,
-                                        #2c2c2c {score}% 100%
-                                    );
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: center;
-                                ">
-                                    <div style="
-                                        width: 120px;
-                                        height: 120px;
-                                        background: #1a1a1a;
-                                        border-radius: 50%;
-                                        display: flex;
-                                        align-items: center;
-                                        justify-content: center;
-                                        font-size: 24px;
-                                        font-weight: bold;
-                                        color: {color};
-                                    ">
-                                        {score}
-                                    </div>
-                                </div>
-                            </div>
-                            <div style="text-align: center; margin-top: 10px;">
-                                <span style="
-                                    font-size: 1.2em;
-                                    color: {color};
-                                    font-weight: bold;
-                                ">
-                                    {status}
-                                </span>
-                            </div>
-                        """.format(
-                            score=analysis['ats_score'],
-                            color='#4CAF50' if analysis['ats_score'] >= 80 else '#FFA500' if analysis[
-                                'ats_score'] >= 60 else '#FF4444',
-                            status='Excellent' if analysis['ats_score'] >= 80 else 'Good' if analysis[
-                                'ats_score'] >= 60 else 'Needs Improvement'
-                        ), unsafe_allow_html=True)
-
-                        st.markdown("</div>", unsafe_allow_html=True)
-
-                        # self.display_analysis_results(analysis_results)
-
-                        # Skills Match Card
-                        st.markdown("""
-                        <div class="feature-card">
-                            <h2>Skills Match</h2>
+                     
+                    st.markdown("---")
+                    st.markdown("## 📊 Analysis Results")
+                    
+                    # === TOP METRICS ROW ===
+                    metrics_col1, metrics_col2, metrics_col3, metrics_col4 = st.columns(4)
+                    
+                    with metrics_col1:
+                        # ATS Score with color coding
+                        ats_score = analysis['ats_score']
+                        score_color = '#4CAF50' if ats_score >= 80 else '#FFA500' if ats_score >= 60 else '#FF4444'
+                        status = 'Excellent' if ats_score >= 80 else 'Good' if ats_score >= 60 else 'Needs Improvement'
+                        
+                        st.markdown(f"""
+                        <div class="metric-card" style="text-align: center; padding: 20px; background: linear-gradient(135deg, #1e1e1e, #2a2a2a); border-radius: 15px; margin: 10px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+                            <h3 style="color: #fff; margin-bottom: 15px;">🎯 ATS Score</h3>
+                            <div style="font-size: 2.5em; font-weight: bold; color: {score_color};">{ats_score}</div>
+                            <div style="color: {score_color}; font-weight: bold; margin-top: 5px;">{status}</div>
+                        </div>
                         """, unsafe_allow_html=True)
-
-                        st.metric(
-                            "Keyword Match", f"{int(analysis.get('keyword_match', {}).get('score', 0))}%")
-
+            
+                    with metrics_col2:
+                        keyword_score = int(analysis.get('keyword_match', {}).get('score', 0))
+                        st.markdown(f"""
+                        <div class="metric-card" style="text-align: center; padding: 20px; background: linear-gradient(135deg, #1e1e1e, #2a2a2a); border-radius: 15px; margin: 10px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+                            <h3 style="color: #fff; margin-bottom: 15px;">🔍 Keywords</h3>
+                            <div style="font-size: 2.5em; font-weight: bold; color: #64B5F6;">{keyword_score}%</div>
+                            <div style="color: #64B5F6; font-weight: bold; margin-top: 5px;">Match Rate</div>
+                        </div>
+                        """, unsafe_allow_html=True)
+            
+                    with metrics_col3:
+                        format_score = int(analysis.get('format_score', 0))
+                        st.markdown(f"""
+                        <div class="metric-card" style="text-align: center; padding: 20px; background: linear-gradient(135deg, #1e1e1e, #2a2a2a); border-radius: 15px; margin: 10px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+                            <h3 style="color: #fff; margin-bottom: 15px;">📄 Format</h3>
+                            <div style="font-size: 2.5em; font-weight: bold; color: #81C784;">{format_score}%</div>
+                            <div style="color: #81C784; font-weight: bold; margin-top: 5px;">Structure</div>
+                        </div>
+                        """, unsafe_allow_html=True)
+            
+                    with metrics_col4:
+                        section_score = int(analysis.get('section_score', 0))
+                        st.markdown(f"""
+                        <div class="metric-card" style="text-align: center; padding: 20px; background: linear-gradient(135deg, #1e1e1e, #2a2a2a); border-radius: 15px; margin: 10px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+                            <h3 style="color: #fff; margin-bottom: 15px;">📋 Sections</h3>
+                            <div style="font-size: 2.5em; font-weight: bold; color: #FFB74D;">{section_score}%</div>
+                            <div style="color: #FFB74D; font-weight: bold; margin-top: 5px;">Complete</div>
+                        </div>
+                        """, unsafe_allow_html=True)
+            
+                    st.markdown("<br>", unsafe_allow_html=True)
+            
+                    # === DETAILED ANALYSIS ROW ===
+                    details_col1, details_col2 = st.columns([1, 1])
+            
+                    with details_col1:
+                        # Missing Skills Section
                         if analysis['keyword_match']['missing_skills']:
-                            st.markdown("#### Missing Skills:")
-                            for skill in analysis['keyword_match']['missing_skills']:
-                                st.markdown(f"- {skill}")
-
-                        st.markdown("</div>", unsafe_allow_html=True)
-
-                    with col2:
-                        # Format Score Card
+                            st.markdown("""
+                            <div style="background: linear-gradient(135deg, #2a1810, #3d2317); padding: 25px; border-radius: 15px; margin: 15px 0; border-left: 4px solid #FF6B6B; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                                <h3 style="color: #FF6B6B; margin-bottom: 15px; display: flex; align-items: center;">
+                                    <span style="margin-right: 10px;">⚠️</span> Missing Key Skills
+                                </h3>
+                            """, unsafe_allow_html=True)
+                            
+                            # Display missing skills in a grid
+                            skills_per_row = 2
+                            missing_skills = analysis['keyword_match']['missing_skills']
+                            
+                            for i in range(0, len(missing_skills), skills_per_row):
+                                skill_cols = st.columns(skills_per_row)
+                                for j, skill in enumerate(missing_skills[i:i+skills_per_row]):
+                                    with skill_cols[j]:
+                                        st.markdown(f"""
+                                        <div style="background-color: rgba(255, 107, 107, 0.1); padding: 8px 12px; 
+                                                   border-radius: 20px; margin: 5px 0; text-align: center; 
+                                                   border: 1px solid rgba(255, 107, 107, 0.3);">
+                                            <span style="color: #FF6B6B; font-weight: 500;">{skill}</span>
+                                        </div>
+                                        """, unsafe_allow_html=True)
+                            
+                            st.markdown("</div>", unsafe_allow_html=True)
+            
+                    with details_col2:
+                        # Quick Stats
                         st.markdown("""
-                        <div class="feature-card">
-                            <h2>Format Analysis</h2>
+                        <div style="background: linear-gradient(135deg, #1a2332, #243447); padding: 25px; border-radius: 15px; margin: 15px 0; border-left: 4px solid #4CAF50; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                            <h3 style="color: #4CAF50; margin-bottom: 15px; display: flex; align-items: center;">
+                                <span style="margin-right: 10px;">📈</span> Quick Insights
+                            </h3>
                         """, unsafe_allow_html=True)
-
-                        st.metric("Format Score",
-                                  f"{int(analysis.get('format_score', 0))}%")
-                        st.metric("Section Score",
-                                  f"{int(analysis.get('section_score', 0))}%")
-
+                        
+                        # Create insights grid
+                        insight_col1, insight_col2 = st.columns(2)
+                        with insight_col1:
+                            total_skills_found = len(analysis.get('skills', []))
+                            st.markdown(f"""
+                            <div style="text-align: center; margin: 10px 0;">
+                                <div style="font-size: 1.8em; font-weight: bold; color: #64B5F6;">{total_skills_found}</div>
+                                <div style="color: #B0BEC5; font-size: 0.9em;">Skills Found</div>
+                            </div>
+                            """, unsafe_allow_html=True)
+                        
+                        with insight_col2:
+                            missing_count = len(analysis['keyword_match']['missing_skills'])
+                            st.markdown(f"""
+                            <div style="text-align: center; margin: 10px 0;">
+                                <div style="font-size: 1.8em; font-weight: bold; color: #FF6B6B;">{missing_count}</div>
+                                <div style="color: #B0BEC5; font-size: 0.9em;">Missing Skills</div>
+                            </div>
+                            """, unsafe_allow_html=True)
+                        
                         st.markdown("</div>", unsafe_allow_html=True)
 
-                        # Suggestions Card with improved UI
-                        st.markdown("""
-                        <div class="feature-card">
-                            <h2>📋 Resume Improvement Suggestions</h2>
-                        """, unsafe_allow_html=True)
-
-                            # Contact Section
-                        if analysis.get('contact_suggestions'):
-                                st.markdown("""
-                                <div style='background-color: #1e1e1e; padding: 15px; border-radius: 10px; margin: 10px 0;'>
-                                    <h3 style='color: #4CAF50; margin-bottom: 10px;'>📞 Contact Information</h3>
-                                    <ul style='list-style-type: none; padding-left: 0;'>
-                                """, unsafe_allow_html=True)
-                                for suggestion in analysis.get(
-                                    'contact_suggestions', []):
-                                    st.markdown(
-    f"<li style='margin-bottom: 8px;'>✓ {suggestion}</li>",
-     unsafe_allow_html=True)
-                                st.markdown(
-    "</ul></div>", unsafe_allow_html=True)
-
-                            # Summary Section
-                        if analysis.get('summary_suggestions'):
-                                st.markdown("""
-                                <div style='background-color: #1e1e1e; padding: 15px; border-radius: 10px; margin: 10px 0;'>
-                                    <h3 style='color: #4CAF50; margin-bottom: 10px;'>📝 Professional Summary</h3>
-                                    <ul style='list-style-type: none; padding-left: 0;'>
-                                """, unsafe_allow_html=True)
-                                for suggestion in analysis.get(
-                                    'summary_suggestions', []):
-                                    st.markdown(
-    f"<li style='margin-bottom: 8px;'>✓ {suggestion}</li>",
-     unsafe_allow_html=True)
-                                st.markdown(
-    "</ul></div>", unsafe_allow_html=True)
-
-                            # Skills Section
-                        if analysis.get(
-                            'skills_suggestions') or analysis['keyword_match']['missing_skills']:
-                                st.markdown("""
-                                <div style='background-color: #1e1e1e; padding: 15px; border-radius: 10px; margin: 10px 0;'>
-                                    <h3 style='color: #4CAF50; margin-bottom: 10px;'>🎯 Skills</h3>
-                                    <ul style='list-style-type: none; padding-left: 0;'>
-                                """, unsafe_allow_html=True)
-                                for suggestion in analysis.get(
-                                    'skills_suggestions', []):
-                                    st.markdown(
-    f"<li style='margin-bottom: 8px;'>✓ {suggestion}</li>",
-     unsafe_allow_html=True)
-                                if analysis['keyword_match']['missing_skills']:
-                                    st.markdown(
-    "<li style='margin-bottom: 8px;'>✓ Consider adding these relevant skills:</li>",
-     unsafe_allow_html=True)
-                                    for skill in analysis['keyword_match']['missing_skills']:
-                                        st.markdown(
-    f"<li style='margin-left: 20px; margin-bottom: 4px;'>• {skill}</li>",
-     unsafe_allow_html=True)
-                                st.markdown(
-    "</ul></div>", unsafe_allow_html=True)
-
-                            # Experience Section
-                        if analysis.get('experience_suggestions'):
-                                st.markdown("""
-                                <div style='background-color: #1e1e1e; padding: 15px; border-radius: 10px; margin: 10px 0;'>
-                                    <h3 style='color: #4CAF50; margin-bottom: 10px;'>💼 Work Experience</h3>
-                                    <ul style='list-style-type: none; padding-left: 0;'>
-                                """, unsafe_allow_html=True)
-                                for suggestion in analysis.get(
-                                    'experience_suggestions', []):
-                                    st.markdown(
-    f"<li style='margin-bottom: 8px;'>✓ {suggestion}</li>",
-     unsafe_allow_html=True)
-                                st.markdown(
-    "</ul></div>", unsafe_allow_html=True)
-
-                            # Education Section
-                        if analysis.get('education_suggestions'):
-                                st.markdown("""
-                                <div style='background-color: #1e1e1e; padding: 15px; border-radius: 10px; margin: 10px 0;'>
-                                    <h3 style='color: #4CAF50; margin-bottom: 10px;'>🎓 Education</h3>
-                                    <ul style='list-style-type: none; padding-left: 0;'>
-                                """, unsafe_allow_html=True)
-                                for suggestion in analysis.get(
-                                    'education_suggestions', []):
-                                    st.markdown(
-    f"<li style='margin-bottom: 8px;'>✓ {suggestion}</li>",
-     unsafe_allow_html=True)
-                                st.markdown(
-    "</ul></div>", unsafe_allow_html=True)
-
-                            # General Formatting Suggestions
-                        if analysis.get('format_suggestions'):
-                                st.markdown("""
-                                <div style='background-color: #1e1e1e; padding: 15px; border-radius: 10px; margin: 10px 0;'>
-                                    <h3 style='color: #4CAF50; margin-bottom: 10px;'>📄 Formatting</h3>
-                                    <ul style='list-style-type: none; padding-left: 0;'>
-                                """, unsafe_allow_html=True)
-                                for suggestion in analysis.get(
-                                    'format_suggestions', []):
-                                    st.markdown(
-    f"<li style='margin-bottom: 8px;'>✓ {suggestion}</li>",
-     unsafe_allow_html=True)
-                                st.markdown(
-    "</ul></div>", unsafe_allow_html=True)
-
-                        st.markdown("</div>", unsafe_allow_html=True)
-
+                        # Main Feature Card Container
+                    
+                    st.markdown("## 📋 Resume Improvement Suggestions")
+                    # Enhanced helper function to render each suggestion section
+                    def render_section(title, suggestions, bullet_icon="✓", nested_items=None):
+                        """
+                        Render a suggestion section with optional nested items
+                        """
+                        if suggestions or nested_items:
+                            st.markdown(f"""
+                            <div style='
+                                background-color: #1e1e1e;
+                                padding: 5px;
+                                border-radius: 12px;
+                                margin-bottom: 5px;
+                                border-left: 4px solid #4CAF50;
+                            '>
+                                <h3 style='color: #4CAF50; margin-bottom: 15px;'>{title}</h3>
+                            """, unsafe_allow_html=True)
+                            
+                            # Main suggestions
+                            if suggestions:
+                                st.markdown("<ul style='list-style-type: none; padding-left: 0;'>", unsafe_allow_html=True)
+                                for item in suggestions:
+                                    st.markdown(f"""
+                                        <li style='margin-bottom: 10px; color: #e0e0e0;'>
+                                            <span style='color: #4CAF50; margin-right: 8px;'>{bullet_icon}</span>{item}
+                                        </li>
+                                    """, unsafe_allow_html=True)
+                                st.markdown("</ul>", unsafe_allow_html=True)
+                            
+                            # Nested items (for missing skills)
+                            if nested_items:
+                                
+                                for skill in nested_items:
+                                    st.markdown(f"""
+                                        <li style='margin-bottom: 6px; margin-left: 15px; color: #ccc;'>
+                                            <span style='color: #66BB6A; margin-right: 8px;'>•</span>{skill}
+                                        </li>
+                                    """, unsafe_allow_html=True)
+                                st.markdown("</ul></div>", unsafe_allow_html=True)
+                            
+                            st.markdown("</div>", unsafe_allow_html=True)
+                    
+                    # Render Each Section
+                    render_section("📞 Contact Information", analysis.get('contact_suggestions', []))
+                    render_section("📝 Professional Summary", analysis.get('summary_suggestions', []))
+                    
+                    # Skills section with nested missing skills
+                    skills_suggestions = analysis.get('skills_suggestions', [])
+                    missing_skills = analysis.get('keyword_match', {}).get('missing_skills', [])
+                    render_section("🎯 Skills", skills_suggestions, nested_items=missing_skills)
+                    
+                    render_section("💼 Work Experience", analysis.get('experience_suggestions', []))
+                    render_section("🎓 Education", analysis.get('education_suggestions', []))
+                    render_section("📄 Formatting", analysis.get('format_suggestions', []))
+                    
+                    # Close main container
+                    st.markdown("</div>", unsafe_allow_html=True)
                         # Course Recommendations
-                    st.markdown("""
-                        <div class="feature-card">
-                            <h2>📚 Recommended Courses</h2>
-                        """, unsafe_allow_html=True)
+                    st.markdown("## 📚 Recommended Courses ")
+                    
 
                         # Get courses based on role and category
                     courses = get_courses_for_role(selected_role)
@@ -1632,10 +1619,8 @@ class ResumeApp:
                     st.markdown("</div>", unsafe_allow_html=True)
 
                         # Learning Resources
-                    st.markdown("""
-                        <div class="feature-card">
-                            <h2>📺 Helpful Videos</h2>
-                        """, unsafe_allow_html=True)
+                    st.markdown("## 📺 Helpful Videos")
+                            
 
                     tab1, tab2 = st.tabs(["Resume Tips", "Interview Tips"])
 
@@ -1668,6 +1653,33 @@ class ResumeApp:
             </div>
             """, unsafe_allow_html=True)
              
+
+            # AI Model Selection
+            ai_model = st.selectbox(
+                "Select AI Model",
+                ["Google Gemini"],
+                help="Choose the AI model to analyze your resume"
+            )
+             
+            # Add job description input option
+            use_custom_job_desc = st.checkbox("Use custom job description", value=False, 
+                                             help="Enable this to provide a specific job description for more targeted analysis")
+            
+            custom_job_description = ""
+            if use_custom_job_desc:
+                custom_job_description = st.text_area(
+                    "Paste the job description here",
+                    height=200,
+                    placeholder="Paste the full job description from the company here for more targeted analysis...",
+                    help="Providing the actual job description will help the AI analyze your resume specifically for this position"
+                )
+                
+                st.markdown("""
+                <div style='background-color: #2e7d32; padding: 15px; border-radius: 10px; margin: 10px 0;'>
+                    <p><i class="fas fa-lightbulb"></i> <strong>Pro Tip:</strong> Including the actual job description significantly improves the accuracy of the analysis and provides more relevant recommendations tailored to the specific position.</p>
+                </div>
+                """, unsafe_allow_html=True)
+            
                         # Add AI Analyzer Stats in an expander
             with st.expander("📊 AI Analyzer Statistics", expanded=False):
                 try:
@@ -2255,32 +2267,7 @@ class ResumeApp:
                 except Exception as e:
                     st.error(f"Error loading AI analysis statistics: {str(e)}")
 
-                        # AI Model Selection
-            ai_model = st.selectbox(
-                "Select AI Model",
-                ["Google Gemini"],
-                help="Choose the AI model to analyze your resume"
-            )
-             
-            # Add job description input option
-            use_custom_job_desc = st.checkbox("Use custom job description", value=False, 
-                                             help="Enable this to provide a specific job description for more targeted analysis")
-            
-            custom_job_description = ""
-            if use_custom_job_desc:
-                custom_job_description = st.text_area(
-                    "Paste the job description here",
-                    height=200,
-                    placeholder="Paste the full job description from the company here for more targeted analysis...",
-                    help="Providing the actual job description will help the AI analyze your resume specifically for this position"
-                )
-                
-                st.markdown("""
-                <div style='background-color: #2e7d32; padding: 15px; border-radius: 10px; margin: 10px 0;'>
-                    <p><i class="fas fa-lightbulb"></i> <strong>Pro Tip:</strong> Including the actual job description significantly improves the accuracy of the analysis and provides more relevant recommendations tailored to the specific position.</p>
-                </div>
-                """, unsafe_allow_html=True)
-
+                    
             # Job Role Selection for AI Analysis
             categories = list(self.job_roles.keys())
             selected_category = st.selectbox(
@@ -2405,7 +2392,7 @@ class ResumeApp:
                                         }
                                     )
                                 # show snowflake effect
-                                st.snow()
+                                # st.snow()
 
                                 # Complete the progress
                                 progress_bar.progress(100)
@@ -2785,8 +2772,7 @@ class ResumeApp:
                             st.error(f"Error during AI analysis: {str(ai_error)}")
                             import traceback as tb
                             st.code(tb.format_exc())
-
-        # st.toast("Check out these repositories: [Awesome Java](https://github.com/Hunterdii/Awesome-Java)", icon="ℹ️")
+                   
 
 
     def render_home(self):
@@ -2831,7 +2817,7 @@ class ResumeApp:
                     margin-bottom: 1rem; 
                     font-weight: 700;
                     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-                ">🚀 Smart Resume AI</h1>
+                "> Smart Resume AI</h1>
                 <p style="
                     color: rgba(255,255,255,0.9); 
                     font-size: 1.3rem; 
@@ -2867,7 +2853,7 @@ class ResumeApp:
         </div>
         """, unsafe_allow_html=True)
         
-        # Enhanced responsive grid with hover effects
+       # Enhanced responsive grid with hover effects
         col1, col2, col3 = st.columns(3, gap="large")
         
         with col1:
@@ -2893,15 +2879,12 @@ class ResumeApp:
                     left: 0;
                     right: 0;
                     height: 4px;
-                    background: linear-gradient(90deg, #667eea, #764ba2);
+                    background: linear-gradient(90deg, #fd7e14, #e83e8c);
                 "></div>
                 <div style="
                     font-size: 4rem; 
                     margin-bottom: 1.5rem;
-                    background: linear-gradient(45deg, #667eea, #764ba2);
-                    -webkit-background-clip: text;
-                    -webkit-text-fill-color: transparent;
-                    background-clip: text;
+                    color: #fd7e14;
                 ">🤖</div>
                 <h3 style="
                     color: #2c3e50; 
@@ -2913,9 +2896,10 @@ class ResumeApp:
                     color: #6c757d; 
                     line-height: 1.7;
                     font-size: 1rem;
-                ">Get instant feedback on your resume with advanced AI analysis that identifies strengths and areas for improvement using cutting-edge technology.</p>
+                ">Get instant AI-powered feedback on your resume—highlight strengths and fix weaknesses fast.</p>
             </div>
             """, unsafe_allow_html=True)
+    
         
         with col2:
             st.markdown("""
@@ -2945,10 +2929,7 @@ class ResumeApp:
                 <div style="
                     font-size: 4rem; 
                     margin-bottom: 1.5rem;
-                    background: linear-gradient(45deg, #28a745, #20c997);
-                    -webkit-background-clip: text;
-                    -webkit-text-fill-color: transparent;
-                    background-clip: text;
+                    color: #28a745;
                 ">✨</div>
                 <h3 style="
                     color: #2c3e50; 
@@ -2992,10 +2973,7 @@ class ResumeApp:
                 <div style="
                     font-size: 4rem; 
                     margin-bottom: 1.5rem;
-                    background: linear-gradient(45deg, #fd7e14, #e83e8c);
-                    -webkit-background-clip: text;
-                    -webkit-text-fill-color: transparent;
-                    background-clip: text;
+                    color: #fd7e14;
                 ">📈</div>
                 <h3 style="
                     color: #2c3e50; 
@@ -3236,8 +3214,7 @@ class ResumeApp:
         """Render the job search page"""
         render_job_search()
 
-        # st.toast("Check out these repositories: [GeeksforGeeks-POTD](https://github.com/Hunterdii/GeeksforGeeks-POTD)", icon="ℹ️")
-
+    
 
     def render_feedback_page(self):
         """Render the feedback page"""
@@ -3251,7 +3228,47 @@ class ResumeApp:
         
         # Initialize feedback manager
         feedback_manager = FeedbackManager()
-        
+        st.markdown("""
+                    <style>
+                    /* Center align and style tab container */
+                    .stTabs [data-baseweb="tab-list"] {
+                        justify-content: center;
+                        margin-top: 20px;
+                        margin-bottom: 20px;
+                        gap: 10px;
+                    }
+                
+                    /* Base style for each tab */
+                    .stTabs [data-baseweb="tab"] {
+                        background-color: #f0f0f0;
+                        border: 1px solid #ddd;
+                        border-radius: 8px;
+                        padding: 10px 24px;
+                        font-size: 16px;
+                        font-weight: 600;
+                        color: #333;
+                        transition: all 0.2s ease-in-out;
+                    }
+                
+                    /* Hover effect */
+                    .stTabs [data-baseweb="tab"]:hover {
+                        background-color: #e0f5ec;
+                        border-color: #00bfa5;
+                        color: #111;
+                        transform: translateY(-2px);
+                        cursor: pointer;
+                    }
+                
+                    /* Selected/active tab style */
+                    .stTabs [aria-selected="true"] {
+                        background-color: #00bfa5 !important;
+                        color: white !important;
+                        border: 1px solid #00bfa5;
+                        font-weight: 700;
+                        box-shadow: 0px 4px 12px rgba(0, 191, 165, 0.2);
+                    }
+                    </style>
+                """, unsafe_allow_html=True)
         # Create tabs for form and stats
         form_tab, stats_tab = st.tabs(["Submit Feedback", "Feedback Stats"])
         

@@ -111,7 +111,7 @@ class FeedbackManager:
         """Render the enhanced feedback form"""
     
         
-        st.markdown('<h2 class="feedback-header">✨ Share Your Amazing Feedback ✨</h2>', unsafe_allow_html=True)
+        # st.markdown('<h2 class="feedback-header">✨ Share Your Amazing Feedback ✨</h2>', unsafe_allow_html=True)
 
         st.markdown('<div style="margin-bottom: 20px;">', unsafe_allow_html=True)
         rating = self.render_star_rating("🌟 Overall Experience Rating", "overall", 5)
@@ -200,7 +200,7 @@ class FeedbackManager:
                 # Multiple celebration effects
                 st.balloons()
                 time.sleep(1)
-                st.snow()
+                # st.snow()
                 
                 # Keep success message visible longer
                 time.sleep(3)

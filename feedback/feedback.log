@@ -1,0 +1,7 @@
+2025-08-10 12:05:04,823 - feedback.feedback - ERROR - Database setup failed: no such column: session_id
+2025-08-10 12:05:23,207 - feedback.feedback - ERROR - Database setup failed: no such column: session_id
+2025-08-10 12:05:31,834 - feedback.feedback - ERROR - Database setup failed: no such column: session_id
+2025-08-10 12:05:33,421 - feedback.feedback - ERROR - Database setup failed: no such column: session_id
+2025-08-10 12:05:35,267 - feedback.feedback - ERROR - Failed to save feedback: table feedback has no column named session_id
+2025-08-10 12:05:51,252 - feedback.feedback - ERROR - Database setup failed: no such column: session_id
+2025-08-10 12:06:00,064 - feedback.feedback - ERROR - Database setup failed: no such column: session_id

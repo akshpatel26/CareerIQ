@@ -243,7 +243,7 @@ class AIResumeAnalyzer:
                 """
             
             if job_description:
-                base_prompt += f"""
+                base_prompt += f"""z
                 
                 Additionally, compare this resume to the following job description:
                 
@@ -1283,6 +1283,457 @@ class AIResumeAnalyzer:
                 "full_response": f"Error: {str(e)}",
                 "model_used": "Error"
             } 
+    # Add these new methods to your existing AIResumeAnalyzer class
+
+    def extract_resume_sections(self, resume_text):
+        """Extract structured sections from resume text using AI"""
+        if not self.google_api_key:
+            return {"error": "Google API key is not configured"}
+        
+        try:
+            model = genai.GenerativeModel("gemini-1.5-flash")
+            
+            prompt = f"""
+            Extract and structure the following resume into clear sections. Return the data in JSON format with the following structure:
+    
+            {{
+                "contact_info": {{
+                    "name": "",
+                    "email": "",
+                    "phone": "",
+                    "address": "",
+                    "linkedin": "",
+                    "portfolio": ""
+                }},
+                "professional_summary": "",
+                "work_experience": [
+                    {{
+                        "position": "",
+                        "company": "",
+                        "duration": "",
+                        "description": []
+                    }}
+                ],
+                "education": [
+                    {{
+                        "degree": "",
+                        "institution": "",
+                        "year": "",
+                        "details": ""
+                    }}
+                ],
+                "skills": {{
+                    "technical": [],
+                    "soft": [],
+                    "languages": [],
+                    "certifications": []
+                }},
+                "projects": [
+                    {{
+                        "name": "",
+                        "description": "",
+                        "technologies": [],
+                        "link": ""
+                    }}
+                ],
+                "additional_sections": {{
+                    "achievements": [],
+                    "publications": [],
+                    "volunteer": [],
+                    "interests": []
+                }}
+            }}
+    
+            Resume text:
+            {resume_text}
+            
+            Please extract all available information and structure it properly. If a section is not present, leave it empty but maintain the structure.
+            """
+            
+            response = model.generate_content(prompt)
+            
+            # Clean the response to extract JSON
+            response_text = response.text.strip()
+            if response_text.startswith('```json'):
+                response_text = response_text[7:]
+            if response_text.endswith('```'):
+                response_text = response_text[:-3]
+            
+            try:
+                resume_data = json.loads(response_text)
+                return resume_data
+            except json.JSONDecodeError:
+                # Try to find JSON in the response
+                json_match = re.search(r'\{.*\}', response_text, re.DOTALL)
+                if json_match:
+                    resume_data = json.loads(json_match.group())
+                    return resume_data
+                else:
+                    return {"error": "Could not parse resume structure"}
+                    
+        except Exception as e:
+            return {"error": f"Failed to extract resume sections: {str(e)}"}
+    
+    def generate_improved_resume_content(self, original_sections, analysis_result, job_role=None):
+        """Generate improved resume content based on AI analysis"""
+        if not self.google_api_key:
+            return {"error": "Google API key is not configured"}
+        
+        try:
+            model = genai.GenerativeModel("gemini-1.5-flash")
+            
+            # Extract suggestions from analysis
+            suggestions = analysis_result.get("suggestions", [])
+            strengths = analysis_result.get("strengths", [])
+            weaknesses = analysis_result.get("weaknesses", [])
+            full_analysis = analysis_result.get("full_response", "")
+            
+            prompt = f"""
+            Based on the resume analysis and feedback, please improve the following resume content.
+            
+            Target Role: {job_role if job_role else "General"}
+            
+            Analysis Feedback:
+            Strengths: {', '.join(strengths)}
+            Areas for Improvement: {', '.join(weaknesses)}
+            Suggestions: {', '.join(suggestions)}
+            
+            Original Resume Structure:
+            {json.dumps(original_sections, indent=2)}
+            
+            Please provide an improved version with the following enhancements:
+            1. Strengthen the professional summary to better align with the target role
+            2. Improve work experience descriptions with more impactful action verbs and quantified achievements
+            3. Optimize skills section based on the target role requirements
+            4. Enhance overall ATS compatibility
+            5. Add or improve missing sections that were identified in the analysis
+            
+            Return the improved resume in the same JSON structure format, but with enhanced content.
+            Make sure all improvements are realistic and based on the original information provided.
+            
+            Focus on:
+            - Using stronger action verbs
+            - Adding quantifiable metrics where possible (but realistic ones)
+            - Better keyword optimization for ATS
+            - Improved formatting and structure
+            - Enhanced professional summary
+            """
+            
+            response = model.generate_content(prompt)
+            
+            # Clean the response to extract JSON
+            response_text = response.text.strip()
+            if response_text.startswith('```json'):
+                response_text = response_text[7:]
+            if response_text.endswith('```'):
+                response_text = response_text[:-3]
+            
+            try:
+                improved_data = json.loads(response_text)
+                return improved_data
+            except json.JSONDecodeError:
+                # Try to find JSON in the response
+                json_match = re.search(r'\{.*\}', response_text, re.DOTALL)
+                if json_match:
+                    improved_data = json.loads(json_match.group())
+                    return improved_data
+                else:
+                    return {"error": "Could not parse improved resume structure"}
+                    
+        except Exception as e:
+            return {"error": f"Failed to generate improved resume: {str(e)}"}
+    
+    def create_resume_docx(self, resume_data, filename="improved_resume.docx"):
+        """Create a professional Word document from resume data"""
+        try:
+            # Create a new Document
+            doc = Document()
+            
+            # Set document margins
+            sections = doc.sections
+            for section in sections:
+                section.top_margin = Inches(0.5)
+                section.bottom_margin = Inches(0.5)
+                section.left_margin = Inches(0.7)
+                section.right_margin = Inches(0.7)
+            
+            # Define styles
+            styles = doc.styles
+            
+            # Create custom styles
+            try:
+                # Title style for name
+                name_style = styles.add_style('NameStyle', WD_STYLE_TYPE.PARAGRAPH)
+                name_style.font.size = Pt(18)
+                name_style.font.bold = True
+                name_style.font.color.rgb = RGBColor(0, 0, 128)  # Navy blue
+                name_style.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                name_style.paragraph_format.space_after = Pt(6)
+            except:
+                name_style = styles['Heading 1']
+            
+            try:
+                # Contact info style
+                contact_style = styles.add_style('ContactStyle', WD_STYLE_TYPE.PARAGRAPH)
+                contact_style.font.size = Pt(10)
+                contact_style.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                contact_style.paragraph_format.space_after = Pt(12)
+            except:
+                contact_style = styles['Normal']
+            
+            try:
+                # Section heading style
+                section_style = styles.add_style('SectionStyle', WD_STYLE_TYPE.PARAGRAPH)
+                section_style.font.size = Pt(14)
+                section_style.font.bold = True
+                section_style.font.color.rgb = RGBColor(0, 0, 128)  # Navy blue
+                section_style.paragraph_format.space_before = Pt(12)
+                section_style.paragraph_format.space_after = Pt(6)
+            except:
+                section_style = styles['Heading 2']
+            
+            # Add header with contact information
+            contact_info = resume_data.get('contact_info', {})
+            
+            # Name
+            if contact_info.get('name'):
+                name_para = doc.add_paragraph(contact_info['name'], style='NameStyle')
+            
+            # Contact details
+            contact_details = []
+            if contact_info.get('email'):
+                contact_details.append(contact_info['email'])
+            if contact_info.get('phone'):
+                contact_details.append(contact_info['phone'])
+            if contact_info.get('address'):
+                contact_details.append(contact_info['address'])
+            if contact_info.get('linkedin'):
+                contact_details.append(contact_info['linkedin'])
+            if contact_info.get('portfolio'):
+                contact_details.append(contact_info['portfolio'])
+            
+            if contact_details:
+                contact_para = doc.add_paragraph(' | '.join(contact_details), style='ContactStyle')
+            
+            # Professional Summary
+            if resume_data.get('professional_summary'):
+                doc.add_paragraph('PROFESSIONAL SUMMARY', style='SectionStyle')
+                doc.add_paragraph(resume_data['professional_summary'])
+            
+            # Work Experience
+            work_experience = resume_data.get('work_experience', [])
+            if work_experience:
+                doc.add_paragraph('WORK EXPERIENCE', style='SectionStyle')
+                
+                for job in work_experience:
+                    # Job title and company
+                    job_header = f"{job.get('position', '')} - {job.get('company', '')}"
+                    if job.get('duration'):
+                        job_header += f" ({job.get('duration', '')})"
+                    
+                    job_para = doc.add_paragraph()
+                    run = job_para.add_run(job_header)
+                    run.bold = True
+                    
+                    # Job description
+                    if isinstance(job.get('description'), list):
+                        for desc in job['description']:
+                            if desc.strip():
+                                bullet_para = doc.add_paragraph()
+                                bullet_para.style = 'List Bullet'
+                                bullet_para.add_run(desc.strip())
+                    elif job.get('description'):
+                        doc.add_paragraph(job['description'])
+            
+            # Education
+            education = resume_data.get('education', [])
+            if education:
+                doc.add_paragraph('EDUCATION', style='SectionStyle')
+                
+                for edu in education:
+                    edu_text = f"{edu.get('degree', '')} - {edu.get('institution', '')}"
+                    if edu.get('year'):
+                        edu_text += f" ({edu.get('year', '')})"
+                    
+                    edu_para = doc.add_paragraph()
+                    run = edu_para.add_run(edu_text)
+                    run.bold = True
+                    
+                    if edu.get('details'):
+                        doc.add_paragraph(edu['details'])
+            
+            # Skills
+            skills = resume_data.get('skills', {})
+            if any(skills.values()):
+                doc.add_paragraph('SKILLS', style='SectionStyle')
+                
+                if skills.get('technical'):
+                    doc.add_paragraph().add_run('Technical Skills: ').bold = True
+                    doc.paragraphs[-1].add_run(', '.join(skills['technical']))
+                
+                if skills.get('soft'):
+                    doc.add_paragraph().add_run('Soft Skills: ').bold = True
+                    doc.paragraphs[-1].add_run(', '.join(skills['soft']))
+                
+                if skills.get('languages'):
+                    doc.add_paragraph().add_run('Languages: ').bold = True
+                    doc.paragraphs[-1].add_run(', '.join(skills['languages']))
+                
+                if skills.get('certifications'):
+                    doc.add_paragraph().add_run('Certifications: ').bold = True
+                    doc.paragraphs[-1].add_run(', '.join(skills['certifications']))
+            
+            # Projects
+            projects = resume_data.get('projects', [])
+            if projects:
+                doc.add_paragraph('PROJECTS', style='SectionStyle')
+                
+                for project in projects:
+                    project_name = project.get('name', '')
+                    if project.get('link'):
+                        project_name += f" ({project.get('link', '')})"
+                    
+                    project_para = doc.add_paragraph()
+                    run = project_para.add_run(project_name)
+                    run.bold = True
+                    
+                    if project.get('description'):
+                        doc.add_paragraph(project['description'])
+                    
+                    if project.get('technologies'):
+                        tech_para = doc.add_paragraph()
+                        tech_para.add_run('Technologies: ').italic = True
+                        tech_para.add_run(', '.join(project['technologies']))
+            
+            # Additional Sections
+            additional = resume_data.get('additional_sections', {})
+            
+            if additional.get('achievements'):
+                doc.add_paragraph('ACHIEVEMENTS', style='SectionStyle')
+                for achievement in additional['achievements']:
+                    bullet_para = doc.add_paragraph()
+                    bullet_para.style = 'List Bullet'
+                    bullet_para.add_run(achievement)
+            
+            if additional.get('volunteer'):
+                doc.add_paragraph('VOLUNTEER EXPERIENCE', style='SectionStyle')
+                for volunteer in additional['volunteer']:
+                    bullet_para = doc.add_paragraph()
+                    bullet_para.style = 'List Bullet'
+                    bullet_para.add_run(volunteer)
+            
+            # Save to buffer
+            buffer = io.BytesIO()
+            doc.save(buffer)
+            buffer.seek(0)
+            
+            return buffer
+            
+        except Exception as e:
+            st.error(f"Error creating Word document: {str(e)}")
+            return None
+    
+    def generate_complete_improved_resume(self, resume_text, analysis_result, job_role=None):
+        """Complete workflow: extract, improve, and generate new resume"""
+        try:
+            # Step 1: Extract original resume sections
+            st.info("📋 Extracting resume sections...")
+            original_sections = self.extract_resume_sections(resume_text)
+            
+            if "error" in original_sections:
+                return {"error": original_sections["error"]}
+            
+            # Step 2: Generate improved content based on analysis
+            st.info("🚀 Generating improved resume content...")
+            improved_sections = self.generate_improved_resume_content(
+                original_sections, analysis_result, job_role
+            )
+            
+            if "error" in improved_sections:
+                return {"error": improved_sections["error"]}
+            
+            # Step 3: Create Word document
+            st.info("📄 Creating improved resume document...")
+            resume_buffer = self.create_resume_docx(improved_sections)
+            
+            if resume_buffer is None:
+                return {"error": "Failed to create Word document"}
+            
+            return {
+                "original_sections": original_sections,
+                "improved_sections": improved_sections,
+                "resume_buffer": resume_buffer,
+                "success": True
+            }
+            
+        except Exception as e:
+            return {"error": f"Resume generation failed: {str(e)}"}
+    
+    # Add this to your Streamlit UI code (usually in main() function or similar):
+    
+    def add_resume_generation_ui():
+        """Add UI components for resume generation"""
+        
+        # Add this after your existing analysis results display
+        if st.session_state.get('analysis_complete', False) and st.session_state.get('analysis_result'):
+            st.markdown("---")
+            st.subheader("🚀 Generate Improved Resume")
+            
+            col1, col2 = st.columns([2, 1])
+            
+            with col1:
+                st.write("Based on the analysis above, we can generate an improved version of your resume.")
+                st.write("The new resume will include:")
+                st.write("• Enhanced professional summary")
+                st.write("• Improved work experience descriptions")
+                st.write("• Optimized keywords for ATS")
+                st.write("• Better formatting and structure")
+            
+            with col2:
+                if st.button("🔄 Generate Improved Resume", type="primary"):
+                    with st.spinner("Generating your improved resume..."):
+                        # Get the stored data
+                        resume_text = st.session_state.get('resume_text', '')
+                        analysis_result = st.session_state.get('analysis_result', {})
+                        job_role = st.session_state.get('job_role', 'General')
+                        
+                        # Generate improved resume
+                        analyzer = AIResumeAnalyzer()
+                        result = analyzer.generate_complete_improved_resume(
+                            resume_text, analysis_result, job_role
+                        )
+                        
+                        if "error" in result:
+                            st.error(f"❌ Error: {result['error']}")
+                        else:
+                            st.success("✅ Improved resume generated successfully!")
+                            
+                            # Show before/after comparison
+                            st.subheader("📊 Before vs After Comparison")
+                            
+                            col1, col2 = st.columns(2)
+                            
+                            with col1:
+                                st.markdown("**Original Resume Summary:**")
+                                original_summary = result['original_sections'].get('professional_summary', 'No summary found')
+                                st.text_area("Original", original_summary, height=100, disabled=True)
+                            
+                            with col2:
+                                st.markdown("**Improved Resume Summary:**")
+                                improved_summary = result['improved_sections'].get('professional_summary', 'No summary generated')
+                                st.text_area("Improved", improved_summary, height=100, disabled=True)
+                            
+                            # Download button for the improved resume
+                            st.download_button(
+                                label="📥 Download Improved Resume (.docx)",
+                                data=result['resume_buffer'].getvalue(),
+                                file_name="improved_resume.docx",
+                                mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                            )
+                            
+                            # Store the result for potential future use
+                            st.session_state['improved_resume'] = result
+
 
     def simple_generate_pdf_report(self, analysis_result, candidate_name, job_role):
         """Generate a simple PDF report without complex charts as a fallback"""

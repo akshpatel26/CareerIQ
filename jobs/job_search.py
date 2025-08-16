@@ -499,26 +499,32 @@ def render_job_search():
                                         location = city['text']
 
             # Advanced Filters
-            with st.expander("🎯 Advanced Filters"):
-                st.markdown('<div class="filter-section">', unsafe_allow_html=True)
-                filter_cols = st.columns(3)
-                
-                with filter_cols[0]:
-                    experience = st.selectbox("Experience Level",
-                                            options=get_filter_options()["experience_levels"],
-                                            format_func=lambda x: x["text"])
-                
-                with filter_cols[1]:
-                    salary_range = st.selectbox("Salary Range",
-                                              options=get_filter_options()["salary_ranges"],
-                                              format_func=lambda x: x["text"])
-                
-                with filter_cols[2]:
-                    job_type = st.selectbox("Job Type",
-                                          options=get_filter_options()["job_types"],
-                                          format_func=lambda x: x["text"])
-                
-                st.markdown('</div>', unsafe_allow_html=True)
+            # st.markdown("### 🎯 Advanced Filters")
+            st.markdown('<div class="filter-section">', unsafe_allow_html=True)
+            filter_cols = st.columns(3)
+            
+            with filter_cols[0]:
+                experience = st.selectbox(
+                    "Experience Level",
+                    options=get_filter_options()["experience_levels"],
+                    format_func=lambda x: x["text"]
+                )
+            
+            with filter_cols[1]:
+                salary_range = st.selectbox(
+                    "Salary Range",
+                    options=get_filter_options()["salary_ranges"],
+                    format_func=lambda x: x["text"]
+                )
+            
+            with filter_cols[2]:
+                job_type = st.selectbox(
+                    "Job Type",
+                    options=get_filter_options()["job_types"],
+                    format_func=lambda x: x["text"]
+                )
+            
+            st.markdown('</div>', unsafe_allow_html=True)
 
             # Search button
             if st.button("SEARCH JOBS", type="primary", use_container_width=True):
