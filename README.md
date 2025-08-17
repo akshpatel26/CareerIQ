@@ -90,27 +90,17 @@
 
 ## 💡 **How It Works**  
 
-1. **Upload or Start from Scratch**  
-   - Import your resume in **PDF/Word** or create one from scratch with our AI-powered builder.  
+1. **Upload or Create**: Start from PDF/Word or build a resume from scratch.
 
-2. **Analyze Your Resume**  
-   - **ATS Compatibility**: Ensure your resume meets recruiter expectations.  
-   - **Keyword Insights**: Find and fill gaps in your content.  
-   - **Skills Gap Analysis**: Discover key skills missing for your target role.  
+2. **Analyze**: Get ATS score, keyword insights, and skills gap report.
 
-3. **Build a Stunning Resume**  
-   - Select from **4 unique templates** and customize sections like skills, achievements, or hobbies.  
+3. **Customize**: Pick a template and tailor sections like skills, achievements, or hobbies.
 
-4. **Download & Apply**  
-   - Export your resume in **PDF** format, ready for submission.  This project has evolved with significant enhancements to its resume analysis capabilities:
+4. **Download & Apply**: Export a polished, ready-to-submit PDF resume.
 
-5. **Job Portal**  
-   - Find and apply to jobs from Naukri, Indeed, Glassdoor, and LinkedIn. AI ranks matches and generates tailored cover letters instantly.
- 
-6. **Smart Quiz**  
-   - Adaptive quizzes tailored to your skill level.
-   - AI-generated sets: Numerical, Logic, Reasoning, Mock Tests.
+5. **Job Portal**: Find and apply to jobs from Naukri, Indeed, Glassdoor, and LinkedIn. AI ranks matches and generates tailored cover letters instantly.
 
+6. **Smart Quiz**: Test your skills with adaptive AI-generated quizzes (Numerical, Logic, Reasoning, Mock Tests) to prepare for interviews.
 
 #### ✅ Step-by-Step:
 
