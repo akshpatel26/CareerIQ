@@ -40,7 +40,7 @@ import json
 import datetime
 from dotenv import load_dotenv
 import os
-from aimocktest import run_quiz  # Import the run_quiz function
+from SmartQuiz.aimocktest import run_quiz 
 
 load_dotenv()  # Load from .env file
 google_api_key = os.getenv("GOOGLE_API_KEY")
