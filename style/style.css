@@ -17,6 +17,7 @@
     --error-color: #F44336;
 }
 
+
 /* Global Styles */
 body {
     font-family: 'Inter', sans-serif;
@@ -456,6 +457,7 @@ h1 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
 
 /* Responsive adjustments */
 @media (max-width: 768px) {

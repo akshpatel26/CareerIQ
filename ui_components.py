@@ -392,6 +392,7 @@ def render_activity_section(resume_uploaded=False):
     
     st.markdown("</div>", unsafe_allow_html=True)
 
+
 def render_suggestions_section(resume_uploaded=False):
     """Render the suggestions section"""
     st.markdown("""

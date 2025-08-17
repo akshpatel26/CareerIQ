@@ -2,6 +2,7 @@ import spacy
 from collections import Counter
 from datetime import datetime
 
+
 class ResumeAnalyzer:
     def __init__(self):
         self.nlp = spacy.load("en_core_web_sm")
