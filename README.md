@@ -8,6 +8,7 @@
   CareerIQ is your **all-in-one tool** to analyze, optimize, and craft resumes that stand out, helping you **land your dream job** , Adaptive Practice **Smart Quiz** that adjusts questions to your skill level.
 </div>
 
+👨‍💻 [Try CareerIQ Live Demo](https://your-demo-link.com)
   
 ## <img src="https://github.com/user-attachments/assets/a6e4d77f-56d6-4aa8-8278-0f5a18ef5eb9" width="24px"> **What Makes Us Different ?**  
 
@@ -37,9 +38,6 @@
    - 🔄 Adaptive Practice
    - 🎯 Wide Coverage
   
-
-## <img src="https://github.com/user-attachments/assets/e5ac1371-6ac4-48b6-b95c-5ef9afaf1353" width="30"> **Live Demo**  
-👨‍💻 Try it Now: [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://resumind.streamlit.app/)  
 
 
 ## <img src="https://github.com/user-attachments/assets/0cefad05-58a9-4aa0-a070-f75a0c9b0353" height="32px">  Tech Stack 
@@ -106,12 +104,12 @@
 4. **Download & Apply**  
    - Export your resume in **PDF** format, ready for submission.  This project has evolved with significant enhancements to its resume analysis capabilities:
 
-5. **Job Application Portal**  
-   - Aggregates jobs from Naukri, Indeed, Glassdoor, and LinkedIn, ranks them by AI match score, and generates personalized cover letters. LinkedIn Scraper pulls targeted jobs with match % + AI cover letters for quick applications.
+5. **Job Portal**  
+   - Find and apply to jobs from Naukri, Indeed, Glassdoor, and LinkedIn. AI ranks matches and generates tailored cover letters instantly.
  
 6. **Smart Quiz**  
-   - Flexible Modes → Choose from curated Question Bank quizzes (Aptitude, Reasoning, Programming, DSA, Languages) or AI-generated sets (Numerical, Logic, Reasoning, Mock Tests, etc ).
-   - Smart Features → Customize #questions & timers, get detailed results with explanations, and retry or generate new quizzes instantly.
+   - Adaptive quizzes tailored to your skill level.
+   - AI-generated sets: Numerical, Logic, Reasoning, Mock Tests.
 
 
 #### ✅ Step-by-Step:
