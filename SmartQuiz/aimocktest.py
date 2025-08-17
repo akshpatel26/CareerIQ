@@ -194,7 +194,10 @@ def init_quiz_session_state():
             'time_up': False,
             'generating_questions': False,
             'generation_progress': 0,
-            'generation_status': ''
+            'generation_status': '',
+            'timer_active': False,
+            'auto_submitted': False,
+            'timer_expired': False
         }
 
 def get_category_display_name(category):
@@ -247,6 +250,106 @@ def generate_static_questions():
             questions.extend(general_questions.get(diff, []))
     
     return shuffle_questions(questions, num_questions)
+
+def start_question_timer():
+    """Start timer for current question"""
+    st.session_state.quiz_state['question_start_time'] = datetime.now()
+    st.session_state.quiz_state['timer_active'] = True
+    st.session_state.quiz_state['auto_submitted'] = False
+    st.session_state.quiz_state['timer_expired'] = False
+
+def get_remaining_time():
+    """Get remaining time for current question"""
+    if not st.session_state.quiz_state.get('question_start_time'):
+        return st.session_state.quiz_state['timer_duration']
+    
+    elapsed = (datetime.now() - st.session_state.quiz_state['question_start_time']).total_seconds()
+    remaining = st.session_state.quiz_state['timer_duration'] - elapsed
+    return max(0, remaining)
+
+def get_timer_color_and_icon(remaining_time):
+    """Get color and icon based on remaining time"""
+    if remaining_time <= 5:
+        return "🔴", "#ff4444"  # Red - Critical
+    elif remaining_time <= 10:
+        return "🟡", "#ffaa00"  # Yellow - Warning
+    else:
+        return "🟢", "#00ff88"  # Green - Safe
+
+def handle_timer_expiry():
+    """Handle when timer expires"""
+    if st.session_state.quiz_state.get('auto_submitted', False):
+        return  # Already handled
+    
+    quiz_state = st.session_state.quiz_state
+    current_q_idx = quiz_state['current_question']
+    question_data = quiz_state['questions'][current_q_idx]
+    
+    # Record timeout answer
+    answer_record = {
+        'question_index': current_q_idx,
+        'selected': -1,  # No selection
+        'correct': question_data.get('correct', 0),
+        'is_correct': False,
+        'question': question_data['question'],
+        'options': question_data.get('options', []),
+        'explanation': question_data.get('explanation', 'No explanation available.'),
+        'time_taken': quiz_state['timer_duration'],
+        'timed_out': True
+    }
+    
+    st.session_state.quiz_state['user_answers'].append(answer_record)
+    st.session_state.quiz_state['auto_submitted'] = True
+    st.session_state.quiz_state['timer_expired'] = True
+    st.session_state.quiz_state['timer_active'] = False
+    
+    # Move to next question or results
+    if current_q_idx < len(quiz_state['questions']) - 1:
+        st.session_state.quiz_state['current_question'] += 1
+        start_question_timer()
+    else:
+        st.session_state.quiz_state['phase'] = 'results'
+
+def handle_answer_selection_with_timer(option_index):
+    """Handle answer selection with timer tracking"""
+    quiz_state = st.session_state.quiz_state
+    current_q_idx = quiz_state['current_question']
+    question_data = quiz_state['questions'][current_q_idx]
+    
+    # Stop timer
+    st.session_state.quiz_state['timer_active'] = False
+    
+    correct_idx = question_data.get('correct', 0)
+    is_correct = option_index == correct_idx
+    
+    time_taken = (datetime.now() - quiz_state['question_start_time']).total_seconds()
+    
+    answer_record = {
+        'question_index': current_q_idx,
+        'selected': option_index,
+        'correct': correct_idx,
+        'is_correct': is_correct,
+        'question': question_data['question'],
+        'options': question_data.get('options', []),
+        'explanation': question_data.get('explanation', 'No explanation available.'),
+        'time_taken': time_taken,
+        'timed_out': False
+    }
+    
+    st.session_state.quiz_state['user_answers'].append(answer_record)
+    
+    if is_correct:
+        st.session_state.quiz_state['score'] += 10
+        st.session_state.quiz_state['correct_answers'] += 1
+    
+    # Move to next question or results
+    if current_q_idx < len(quiz_state['questions']) - 1:
+        st.session_state.quiz_state['current_question'] += 1
+        start_question_timer()
+    else:
+        st.session_state.quiz_state['phase'] = 'results'
+    
+    st.rerun()
 
 def setup_phase():
     """Main setup interface"""
@@ -361,7 +464,7 @@ def show_static_quiz_settings():
     with col3:
         timer_duration = st.selectbox(
             "⏱️ Timer (seconds)",
-            options=[15, 20, 30, 45],
+            options=[30,45,60],
             index=0,
             key="static_timer"
         )
@@ -565,7 +668,7 @@ def show_ai_quiz_settings():
     with col2:
         timer_duration = st.selectbox(
             "⏱️ Timer (seconds)",
-            options=[15, 20, 30, 45],
+            options=[30,45,60],
             index=0,
             key="ai_timer"
         )
@@ -649,7 +752,7 @@ def generating_phase():
                 st.rerun()
 
 def quiz_phase():
-    """Main quiz interface"""
+    """Main quiz interface with real-time timer"""
     quiz_state = st.session_state.quiz_state
     
     if not quiz_state.get('questions') or len(quiz_state['questions']) == 0:
@@ -668,63 +771,60 @@ def quiz_phase():
         
     question_data = quiz_state['questions'][current_q_idx]
     
-    # Progress bar
-    progress = (current_q_idx + 1) / len(quiz_state['questions'])
-    # st.progress(progress, text=f"Question {current_q_idx + 1} of {len(quiz_state['questions'])}")
+    # Initialize timer for first question
+    if not quiz_state.get('question_start_time'):
+        start_question_timer()
     
-    # # Question meta info
-    # col1, col2, col3 = st.columns(3)
-    # with col1:
-    #     difficulty_icons = {'easy': '🟢', 'medium': '🟡', 'hard': '🔴'}
-    #     icon = difficulty_icons.get(quiz_state['difficulty'], '🟡')
-    #     st.markdown(f"{icon} **{quiz_state['difficulty'].capitalize()}**")
-    # with col2:
-    #     st.markdown(f"📊 **Score: {quiz_state['score']}/{len(quiz_state['questions']) * 10}**")
-    # with col3:
-    #     st.markdown("**+10 points per correct answer**")
+    # Get remaining time
+    remaining_time = get_remaining_time()
     
-    # Question display
-    st.markdown(f"### Question {current_q_idx + 1}")
-    st.markdown(f"**{question_data['question']}**")
+    # Check if time expired
+    if remaining_time <= 0 and quiz_state.get('timer_active', False):
+        handle_timer_expiry()
+        st.rerun()
+        return
+    q_col, t_col = st.columns([3, 1])
+
+    with q_col:
+        st.markdown(f"### Question {current_q_idx + 1}")
+        st.markdown(f"**{question_data['question']}**")
+
+    with t_col:
+        timer_icon, timer_color = get_timer_color_and_icon(remaining_time)
+        st.markdown(f"""
+        <div style="text-align: center; padding: 10px; border-radius: 10px; 
+                    background: linear-gradient(135deg, {timer_color}22, {timer_color}11);
+                    border: 2px solid {timer_color}; width: 120px; height: 80px;  margin: auto;">
+            <h3 style="margin: 0; color: {timer_color};">
+                {timer_icon} {int(remaining_time)}s
+            </h3>
+        </div>
+        """, unsafe_allow_html=True)
     
     st.markdown("---")
-    
-    # Answer options
     st.markdown("### Choose your answer:")
     
+    # Answer options with timer check
     options = question_data.get('options', [])
+    
+    # Disable buttons if timer expired
+    if quiz_state.get('timer_expired', False):
+        st.error("⏰ Time expired! Moving to next question...")
+        time.sleep(2)
+        st.rerun()
+        return
+    
     for i, option in enumerate(options):
-        if st.button(f"**{chr(65+i)}.** {option}", key=f"q{current_q_idx}_opt{i}", use_container_width=True):
-            # Record answer
-            correct_idx = question_data.get('correct', 0)
-            is_correct = i == correct_idx
-            
-            answer_record = {
-                'question_index': current_q_idx,
-                'selected': i,
-                'correct': correct_idx,
-                'is_correct': is_correct,
-                'question': question_data['question'],
-                'options': options,
-                'explanation': question_data.get('explanation', 'No explanation available.'),
-                'time_taken': (datetime.now() - quiz_state['question_start_time']).total_seconds()
-            }
-            
-            st.session_state.quiz_state['user_answers'].append(answer_record)
-            
-            if is_correct:
-                st.session_state.quiz_state['score'] += 10
-                st.session_state.quiz_state['correct_answers'] += 1
-            
-            # Next question or results
-            if current_q_idx < len(quiz_state['questions']) - 1:
-                st.session_state.quiz_state['current_question'] += 1
-                st.session_state.quiz_state['question_start_time'] = datetime.now()
-            else:
-                st.session_state.quiz_state['phase'] = 'results'
-            
-            st.rerun()
-
+        if st.button(f"**{chr(65+i)}.** {option}", 
+                    key=f"q{current_q_idx}_opt{i}", 
+                    use_container_width=True,
+                    disabled=remaining_time <= 0):
+            handle_answer_selection_with_timer(i)
+    
+    # Auto-refresh every second for timer update
+    if quiz_state.get('timer_active', False) and remaining_time > 0:
+        time.sleep(1)
+        st.rerun()
 def get_performance_message(percentage, correct, total):
     """Generate performance message based on score"""
     if percentage >= 90:
@@ -739,7 +839,7 @@ def get_performance_message(percentage, correct, total):
         return f"💪 Keep Learning! Don't worry! {correct}/{total} is a start. Practice makes perfect - try again to boost your score!"
 
 def results_phase():
-    """Display quiz results"""
+    """Display quiz results with timer statistics"""
     quiz_state = st.session_state.quiz_state
     
     st.markdown("# 🎯 Quiz Results")
@@ -756,6 +856,19 @@ def results_phase():
         accuracy = (quiz_state['correct_answers'] / len(quiz_state['questions'])) * 100
         st.metric("🎯 Accuracy", f"{accuracy:.1f}%")
     
+    # Timer statistics
+    timeouts = sum(1 for ans in quiz_state['user_answers'] if ans.get('timed_out', False))
+    avg_time = sum(ans.get('time_taken', 0) for ans in quiz_state['user_answers']) / len(quiz_state['user_answers'])
+    
+    timer_col1, timer_col2, timer_col3 = st.columns(3)
+    with timer_col1:
+        st.metric("⏰ Timeouts", timeouts)
+    with timer_col2:
+        st.metric("⚡ Avg Time", f"{avg_time:.1f}s")
+    with timer_col3:
+        total_time = (datetime.now() - quiz_state['start_time']).total_seconds() / 60
+        st.metric("🕐 Total Time", f"{total_time:.1f}m")
+    
     # Performance feedback
     message = get_performance_message(accuracy, quiz_state['correct_answers'], len(quiz_state['questions']))
     if accuracy >= 80:
@@ -765,18 +878,20 @@ def results_phase():
     else:
         st.warning(message)
     
-    # Quiz mode indicator
-    mode_indicator = "🤖 AI-Generated" if quiz_state.get('quiz_mode') == 'ai' else "📚 Question Bank"
-    topic_display = quiz_state.get('ai_topic', quiz_state.get('programming_language', quiz_state.get('category', 'Mixed')))
-    st.info(f"**Quiz Mode:** {mode_indicator} | **Topic:** {topic_display}")
+    # Rest of your existing results_phase code...
     
-    st.markdown("---")
-    
-    # Detailed analysis
+    # Detailed analysis with timer info
     st.markdown("## 📝 Detailed Analysis")
     
     for i, answer_data in enumerate(quiz_state['user_answers']):
-        with st.expander(f"Question {i+1}: {'✅ Correct' if answer_data['is_correct'] else '❌ Incorrect'}"):
+        if answer_data.get('timed_out', False):
+            status = "⏰ Time Up"
+        elif answer_data['is_correct']:
+            status = "✅ Correct"
+        else:
+            status = "❌ Incorrect"
+            
+        with st.expander(f"Question {i+1}: {status}"):
             st.markdown(f"**Q:** {answer_data['question']}")
             
             # Show options with indicators
@@ -791,14 +906,25 @@ def results_phase():
                 else:
                     st.info(f"**{chr(65+opt_idx)}.** {option}")
             
-            # Explanation
+            # Show timeout info
+            if answer_data.get('timed_out', False):
+                st.warning("⏰ **Time expired - No answer selected**")
+            
+            # Explanation and timing
             st.info(f"💡 **Explanation:** {answer_data['explanation']}")
             
-            # Time taken
-            if 'time_taken' in answer_data:
-                st.caption(f"⏱️ Time taken: {answer_data['time_taken']:.1f} seconds")
-    
-    # Action buttons
+            # Enhanced time display
+            time_taken = answer_data.get('time_taken', 0)
+            if answer_data.get('timed_out', False):
+                st.caption(f"⏱️ Time: {time_taken:.1f}s (Expired)")
+            elif time_taken <= 5:
+                st.caption(f"⚡ Time: {time_taken:.1f}s (Very Fast!)")
+            elif time_taken <= 10:
+                st.caption(f"🚀 Time: {time_taken:.1f}s (Fast)")
+            else:
+                st.caption(f"⏱️ Time: {time_taken:.1f}s")
+                
+            # Action buttons
     col1, col2, col3 = st.columns([1, 1, 1])
     
     with col1:
@@ -885,6 +1011,45 @@ def results_phase():
                 'generation_status': ''
             }
             st.rerun()
+
+
+def add_timer_css():
+    """Add custom CSS for timer styling"""
+    st.markdown("""
+    <style>
+    /* Timer pulse animation */
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+    
+    .timer-critical {
+        animation: pulse 1s infinite;
+    }
+    
+    /* Progress bar enhancements */
+    .stProgress .st-bp {
+        background: linear-gradient(90deg, #00ff88, #00aaff);
+    }
+    
+    /* Button hover effects */
+    .stButton > button {
+        transition: all 0.3s ease;
+        border-radius: 8px;
+    }
+    
+    .stButton > button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    
+    .stButton > button:disabled {
+        opacity: 0.6;
+        transform: none !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
 def run_quiz():
     """Main function to run the quiz"""
