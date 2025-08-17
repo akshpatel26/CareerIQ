@@ -9,7 +9,7 @@ from config.QuestionBank import QUESTION_BANK
 from config.fallback_questions import create_fallback_questions
 
 
-genai.configure(api_key="AIzaSyDWQlFnZtNVF7ydDxn6x3GS65tbNeAuHm0")
+genai.configure(api_key="GOOGLE_API_KEY")
 
 def generate_aptitude_mcqs_gemini(num_questions=5, topic="Mixed Aptitude", difficulty="medium"):
     """Generate AI questions using Gemini API"""
