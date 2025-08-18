@@ -207,7 +207,7 @@ def get_category_display_name(category):
         'Verbal and Reasoning': '🧩 Verbal and Reasoning',
         'programming': '💻 Programming',
         'Technical MCQs': '📚 Technical MCQs',
-        'Data structure and Algorithm': '🧮 Data Structure & Algorithm',
+        'Core Concepts(CE)': '🧮 Core Concepts(CE)',
         'Problem Solving': '🕵 Problem Solving',
         'C': '💻 C Programming',
         'C++': '💻 C++ Programming',
@@ -356,7 +356,7 @@ def setup_phase():
     # st.markdown("# 🎯 AI-Powered Quiz System")
     # st.markdown("Choose your preferred quiz experience:")
     st.markdown("""
-    ### 🚀 Welcome to Our Comprehensive Learning Platform!
+    ### Welcome to Our Comprehensive Learning Platform!
     
     **Discover knowledge through interactive quizzes designed for modern learners.** 
     
@@ -399,7 +399,7 @@ def static_quiz_setup():
         ('Verbal and Reasoning', '🧩', 'Verbal and Reasoning'),
         ('programming', '💻', 'Programming'),
         ('Technical MCQs', '📚', 'Technical MCQs'),
-        ('Data structure and Algorithm', '🧮', 'Data Structure & Algorithm'),
+        ('Core Concepts(CE)', '🧮', 'Core Concepts(CE)'),
         ('Problem Solving', '🕵', 'Problem Solving')
     ]
     
