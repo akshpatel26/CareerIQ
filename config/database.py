@@ -530,3 +530,5 @@ def reset_ai_analysis_stats():
         return {"success": False, "message": f"Error resetting AI analysis statistics: {str(e)}"}
     finally:
         conn.close()
+        
+        
