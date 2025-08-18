@@ -549,7 +549,7 @@ def programming_settings_phase():
         st.markdown("⏱ Timer Settings")
         timer_duration = st.selectbox(
             "Timer per question",
-            options=[10, 15, 20, 30],
+            options=[30,45,60],
             format_func=lambda x: f"{x} seconds",
             index=1,
             key="prog_timer_select"
@@ -689,7 +689,6 @@ def show_ai_quiz_settings():
             st.session_state.quiz_state['phase'] = 'generating'
             st.rerun()
 
-
 def generating_phase():
     """Show loading screen during AI generation"""
     st.markdown("# 🤖 Generating Your AI Quiz")
@@ -700,8 +699,10 @@ def generating_phase():
     
     st.info(f"📋 **Topic:** {topic} | 🎯 **Difficulty:** {difficulty.capitalize()} | 📊 **Questions:** {num_questions}")
     
+    # Progress + status containers
     progress_container = st.container()
     status_container = st.container()
+    spinner_container = st.container()
     
     with progress_container:
         progress_bar = st.progress(0, text="Initializing AI generation...")
@@ -709,6 +710,32 @@ def generating_phase():
     with status_container:
         status_info = st.empty()
     
+    # Custom centered loading circle
+    with spinner_container:
+        st.markdown(
+            """
+            <div style="display:flex; justify-content:center; align-items:center; height:100px;">
+                <div class="loader"></div>
+            </div>
+            <style>
+            .loader {
+                border: 6px solid #f3f3f3;
+                border-top: 6px solid #4CAF50;
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                animation: spin 1s linear infinite;
+            }
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
+    
+    # Steps for fake progress
     steps = [
         (20, "🔗 Connecting to Gemini AI..."),
         (40, "🧠 Analyzing topic requirements..."),
@@ -722,6 +749,7 @@ def generating_phase():
         status_info.info(message)
         time.sleep(0.8)
     
+    # Actual AI call
     questions = generate_aptitude_mcqs_gemini(
         num_questions=num_questions,
         topic=topic,
@@ -750,6 +778,7 @@ def generating_phase():
             if st.button("⬅️ Back to Setup", use_container_width=True):
                 st.session_state.quiz_state['phase'] = 'setup'
                 st.rerun()
+
 
 def quiz_phase():
     """Main quiz interface with real-time timer"""
