@@ -326,6 +326,7 @@ def save_ai_analysis_data(resume_id, analysis_data):
     finally:
         conn.close()
 
+
 def get_ai_analysis_stats():
     """Get statistics about AI analyzer usage"""
     conn = get_database_connection()
