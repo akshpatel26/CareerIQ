@@ -3185,7 +3185,7 @@ class ResumeApp:
                 font-size: 2rem;
                 margin-bottom: 1rem;
                 font-weight: 600;
-            ">Ready to Transform Your Career? 🚀</h3>
+            ">Ready to Transform Your Career?</h3>
             <p style="
                 color: rgba(255,255,255,0.9);
                 font-size: 1.1rem;
