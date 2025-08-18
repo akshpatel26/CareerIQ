@@ -389,6 +389,7 @@ def get_ai_analysis_stats():
     finally:
         conn.close()
 
+
 def get_detailed_ai_analysis_stats():
     """Get detailed statistics about AI analyzer usage including daily trends"""
     conn = get_database_connection()
