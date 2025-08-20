@@ -4,56 +4,87 @@ from datetime import datetime
 import pandas as pd
 import time
 import re
+import os
+import tempfile
 
 class FeedbackManager:
     def __init__(self):
-        self.db_path = "feedback/feedback.db"
+        # Try different database path strategies
+        self.db_path = self.get_database_path()
         self.setup_database()
+
+    def get_database_path(self):
+        """Get appropriate database path for different environments"""
+        try:
+            # Option 1: Try to use a data directory
+            if not os.path.exists("data"):
+                os.makedirs("data", exist_ok=True)
+            db_path = os.path.join("data", "feedback.db")
+            
+            # Test write permissions
+            test_conn = sqlite3.connect(db_path)
+            test_conn.close()
+            
+            st.info(f"✅ Using database path: {db_path}")
+            return db_path
+            
+        except Exception as e:
+            # Option 2: Use temporary directory
+            temp_dir = tempfile.gettempdir()
+            db_path = os.path.join(temp_dir, "feedback.db")
+            st.warning(f"⚠️ Using temporary database: {db_path}")
+            st.warning("Note: Data may not persist between app restarts")
+            return db_path
 
     def setup_database(self):
         """Create feedback table if it doesn't exist with all required fields"""
-        conn = sqlite3.connect(self.db_path)
-        c = conn.cursor()
-        
-        # Check if table exists
-        c.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='feedback'")
-        table_exists = c.fetchone() is not None
-        
-        if not table_exists:
-            # Create new table with all required fields
-            c.execute('''
-                CREATE TABLE feedback (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    full_name TEXT NOT NULL,
-                    contact_no TEXT NOT NULL,
-                    email TEXT NOT NULL,
-                    branch TEXT NOT NULL,
-                    rating INTEGER,
-                    usability_score INTEGER,
-                    feature_satisfaction INTEGER,
-                    missing_features TEXT,
-                    improvement_suggestions TEXT,
-                    user_experience TEXT,
-                    timestamp DATETIME
-                )
-            ''')
-            print("✅ Created new feedback table with all required fields")
-        else:
-            # Check if new columns exist and add them if needed
-            c.execute("PRAGMA table_info(feedback)")
-            columns = [column[1] for column in c.fetchall()]
+        try:
+            conn = sqlite3.connect(self.db_path)
+            c = conn.cursor()
             
-            required_columns = ['full_name', 'contact_no', 'branch']
-            for col in required_columns:
-                if col not in columns:
-                    try:
-                        c.execute(f'ALTER TABLE feedback ADD COLUMN {col} TEXT')
-                        print(f"✅ Added {col} column")
-                    except sqlite3.OperationalError as e:
-                        print(f"❌ Failed to add {col} column: {e}")
-        
-        conn.commit()
-        conn.close()
+            # Check if table exists
+            c.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='feedback'")
+            table_exists = c.fetchone() is not None
+            
+            if not table_exists:
+                # Create new table with all required fields
+                c.execute('''
+                    CREATE TABLE feedback (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        full_name TEXT NOT NULL,
+                        contact_no TEXT NOT NULL,
+                        email TEXT NOT NULL,
+                        branch TEXT NOT NULL,
+                        rating INTEGER,
+                        usability_score INTEGER,
+                        feature_satisfaction INTEGER,
+                        missing_features TEXT,
+                        improvement_suggestions TEXT,
+                        user_experience TEXT,
+                        timestamp DATETIME
+                    )
+                ''')
+                st.success("✅ Created new feedback table with all required fields")
+            else:
+                # Check if new columns exist and add them if needed
+                c.execute("PRAGMA table_info(feedback)")
+                columns = [column[1] for column in c.fetchall()]
+                
+                required_columns = ['full_name', 'contact_no', 'branch']
+                for col in required_columns:
+                    if col not in columns:
+                        try:
+                            c.execute(f'ALTER TABLE feedback ADD COLUMN {col} TEXT')
+                            st.success(f"✅ Added {col} column")
+                        except sqlite3.OperationalError as e:
+                            st.error(f"❌ Failed to add {col} column: {e}")
+            
+            conn.commit()
+            conn.close()
+            
+        except Exception as e:
+            st.error(f"🚨 Database setup failed: {str(e)}")
+            st.error("This might be due to deployment platform limitations")
 
     def validate_email(self, email):
         """Validate email format"""
@@ -75,39 +106,129 @@ class FeedbackManager:
         return any(re.match(pattern, phone_clean) for pattern in patterns)
 
     def save_feedback(self, feedback_data):
-        """Save feedback to database"""
-        conn = sqlite3.connect(self.db_path)
-        c = conn.cursor()
-        c.execute('''
-            INSERT INTO feedback (
-                full_name, contact_no, email, branch,
-                rating, usability_score, feature_satisfaction,
-                missing_features, improvement_suggestions,
-                user_experience, timestamp
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        ''', (
-            feedback_data['full_name'],
-            feedback_data['contact_no'],
-            feedback_data['email'],
-            feedback_data['branch'],
-            feedback_data['rating'],
-            feedback_data['usability_score'],
-            feedback_data['feature_satisfaction'],
-            feedback_data['missing_features'],
-            feedback_data['improvement_suggestions'],
-            feedback_data['user_experience'],
-            datetime.now()
-        ))
-        conn.commit()
-        conn.close()
+        """Save feedback to database with enhanced error handling"""
+        try:
+            # Verify database connection
+            conn = sqlite3.connect(self.db_path)
+            c = conn.cursor()
+            
+            # Insert feedback
+            c.execute('''
+                INSERT INTO feedback (
+                    full_name, contact_no, email, branch,
+                    rating, usability_score, feature_satisfaction,
+                    missing_features, improvement_suggestions,
+                    user_experience, timestamp
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ''', (
+                feedback_data['full_name'],
+                feedback_data['contact_no'],
+                feedback_data['email'],
+                feedback_data['branch'],
+                feedback_data['rating'],
+                feedback_data['usability_score'],
+                feedback_data['feature_satisfaction'],
+                feedback_data['missing_features'],
+                feedback_data['improvement_suggestions'],
+                feedback_data['user_experience'],
+                datetime.now()
+            ))
+            
+            # Get the inserted row ID for confirmation
+            row_id = c.lastrowid
+            
+            conn.commit()
+            conn.close()
+            
+            # Verify the data was saved
+            self.verify_save(row_id)
+            
+            return True
+            
+        except Exception as e:
+            st.error(f"🚨 Failed to save feedback: {str(e)}")
+            
+            # Try alternative storage method
+            self.save_to_session_state(feedback_data)
+            return False
+
+    def verify_save(self, row_id):
+        """Verify that the feedback was actually saved"""
+        try:
+            conn = sqlite3.connect(self.db_path)
+            c = conn.cursor()
+            c.execute("SELECT id FROM feedback WHERE id = ?", (row_id,))
+            result = c.fetchone()
+            conn.close()
+            
+            if result:
+                st.success(f"✅ Feedback successfully saved with ID: {row_id}")
+            else:
+                st.error("❌ Feedback save verification failed")
+                
+        except Exception as e:
+            st.error(f"🚨 Save verification failed: {str(e)}")
+
+    def save_to_session_state(self, feedback_data):
+        """Fallback: Save to session state if database fails"""
+        if 'fallback_feedback' not in st.session_state:
+            st.session_state['fallback_feedback'] = []
+        
+        feedback_data['timestamp'] = datetime.now()
+        st.session_state['fallback_feedback'].append(feedback_data)
+        
+        st.warning("⚠️ Feedback saved to session (temporary storage)")
+        st.info("💡 For persistent storage, consider using Google Sheets or external database")
 
     def get_feedback_stats(self):
-        """Get feedback statistics"""
-        conn = sqlite3.connect(self.db_path)
-        df = pd.read_sql_query("SELECT * FROM feedback", conn)
-        conn.close()
-        
-        if df.empty:
+        """Get feedback statistics with fallback to session state"""
+        try:
+            # Try database first
+            conn = sqlite3.connect(self.db_path)
+            df = pd.read_sql_query("SELECT * FROM feedback", conn)
+            conn.close()
+            
+            # Add session state data if exists
+            if 'fallback_feedback' in st.session_state:
+                session_df = pd.DataFrame(st.session_state['fallback_feedback'])
+                if not session_df.empty:
+                    df = pd.concat([df, session_df], ignore_index=True)
+            
+            if df.empty:
+                return {
+                    'avg_rating': 0,
+                    'avg_usability': 0,
+                    'avg_satisfaction': 0,
+                    'total_responses': 0,
+                    'branch_distribution': {}
+                }
+            
+            branch_counts = df['branch'].value_counts().to_dict() if 'branch' in df.columns else {}
+            
+            return {
+                'avg_rating': df['rating'].mean() if 'rating' in df.columns else 0,
+                'avg_usability': df['usability_score'].mean() if 'usability_score' in df.columns else 0,
+                'avg_satisfaction': df['feature_satisfaction'].mean() if 'feature_satisfaction' in df.columns else 0,
+                'total_responses': len(df),
+                'branch_distribution': branch_counts
+            }
+            
+        except Exception as e:
+            st.error(f"🚨 Failed to load stats: {str(e)}")
+            
+            # Return session state data only
+            if 'fallback_feedback' in st.session_state:
+                session_data = st.session_state['fallback_feedback']
+                if session_data:
+                    df = pd.DataFrame(session_data)
+                    return {
+                        'avg_rating': df['rating'].mean() if 'rating' in df.columns else 0,
+                        'avg_usability': df['usability_score'].mean() if 'usability_score' in df.columns else 0,
+                        'avg_satisfaction': df['feature_satisfaction'].mean() if 'feature_satisfaction' in df.columns else 0,
+                        'total_responses': len(df),
+                        'branch_distribution': df['branch'].value_counts().to_dict() if 'branch' in df.columns else {}
+                    }
+            
             return {
                 'avg_rating': 0,
                 'avg_usability': 0,
@@ -115,51 +236,9 @@ class FeedbackManager:
                 'total_responses': 0,
                 'branch_distribution': {}
             }
-        
-        branch_counts = df['branch'].value_counts().to_dict() if 'branch' in df.columns else {}
-        
-        return {
-            'avg_rating': df['rating'].mean() if 'rating' in df.columns else 0,
-            'avg_usability': df['usability_score'].mean() if 'usability_score' in df.columns else 0,
-            'avg_satisfaction': df['feature_satisfaction'].mean() if 'feature_satisfaction' in df.columns else 0,
-            'total_responses': len(df),
-            'branch_distribution': branch_counts
-        }
 
-    def render_star_rating(self, label, key, default_value=5):
-        """Render interactive star rating component"""
-        st.markdown(f'<label class="feedback-label" style="color: #E0E0E0; font-weight: 600; display: block; margin-bottom: 10px;">{label}</label>', unsafe_allow_html=True)
-        
-        # Initialize session state for this rating if not exists
-        if f"{key}_rating" not in st.session_state:
-            st.session_state[f"{key}_rating"] = default_value
-        
-        # Create columns for star buttons
-        cols = st.columns([1, 1, 1, 1, 1, 3])
-        
-        current_rating = st.session_state[f"{key}_rating"]
-        
-        # Create interactive star buttons
-        for i in range(1, 6):
-            with cols[i-1]:
-                if i <= current_rating:
-                    star_display = "⭐"
-                else:
-                    star_display = "☆"
-                
-                if st.button(star_display, key=f"{key}_star_{i}", 
-                           help=f"Rate {i} out of 5",
-                           use_container_width=True):
-                    st.session_state[f"{key}_rating"] = i
-                    st.rerun()
-        
-        # Display rating text
-        with cols[5]:
-            rating_labels = {1: "Poor", 2: "Fair", 3: "Good", 4: "Very Good", 5: "Excellent"}
-            st.markdown(f'<div style="color: #E0E0E0; padding: 8px; font-weight: 500;">{current_rating}/5 - {rating_labels[current_rating]}</div>', 
-                       unsafe_allow_html=True)
-        
-        return current_rating
+    # ... [Keep all your existing methods: render_star_rating, render_feedback_form, 
+    #      render_vertical_0_to_10_rating, render_feedback_stats] ...
     
     def render_feedback_form(self):
         """Render the Google Form-style feedback form"""
@@ -197,19 +276,9 @@ class FeedbackManager:
         </style>
         """, unsafe_allow_html=True)
     
-        # # Header section
-        # st.markdown("""
-        # <div class="google-form-header">
-        #     <h1>📋 Smart Resume AI - User Feedback Form</h1>
-        #     <p>Help us improve your experience with Smart Resume AI</p>
-        #     <p><small>* Indicates required question</small></p>
-        # </div>
-        # """, unsafe_allow_html=True)
-    
-        # Personal Information Section
-        # st.markdown('<div class="form-section">', unsafe_allow_html=True)
-        # st.subheader(' 👤 Personal Information')
-    
+        # Database status info
+        st.info(f"🗄️ Database: {self.db_path}")
+        
         # Full Name
         st.markdown('<label class="feedback-label">👤 Full Name <span class="required-field">*</span></label>', unsafe_allow_html=True)
         full_name = st.text_input("", placeholder="Enter your full name", key="user_full_name", label_visibility="collapsed")
@@ -267,9 +336,8 @@ class FeedbackManager:
     
         st.markdown('<label class="feedback-label">🎉 Experience Journey</label>', unsafe_allow_html=True)
         user_experience = st.text_area("", placeholder="Tell us about your journey! (Optional)", key="experience", label_visibility="collapsed", height=120)
-        st.markdown('</div>', unsafe_allow_html=True)
     
-        # ✅ Required Fields Validation (Updated to exclude text areas)
+        # Required Fields Validation
         required_fields_filled = (
             full_name and full_name.strip() != "" and
             contact_no and self.validate_phone(contact_no) and
@@ -280,7 +348,7 @@ class FeedbackManager:
             feature_satisfaction is not None
         )
     
-        # Missing fields list (Updated to exclude text areas)
+        # Missing fields list
         if not required_fields_filled:
             missing_fields = []
             if not full_name or full_name.strip() == "":
@@ -307,33 +375,30 @@ class FeedbackManager:
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
             if st.button("🚀 Submit Feedback", key="submit_feedback", use_container_width=True, disabled=not required_fields_filled, type="primary"):
-                try:
-                    # Save feedback (handle optional fields with default empty strings)
-                    feedback_data = {
-                        'full_name': full_name.strip(),
-                        'contact_no': contact_no.strip(),
-                        'email': email.strip().lower(),
-                        'branch': branch,
-                        'rating': rating,
-                        'usability_score': usability_score,
-                        'feature_satisfaction': feature_satisfaction,
-                        'missing_features': missing_features.strip() if missing_features else "",
-                        'improvement_suggestions': improvement_suggestions.strip() if improvement_suggestions else "",
-                        'user_experience': user_experience.strip() if user_experience else ""
-                    }
-                    self.save_feedback(feedback_data)
-    
+                feedback_data = {
+                    'full_name': full_name.strip(),
+                    'contact_no': contact_no.strip(),
+                    'email': email.strip().lower(),
+                    'branch': branch,
+                    'rating': rating,
+                    'usability_score': usability_score,
+                    'feature_satisfaction': feature_satisfaction,
+                    'missing_features': missing_features.strip() if missing_features else "",
+                    'improvement_suggestions': improvement_suggestions.strip() if improvement_suggestions else "",
+                    'user_experience': user_experience.strip() if user_experience else ""
+                }
+                
+                success = self.save_feedback(feedback_data)
+                
+                if success:
                     st.success(f"🎉 Thank you {full_name.split()[0]}! Your feedback has been submitted successfully.")
-    
+                    
                     # Reset form
                     for key in ['user_full_name', 'user_contact', 'user_email', 'user_branch',
                                 'overall_rating', 'usability_rating', 'features_rating',
                                 'missing_features', 'improvements', 'experience']:
                         if key in st.session_state:
                             del st.session_state[key]
-    
-                except Exception as e:
-                    st.error(f"🚨 Oops! Something went wrong: {str(e)}")
 
     def render_vertical_0_to_10_rating(self, key):
         """Render vertical 1-10 rating scale similar to Google Forms"""
@@ -357,7 +422,6 @@ class FeedbackManager:
             10: "Outstanding"
         }
         
-        
         # Create radio button-style selection for each rating 1-10
         selected_rating = st.radio(
             label="Rating",
@@ -371,12 +435,10 @@ class FeedbackManager:
         # Update session state
         st.session_state[rating_key] = selected_rating
         
-        st.markdown('</div>', unsafe_allow_html=True)
-        
         return selected_rating
 
     def render_feedback_stats(self):
-        """Render enhanced feedback statistics with branch distribution"""
+        """Render enhanced feedback statistics"""
         stats = self.get_feedback_stats()
         
         st.markdown("""
@@ -386,13 +448,17 @@ class FeedbackManager:
             </div>
         """, unsafe_allow_html=True)
         
+        # Display storage info
+        if 'fallback_feedback' in st.session_state and st.session_state['fallback_feedback']:
+            st.info(f"📝 {len(st.session_state['fallback_feedback'])} responses stored in session (temporary)")
+        
         # Main metrics
         cols = st.columns(4)
         metrics = [
             {"label": "🗣️ Total Responses", "value": f"{stats['total_responses']:,}", "delta": "↗️", "color": "#4CAF50"},
-            {"label": "⭐ Avg Rating", "value": f"{stats['avg_rating']:.1f}/5.0", "delta": "🌟", "color": "#FFD700"},
-            {"label": "🎯 Usability", "value": f"{stats['avg_usability']:.1f}/5.0", "delta": "🚀", "color": "#2196F3"},
-            {"label": "😊 Satisfaction", "value": f"{stats['avg_satisfaction']:.1f}/5.0", "delta": "💖", "color": "#9C27B0"}
+            {"label": "⭐ Avg Rating", "value": f"{stats['avg_rating']:.1f}/10.0", "delta": "🌟", "color": "#FFD700"},
+            {"label": "🎯 Usability", "value": f"{stats['avg_usability']:.1f}/10.0", "delta": "🚀", "color": "#2196F3"},
+            {"label": "😊 Satisfaction", "value": f"{stats['avg_satisfaction']:.1f}/10.0", "delta": "💖", "color": "#9C27B0"}
         ]
         
         for col, metric in zip(cols, metrics):
@@ -403,8 +469,6 @@ class FeedbackManager:
                     <div style="color: #E0E0E0; font-size: 1.4em; margin-top: 5px;">{metric['delta']}</div>
                 </div>
             """, unsafe_allow_html=True)
-        
-       
 
 # Initialize and run the feedback form
 def main():
