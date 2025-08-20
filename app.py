@@ -48,7 +48,6 @@ google_api_key = os.getenv("GOOGLE_API_KEY")
 if not google_api_key:
     raise Exception("Google API key not found. Please set it in your .env file.")
 
-
 # Set page config at the very beginning
 st.set_page_config(
     page_title="Smart Resume AI",
