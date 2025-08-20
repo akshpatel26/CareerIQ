@@ -17,6 +17,8 @@ class AIResumeAnalyzer:
         # Load environment variables
         load_dotenv()
         
+        
+        
         # Configure Google Gemini AI
         self.google_api_key = os.getenv("GOOGLE_API_KEY")
         self.openrouter_api_key = os.getenv("OPENROUTER_API_KEY")

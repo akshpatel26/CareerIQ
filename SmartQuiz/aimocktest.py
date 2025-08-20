@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 import json
 import os
 import google.generativeai as genai
-from config.QuestionBank import QUESTION_BANK
+from ..config.QuestionBank import QUESTION_BANK
 from config.fallback_questions import create_fallback_questions
 
 
