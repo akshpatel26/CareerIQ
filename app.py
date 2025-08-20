@@ -1494,10 +1494,9 @@ class ResumeApp:
                                 for j, skill in enumerate(missing_skills[i:i+skills_per_row]):
                                     with skill_cols[j]:
                                         st.markdown(f"""
-                                        <div style="background-color: rgba(255, 107, 107, 0.1); padding: 8px 12px; 
-                                                   border-radius: 20px; margin: 5px 0; text-align: center; 
-                                                   border: 1px solid rgba(255, 107, 107, 0.3);">
-                                            <span style="color: #FF6B6B; font-weight: 500;">{skill}</span>
+                                        <div style=" padding: 6px 10px; 
+                                                    margin: 5px 0; text-align: center;"
+                                            <span style="color: white; font-weight: 400;">{skill}</span>
                                         </div>
                                         """, unsafe_allow_html=True)
                             
