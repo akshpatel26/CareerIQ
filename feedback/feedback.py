@@ -414,12 +414,7 @@ class FeedbackManager:
                 </div>
             """, unsafe_allow_html=True)
         
-        # Branch distribution
-        if stats['branch_distribution']:
-            st.markdown("### 🎓 Responses by Branch")
-            branch_df = pd.DataFrame(list(stats['branch_distribution'].items()), 
-                                   columns=['Branch', 'Count'])
-            st.bar_chart(branch_df.set_index('Branch'))
+       
 
 # Initialize and run the feedback form
 def main():
