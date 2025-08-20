@@ -357,16 +357,6 @@ class FeedbackManager:
             10: "Outstanding"
         }
         
-        # Create vertical rating layout
-        # st.markdown('<div class="vertical-rating-container">', unsafe_allow_html=True)
-        
-        # Scale labels
-        # st.markdown("""
-        # <div class="scale-labels">
-        #     <span><strong>Very bad</strong></span>
-        #     <span><strong>Outstanding</strong></span>
-        # </div>
-        # """, unsafe_allow_html=True)
         
         # Create radio button-style selection for each rating 1-10
         selected_rating = st.radio(
