@@ -66,18 +66,25 @@ class ResumeAnalyzer:
     def check_resume_sections(self, text):
         text = text.lower()
         essential_sections = {
-            'contact': ['email', 'phone', 'address', 'linkedin'],
-            'education': ['education', 'university', 'college', 'degree', 'academic'],
-            'experience': ['experience', 'work', 'employment', 'job', 'internship'],
-            'skills': ['skills', 'technologies', 'tools', 'proficiencies', 'expertise']
+            'Contact': ['email', 'phone', 'address', 'linkedin', 'github', 'portfolio'],
+            'Education': ['Education', 'university', 'college', 'degree', 'academic', 'CGPA', 'GPA','Diploma In Engineering- Computer Engineering(CE)','XII (GSEB)'],
+            'Experience': ['Experience', 'work', 'employment', 'internship', 'projects'],
+            'Skills': ['skills', 'technologies', 'Tools', 'proficiencies', 'expertise']
         }
-        
-        section_scores = {}
+    
+        weights = {
+            'Contact': 15,
+            'Education': 20,
+            'Experience': 40,
+            'Skills': 25
+        }
+    
+        total_score = 0
         for section, keywords in essential_sections.items():
             found = sum(1 for keyword in keywords if keyword in text)
-            section_scores[section] = min(25, (found / len(keywords)) * 25)
-            
-        return sum(section_scores.values())
+            total_score += min(weights[section], (found / len(keywords)) * weights[section])
+    
+        return round(total_score, 2)
         
     def check_formatting(self, text):
         lines = text.split('\n')
@@ -89,10 +96,10 @@ class ResumeAnalyzer:
             score -= 30
             deductions.append("Resume is too short")
             
-        # Check for section headers
+        # Check for section headers (all caps words like EDUCATION, EXPERIENCE, etc.)
         if not any(line.isupper() for line in lines):
             score -= 20
-            deductions.append("No clear section headers found")
+            deductions.append("No clear section headers found (e.g., EDUCATION, EXPERIENCE, SKILLS)")
             
         # Check for bullet points
         if not any(line.strip().startswith(('•', '-', '*', '→')) for line in lines):
@@ -107,15 +114,32 @@ class ResumeAnalyzer:
             
         # Check for contact information format
         contact_patterns = [
-            r'\b[\w\.-]+@[\w\.-]+\.\w+\b',  # email
-            r'\b\d{3}[-.]?\d{3}[-.]?\d{4}\b',  # phone
-            r'linkedin\.com/\w+',  # LinkedIn
+            r'\b[\w\.-]+@[\w\.-]+\.\w+\b',      # email
+            r'\b\d{3}[-.]?\d{3}[-.]?\d{4}\b',   # phone
+            r'linkedin\.com/in/[a-zA-Z0-9-]+',  # LinkedIn
+            r'github\.com/[a-zA-Z0-9-]+',       # GitHub
         ]
         if not any(re.search(pattern, text) for pattern in contact_patterns):
             score -= 15
-            deductions.append("Missing or improperly formatted contact information")
-            
+            deductions.append("Missing or improperly formatted contact information (Email, Phone, LinkedIn, GitHub)")
+        
+        # # ATS Formatting Rules - reminders (cannot check fonts in plain text, but can guide)
+        # ats_rules = [
+        #     "Use simple fonts (Arial, Calibri, Times New Roman).",
+        #     "Font size: 10–12 for body, 14–16 for headings.",
+        #     "Save resume as PDF (unless employer requests DOCX).",
+        #     "Avoid tables with merged cells, images, charts, or headers/footers.",
+        #     "Use standard section names (e.g., 'Education', 'Work Experience', 'Skills')."
+        # ]
+        
+        # Check for non-standard section names (basic check)
+        standard_sections = ["Education", "Experience", "Work Experience", "Skills", "Projects", "Certifications", "Summary"]
+        if not any(any(sec in line.lower() for sec in standard_sections) for line in lines):
+            score -= 10
+            deductions.append("Use standard section names like Education, Work Experience, Skills, Projects")
+        
         return max(0, score), deductions
+
         
     def extract_text_from_pdf(self, file):
         try:
@@ -179,7 +203,6 @@ class ResumeAnalyzer:
             'phone': phone.group(0) if phone else '',
             'linkedin': linkedin.group(0) if linkedin else '',
             'github': github.group(0) if github else '',
-            'portfolio': ''  # Can be enhanced later
         }
 
     def extract_education(self, text):
@@ -187,10 +210,10 @@ class ResumeAnalyzer:
         education = []
         lines = text.split('\n')
         education_keywords = [
-            'education', 'academic', 'qualification', 'degree', 'university', 'college',
-            'school', 'institute', 'certification', 'diploma', 'bachelor', 'master',
-            'phd', 'b.tech', 'm.tech', 'b.e', 'm.e', 'b.sc', 'm.sc','bca', 'mca', 'b.com',
-            'm.com', 'b.cs-it', 'imca', 'bba', 'mba', 'honors', 'scholarship'
+            'Education', 'academic', 'qualification', 'degree', 'university', 'college',
+            'school', 'institute', 'certification', 'diploma', 'bachelor', 'master','Computer Engineering','Bachelor of Architecture (B. Arch)'
+            'phd', 'b.tech', 'm.tech', 'B.E', 'M.E','IT', 'b.sc', 'm.sc','bca', 'mca', 'b.com',
+            'm.com', 'b.cs-it', 'imca', 'bba', 'MCA', 'honors',' S.S.C. ',' H.S.C','' ,' XII (GSEB)',' Diploma in Engineering',' Computer Science Engg','Diploma In Engineering- Computer Engineering(CE)'
         ]
         in_education_section = False
         current_entry = []
@@ -478,6 +501,7 @@ class ResumeAnalyzer:
             
             # Check formatting
             format_score, format_deductions = self.check_formatting(text)
+
             
             # Generate section-specific suggestions
             contact_suggestions = []
@@ -487,10 +511,14 @@ class ResumeAnalyzer:
                 contact_suggestions.append("Add your phone number")
             if not personal_info.get('linkedin'):
                 contact_suggestions.append("Add your LinkedIn profile URL")
+            if not personal_info.get('github'):
+                contact_suggestions.append("Add your Github profile URL")
             
             summary_suggestions = []
             if not summary:
-                summary_suggestions.append("Add a professional summary to highlight your key qualifications")
+                summary_suggestions.append(
+        "Add a professional summary to highlight your key qualifications.\n\n\n "
+        "For example:\n\n  Aspiring Python and SQL Developer with hands-on experience through internships and projects in automation , web scraping , and database management. Proficient in developing mini-projects, optimizing SQL queries, and creating interactive data visualizations using Python libraries such as Pandas, Matplotlib, and Seaborn.")
             elif len(summary.split()) < 30:
                 summary_suggestions.append("Expand your professional summary to better highlight your experience and goals")
             elif len(summary.split()) > 100:
@@ -502,11 +530,12 @@ class ResumeAnalyzer:
             if isinstance(skills, (list, set)) and len(list(skills)) < 5:
                 skills_suggestions.append("List more relevant technical and soft skills")
             if keyword_match['score'] < 70:
-                skills_suggestions.append("Add more skills that match the job requirements")
+                skills_suggestions.append("Add more skills that match the job requirements :")
             
             experience_suggestions = []
             if not experience:
-                experience_suggestions.append("Add your work experience section")
+                    experience_suggestions.append(
+        "Add your work experience section. \n\n\n For Example:\n\n **Cognifyz Technologies (Remote)**          \n           Python Development Intern  |  Apr 2025 – May 2025\n\n • Strengthened core Python programming skills by working on real-world tasks and projects, gaining hands-on experience in writing efficient, structured, and reusable code for different use cases.\n\n • Designed and developed a series of mini-projects such as guessing games, password checkers, and file analyzers, which enhanced problem-solving abilities.\n\n • Created and implemented data visualization dashboards using Matplotlib and Seaborn to represent datasets in an intuitive and meaningful way, enabling better analysis and interpretation of insights.")
             else:
                 has_dates = any(re.search(r'\b(19|20)\d{2}\b', exp) for exp in experience)
                 has_bullets = any(re.search(r'[•\-\*]', exp) for exp in experience)
@@ -521,21 +550,38 @@ class ResumeAnalyzer:
                     experience_suggestions.append("Start bullet points with strong action verbs")
             
             education_suggestions = []
+
             if not education:
-                education_suggestions.append("Add your educational background")
+                education_suggestions.append(
+                    "Add your educational background.\n\n Example:\n\n"
+                    "B.Tech in Computer Engineering | LDRP Institute of Technology & Research, Gandhinagar\n"
+                    "Aug 2022 – Jun 2026 | CGPA: 8.09/10"
+                )
             else:
                 has_dates = any(re.search(r'\b(19|20)\d{2}\b', edu) for edu in education)
-                has_degree = any(re.search(r'\b(bachelor|master|phd|b\.|m\.|diploma)\b', 
-                                         edu.lower()) for edu in education)
-                has_gpa = any(re.search(r'\b(gpa|cgpa|grade|percentage)\b', 
-                                      edu.lower()) for edu in education)
-                
+                has_degree = any(re.search(r'\b(bachelor|master|phd|b\.|m\.|diploma)\b',
+                                           edu.lower()) for edu in education)
+                has_gpa = any(re.search(r'\b(gpa|cgpa|grade|percentage)\b',
+                                        edu.lower()) for edu in education)
+            
                 if not has_dates:
-                    education_suggestions.append("Include graduation dates")
+                    education_suggestions.append(
+                        "Include graduation dates.\n\n Example:\n\n"
+                        "B.Tech in Computer Engineering | LDRP Institute of Technology & Research         \n"
+                        "Aug 2022 – Jun 2026"
+                    )
                 if not has_degree:
-                    education_suggestions.append("Specify your degree type")
+                    education_suggestions.append(
+                        "Specify your degree type.\n\n Example:\n\n"
+                        "Bachelor of Technology (B.Tech) in Computer Engineering"
+                    )
                 if not has_gpa and job_requirements.get('require_gpa', False):
-                    education_suggestions.append("Include your GPA if it's above 3.0")
+                    education_suggestions.append(
+                        "Include your GPA if it's above 3.0.\n\n Example:\n\n"
+                        "B.Tech in Computer Engineering | LDRP-ITR, Gandhinagar\n"
+                        "CGPA: 8.09/10"
+                    )
+
             
             format_suggestions = []
             if format_score < 100:
