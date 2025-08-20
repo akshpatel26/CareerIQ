@@ -142,6 +142,7 @@ class ResumeApp:
         if r.status_code != 200:
             return None
         return r.json()
+    
 
     def apply_global_styles(self):
         st.markdown("""
