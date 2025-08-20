@@ -40,7 +40,7 @@ JOB_ROLES = {
         "recommended_skills": {
           "technical": [
             "React", "Angular", "Vue.js", "Django", "Express", "SQL", "NoSQL",
-            "API Development", "Docker", "Kubernetes", "AWS", "Azure"
+            "API Development", "Docker", "Kubernetes", "AWS", "Azure","EXPRESS JS", "NODE JS"
           ],
           "soft": ["Versatility", "Project management", "Communication"]
         }
