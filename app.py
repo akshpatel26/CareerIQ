@@ -102,7 +102,6 @@ class ResumeApp:
 
         # Initialize dashboard manager
         self.dashboard_manager = DashboardManager()
-
         self.analyzer = ResumeAnalyzer()
         self.ai_analyzer = AIResumeAnalyzer()
         self.builder = ResumeBuilder()
@@ -561,57 +560,9 @@ class ResumeApp:
             </div>
         """, unsafe_allow_html=True)
 
-
-    # def load_image(self, image_name):
-    #     """Load image from static directory"""
-    #     try:
-    #         image_path = f"c:/Users/shree/Downloads/smart-resume-ai/{image_name}"
-    #         with open(image_path, "rb") as f:
-    #             image_bytes = f.read()
-    #         encoded = base64.b64encode(image_bytes).decode()
-    #         return f"data:image/png;base64,{encoded}"
-    #     except Exception as e:
-    #         print(f"Error loading image {image_name}: {e}")
-    #         return None
-
-    # def export_to_excel(self):
-    #     """Export resume data to Excel"""
-    #     conn = get_database_connection()
-
-    #     # Get resume data with analysis
-    #     query = """
-    #         SELECT
-    #             rd.name, rd.email, rd.phone, rd.linkedin, rd.github, rd.portfolio,
-    #             rd.summary, rd.target_role, rd.target_category,
-    #             rd.education, rd.experience, rd.projects, rd.skills,
-    #             ra.ats_score, ra.keyword_match_score, ra.format_score, ra.section_score,
-    #             ra.missing_skills, ra.recommendations,
-    #             rd.created_at
-    #         FROM resume_data rd
-    #         LEFT JOIN resume_analysis ra ON rd.id = ra.resume_id
-    #     """
-
-    #     try:
-    #         # Read data into DataFrame
-    #         df = pd.read_sql_query(query, conn)
-
-    #         # Create Excel writer object
-    #         output = io.BytesIO()
-    #         with pd.ExcelWriter(output, engine='openpyxl') as writer:
-    #             df.to_excel(writer, index=False, sheet_name='Resume Data')
-
-    #         return output.getvalue()
-    #     except Exception as e:
-    #         print(f"Error exporting to Excel: {str(e)}")
-    #         return None
-    #     finally:
-    #         conn.close()
-
     def render_dashboard(self):
         """Render the dashboard page"""
         self.dashboard_manager.render_dashboard()
-
-        # st.toast("Check out these repositories: [Awesome Hacking](https://github.com/Hunterdii/Awesome-Hacking)", icon="ℹ️")
 
 
     def render_empty_state(self, icon, message):
@@ -1195,9 +1146,6 @@ class ResumeApp:
                 print(f"Full traceback: {traceback.format_exc()}")
                 st.error(f"❌ Error preparing resume data: {str(e)}")
 
-        # st.toast("Check out these repositories: [30-Days-Of-Rust](https://github.com/Hunterdii/30-Days-Of-Rust)", icon="ℹ️")
-
-  
     
     def render_analyzer(self):
         """Render the resume analyzer page"""
@@ -3277,37 +3225,6 @@ class ResumeApp:
             
         with stats_tab:
             feedback_manager.render_feedback_stats()
-
-        # st.toast("Check out these repositories: [TryHackMe Free Rooms](https://github.com/Hunterdii/tryhackme-free-rooms)", icon="ℹ️")
-
-
-#     def show_repo_notification(self):
-#         message = """
-# <div style="background-color: #1e1e1e; border-radius: 10px; border: 1px solid #4b6cb7; padding: 10px; margin: 10px 0; color: white;">
-#     <div style="margin-bottom: 10px;">Check out these other repositories:</div>
-#     <div style="margin-bottom: 5px;"><b>Hacking Resources:</b></div>
-#     <ul style="margin-top: 0; padding-left: 20px;">
-#         <li><a href="https://github.com/Hunterdii/tryhackme-free-rooms" target="_blank" style="color: #4CAF50;">TryHackMe Free Rooms</a></li>
-#         <li><a href="https://github.com/Hunterdii/Awesome-Hacking" target="_blank" style="color: #4CAF50;">Awesome Hacking</a></li>
-#     </ul>
-#     <div style="margin-bottom: 5px;"><b>Programming Languages:</b></div>
-#     <ul style="margin-top: 0; padding-left: 20px;">
-#         <li><a href="https://github.com/Hunterdii/Awesome-Java" target="_blank" style="color: #4CAF50;">Awesome Java</a></li>
-#         <li><a href="https://github.com/Hunterdii/30-Days-Of-Rust" target="_blank" style="color: #4CAF50;">30 Days Of Rust</a></li>
-#     </ul>
-#     <div style="margin-bottom: 5px;"><b>Data Structures & Algorithms:</b></div>
-#     <ul style="margin-top: 0; padding-left: 20px;">
-#         <li><a href="https://github.com/Hunterdii/GeeksforGeeks-POTD" target="_blank" style="color: #4CAF50;">GeeksforGeeks POTD</a></li>
-#         <li><a href="https://github.com/Hunterdii/Leetcode-POTD" target="_blank" style="color: #4CAF50;">Leetcode POTD</a></li>
-#     </ul>
-#     <div style="margin-bottom: 5px;"><b>AI/ML Projects:</b></div>
-#     <ul style="margin-top: 0; padding-left: 20px;">
-#         <li><a href="https://github.com/Hunterdii/AI-Nexus" target="_blank" style="color: #4CAF50;">AI Nexus</a></li>
-#     </ul>
-#     <div style="margin-top: 10px;">If you find this project helpful, please consider ⭐ starring the repo!</div>
-# </div>
-# """
-        # st.sidebar.markdown(message, unsafe_allow_html=True)
 
 
     def main(self):
