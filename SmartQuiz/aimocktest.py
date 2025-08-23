@@ -353,8 +353,6 @@ def handle_answer_selection_with_timer(option_index):
 
 def setup_phase():
     """Main setup interface"""
-    # st.markdown("# 🎯 AI-Powered Quiz System")
-    # st.markdown("Choose your preferred quiz experience:")
     st.markdown("""
     ### Welcome to Our Comprehensive Learning Platform!
     
@@ -400,7 +398,6 @@ def static_quiz_setup():
         ('programming', '💻', 'Programming'),
         ('Technical MCQs', '📚', 'Technical MCQs'),
         ('Core Concepts(CE)', '🧮', 'Core Concepts(CE)'),
-        ('Problem Solving', '🕵', 'Problem Solving')
     ]
     
     # Create 2x3 grid
@@ -455,7 +452,7 @@ def show_static_quiz_settings():
     with col2:
         num_questions = st.selectbox(
             "🎯 Number of Questions",
-            options=[15,20,25,30],
+            options=[20,25,30,40],
             index=1,
             key="static_questions"
         )
@@ -464,7 +461,7 @@ def show_static_quiz_settings():
     with col3:
         timer_duration = st.selectbox(
             "⏱️ Timer (seconds)",
-            options=[30,45,60],
+            options=[30,45,60,90],
             index=0,
             key="static_timer"
         )
