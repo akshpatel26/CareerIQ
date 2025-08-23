@@ -197,27 +197,14 @@ class FeedbackManager:
         </style>
         """, unsafe_allow_html=True)
     
-        # # Header section
-        # st.markdown("""
-        # <div class="google-form-header">
-        #     <h1>📋 Smart Resume AI - User Feedback Form</h1>
-        #     <p>Help us improve your experience with Smart Resume AI</p>
-        #     <p><small>* Indicates required question</small></p>
-        # </div>
-        # """, unsafe_allow_html=True)
-    
-        # Personal Information Section
-        # st.markdown('<div class="form-section">', unsafe_allow_html=True)
-        # st.subheader(' 👤 Personal Information')
-    
         # Full Name
         st.markdown('<label class="feedback-label">👤 Full Name <span class="required-field">*</span></label>', unsafe_allow_html=True)
         full_name = st.text_input("", placeholder="Enter your full name", key="user_full_name", label_visibility="collapsed")
     
         # Contact Number
-        st.markdown('<label class="feedback-label">📞 Contact No <span class="required-field">*</span></label>', unsafe_allow_html=True)
-        contact_no = st.text_input("", placeholder="Enter your mobile number", key="user_contact", label_visibility="collapsed")
-        if contact_no:
+        st.markdown('<label class="feedback-label">📞 Contact No</label>', unsafe_allow_html=True)
+        contact_no = st.text_input("", placeholder="Enter your mobile number (Optional)", key="user_contact", label_visibility="collapsed")
+        if contact_no and contact_no.strip():
             if self.validate_phone(contact_no):
                 st.markdown('<div style="color: #4CAF50; font-size: 0.9em;">✅ Valid phone number</div>', unsafe_allow_html=True)
             else:
@@ -272,7 +259,7 @@ class FeedbackManager:
         # ✅ Required Fields Validation (Updated to exclude text areas)
         required_fields_filled = (
             full_name and full_name.strip() != "" and
-            contact_no and self.validate_phone(contact_no) and
+            (not contact_no or self.validate_phone(contact_no)) and  # Only validate if provided
             email and self.validate_email(email) and
             branch and branch != "Select your branch" and
             rating is not None and
@@ -285,8 +272,8 @@ class FeedbackManager:
             missing_fields = []
             if not full_name or full_name.strip() == "":
                 missing_fields.append("Full Name")
-            if not contact_no or not self.validate_phone(contact_no):
-                missing_fields.append("Valid Contact Number")
+            if contact_no and contact_no.strip() and not self.validate_phone(contact_no):
+                missing_fields.append("Valid Contact Number Format")
             if not email or not self.validate_email(email):
                 missing_fields.append("Valid Email Address")
             if not branch or branch == "Select your branch":
@@ -311,7 +298,7 @@ class FeedbackManager:
                     # Save feedback (handle optional fields with default empty strings)
                     feedback_data = {
                         'full_name': full_name.strip(),
-                        'contact_no': contact_no.strip(),
+                        'contact_no': contact_no.strip() if contact_no else "",
                         'email': email.strip().lower(),
                         'branch': branch,
                         'rating': rating,
