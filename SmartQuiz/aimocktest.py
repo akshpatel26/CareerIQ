@@ -384,6 +384,7 @@ def setup_phase():
     elif st.session_state.quiz_state['quiz_mode'] == 'static':
         static_quiz_setup()
 
+
 def static_quiz_setup():
     """Question Bank quiz setup interface"""
     st.markdown("---")
@@ -400,13 +401,12 @@ def static_quiz_setup():
         ('Core Concepts(CE)', '🧮', 'Core Concepts(CE)'),
     ]
     
-    # Create 2x3 grid
+    # Create first row with 3 columns
     row1_cols = st.columns(3)
-    row2_cols = st.columns(3)
     
     for i, (category, icon, display_name) in enumerate(categories[:3]):
         with row1_cols[i]:
-            if st.button(f"{icon}\n**{display_name}**", 
+            if st.button(f"{icon}\n**{display_name}**",
                         key=f"static_cat_{category}", use_container_width=True):
                 st.session_state.quiz_state['category'] = category
                 if category == 'programming':
@@ -415,9 +415,14 @@ def static_quiz_setup():
                 else:
                     st.rerun()
     
+    # Create second row with centered layout for 2 items
+    # Using [1, 1, 1, 1] creates 4 equal columns, we use middle 2 for centering
+    row2_cols = st.columns([1, 2, 2, 1])
+    
     for i, (category, icon, display_name) in enumerate(categories[3:]):
-        with row2_cols[i]:
-            if st.button(f"{icon}\n**{display_name}**", 
+        # Use columns 1 and 2 (middle columns) for the 2 remaining items
+        with row2_cols[i + 1]:
+            if st.button(f"{icon}\n**{display_name}**",
                         key=f"static_cat_{category}", use_container_width=True):
                 st.session_state.quiz_state['category'] = category
                 if category == 'programming':
@@ -429,7 +434,6 @@ def static_quiz_setup():
     # Show settings if category selected (and not programming)
     if st.session_state.quiz_state.get('category') and st.session_state.quiz_state['category'] != 'programming':
         show_static_quiz_settings()
-
 def show_static_quiz_settings():
     """Show settings for static quiz"""
     st.markdown("---")
@@ -851,6 +855,7 @@ def quiz_phase():
     if quiz_state.get('timer_active', False) and remaining_time > 0:
         time.sleep(1)
         st.rerun()
+        
 def get_performance_message(percentage, correct, total):
     """Generate performance message based on score"""
     if percentage >= 90:
@@ -951,7 +956,7 @@ def results_phase():
                 st.caption(f"⏱️ Time: {time_taken:.1f}s")
                 
             # Action buttons
-    col1, col2, col3 = st.columns([1, 1, 1])
+    col1, col2= st.columns([1, 1])
     
     with col1:
         if st.button("🏠 Back to Home", use_container_width=True):
@@ -1009,36 +1014,7 @@ def results_phase():
                 st.session_state.quiz_state['phase'] = 'quiz'
             
             st.rerun()
-    
-    with col3:
-        if st.button("📊 New Quiz", use_container_width=True):
-            # Reset everything and go back to setup for new quiz selection
-            st.session_state.quiz_state = {
-                'phase': 'setup',
-                'quiz_mode': '',
-                'category': '',
-                'programming_language': '',
-                'ai_topic': '',
-                'difficulty': 'medium',
-                'num_questions': 5,
-                'timer_duration': 15,
-                'questions': [],
-                'current_question': 0,
-                'score': 0,
-                'correct_answers': 0,
-                'user_answers': [],
-                'start_time': None,
-                'question_start_time': None,
-                'selected_answer': None,
-                'show_explanation': False,
-                'time_up': False,
-                'generating_questions': False,
-                'generation_progress': 0,
-                'generation_status': ''
-            }
-            st.rerun()
-
-
+   
 def add_timer_css():
     """Add custom CSS for timer styling"""
     st.markdown("""
