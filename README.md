@@ -102,51 +102,39 @@
 
 6. **Smart Quiz**: Test your skills with adaptive AI-generated quizzes (Numerical, Logic, Reasoning, Mock Tests) to prepare for interviews.
 
-#### ✅ Step-by-Step:
 
-1. **Create a `.env` file**.
-2. **Paste your Google Gemini API key** in the following format:
+## **Snap 🤏…Crafted with the tools that make code magic happen!**
 
-#### 📄 Example content for `.env`:
-```env
-GOOGLE_API_KEY=your_google_gemini_api_key
-```
+## **Interactive Resume Templates**  :
 
-#### <img src="https://assets.codepen.io/1468070/Google+G+Icon.png" alt="Google LOGO" width="1.6%" /> Get your Gemini API Key:
-Visit  **[Google AI Studio – Gemini API Access](https://aistudio.google.com/app/apikey)** 👉 Grab and use your **own API key** — Since Mine One Have Usage Limits.
+| ![Image 1](https://github.com/user-attachments/assets/0eaaa84a-809e-4847-a8cb-9f96d9e0cb9b) | ![Image 2](https://github.com/user-attachments/assets/5f603ef7-9c44-4aa8-a7a0-68ce0e82e366) |
+|-----------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| **Professional Template** - Industry-standard                                                    |**Modern Template** - Polished & stylish                                         |
+
+| ![Image 3](https://github.com/user-attachments/assets/1a6ee12d-9189-40c2-b9ee-f9b021e8a0bf) | ![Image 4](https://github.com/user-attachments/assets/ceb60a81-3694-4db1-bc54-a7814195730e) |
+|------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| 	**Minimal Template** - Clean & elegant                                                        |**Creative Template** - Unique & visually appealing                                             |
 
 
-6. **Run the application:**
+##  **Quick Glance – Version 1.0** :
 
-Start the application using Streamlit:
+| ![Image 1](https://github.com/user-attachments/assets/2af91687-2f5d-4d51-8aba-8f181f8f5d4b) | ![Image 2](https://github.com/user-attachments/assets/3f9ade42-9c9f-4220-965b-eef8c99dc360) |
+|-----------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| **RESUME ANALYZER**(According To Roles Recommendations)-1                                     |**RESUME ANALYZER**(According To Roles Recommendations)-2                                       |
 
-   ```bash
-   streamlit run app.py
-   ```
+##  **Quick Glance – Version 2.0 (AI-Powered Resume Analyzer)** :
 
-<details>
-  <summary>📁 Folder Structure After Adding <code>.env</code></summary>
+| ![Image 3](https://github.com/user-attachments/assets/3236cfe1-230a-4847-aa34-43cdc0b7a5d1) | ![Image 4](https://github.com/user-attachments/assets/d82c26d9-4c37-4952-8edc-a4373c35705b) | ![Image 5](https://github.com/user-attachments/assets/b6935cf3-0421-4055-a4e3-e8d1947fe789) |
+|------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| **AI Resume Analysis** | **AI Resume Score & Statistics** | **AI-Generated PDF Resume Report** |
 
-> 🔐 **Important:**  
-> - **Do not commit your `.env` file** to version control (e.g., GitHub). It should be listed in `.gitignore`.
-> - If you're collaborating, you can provide a safe `.env.example` file with dummy data.
 
-  <div align="center">  
-    <table>
-      <tr>
-        <td align="center"><b>🗂️ Folder Structure Preview 1</b></td>
-        <td align="center"><b>🗂️ Folder Structure Preview 2</b></td>
-      </tr>
-      <tr>
-        <td>
-         <img width="293" height="312" alt="Screenshot 2025-08-17 114205" src="https://github.com/user-attachments/assets/a97e4311-4f5e-4fef-94af-f6287377603d" />
+## JOB SEARCH And Dashboard :
 
- </td>
-        <td>
-          <img width="243" height="789" alt="Screenshot 2025-08-17 105256" src="https://github.com/user-attachments/assets/de811c0a-d328-4d54-884b-189df055d42f" />
+| ![Image 1](https://github.com/user-attachments/assets/36574f35-db9e-4215-ae89-80f42a2209b2) | ![Image 2](https://github.com/user-attachments/assets/939b572a-adcc-446f-81e7-73ac5c1bbcb4) |
+|-----------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| **JOB SEARCH**                                      |   **DASHBOARD**                                   |
 
-  </div>
-  
 
-</details>
-   
+
+
