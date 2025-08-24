@@ -145,7 +145,7 @@ Follow the steps below to set up and run the **Smart AI Resume Analyzer** on you
 Open a terminal and run:
 
    ```bash
-   git clone 
+   git clone https://github.com/akshpatel26/CareerIQ.git
    cd CareerIQ
    ```
 
