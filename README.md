@@ -136,5 +136,104 @@
 | **JOB SEARCH**                                      |   **DASHBOARD**                                   |
 
 
+#### **Setup Instructions** 🛠️
 
+Follow the steps below to set up and run the **Smart AI Resume Analyzer** on your local machine.
+
+1. **Clone the repository:**
+
+Open a terminal and run:
+
+   ```bash
+   git clone 
+   cd CareerIQ
+   ```
+
+2. **Create a Virtual Environment(Optional)**
+
+Set up a virtual environment to manage dependencies:
+
+```bash
+python -m venv venv
+```
+
+#### **Activate the Virtual Environment:**
+
+- **Windows:**
+  ```bash
+  venv\Scripts\activate
+  ```
+- **MacOS & Linux:**
+  ```bash
+  source venv/bin/activate
+  ```
+
+3. **Install dependencies:**
+
+Install the required Python packages:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Download the spaCy model:**
+
+Ensure that the necessary NLP model is installed:
+
+   ```bash
+   python -m spacy download en_core_web_sm
+   ```
+   
+``Congratulations 🥳😱 your set-up 👆 and installation is finished 🥳😱``
+
+
+5. **Configure Environment Variables (Mandatory for AI-Analyzer Functionality):**
+
+To enable access to the **Gemini API** used by the AI Resume Analyzer, you need to set up environment variables securely.
+
+#### ✅ Step-by-Step:
+
+1. **Create a .env file**.
+2. *Paste your Google Gemini API key* in the following format:
+
+#### 📄 Example content for .env:
+env
+GOOGLE_API_KEY=your_google_gemini_api_key
+
+
+#### <img src="https://assets.codepen.io/1468070/Google+G+Icon.png" alt="Google LOGO" width="1.6%" /> Get your Gemini API Key:
+Visit  **[Google AI Studio – Gemini API Access](https://aistudio.google.com/app/apikey)** 👉 Grab and use your *own API key* — Since Mine One Have Usage Limits.
+
+
+6. *Run the application:*
+
+Start the application using Streamlit:
+
+   bash
+   streamlit run app.py
+   
+
+<details>
+  <summary>📁 Folder Structure After Adding <code>.env</code></summary>
+
+> 🔐 *Important:*  
+> - **Do not commit your .env file** to version control (e.g., GitHub). It should be listed in .gitignore.
+> - If you're collaborating, you can provide a safe .env.example file with dummy data.
+
+  <div align="center">  
+    <table>
+      <tr>
+        <td align="center"><b>🗂 Folder Structure Preview 1</b></td>
+        <td align="center"><b>🗂 Folder Structure Preview 2</b></td>
+      </tr>
+      <tr>
+        <td>
+         <img width="293" height="312" alt="Screenshot 2025-08-17 114205" src="https://github.com/user-attachments/assets/a97e4311-4f5e-4fef-94af-f6287377603d" />
+
+ </td>
+        <td>
+          <img width="243" height="789" alt="Screenshot 2025-08-17 105256" src="https://github.com/user-attachments/assets/de811c0a-d328-4d54-884b-189df055d42f" />
+
+  </div>
+</details>
 
