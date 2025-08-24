@@ -878,7 +878,7 @@ def results_phase():
     # Summary stats
     col1, col2, col3, col4 = st.columns(4)
     with col1:
-        st.metric("📊 Total Score", f"{quiz_state['score']}/{len(quiz_state['questions']) * 10}")
+        st.metric("📊 Total Score", f"{quiz_state['correct_answers']}/{len(quiz_state['questions'])}")
     with col2:
         st.metric("✅ Correct", quiz_state['correct_answers'])
     with col3:
