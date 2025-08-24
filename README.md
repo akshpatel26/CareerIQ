@@ -103,6 +103,7 @@
 6. **Smart Quiz**: Test your skills with adaptive AI-generated quizzes (Numerical, Logic, Reasoning, Mock Tests) to prepare for interviews.
 
 
+
 ## **Snap 🤏…Crafted with the tools that make code magic happen!**
 
 ## **Interactive Resume Templates**  :
