@@ -384,7 +384,7 @@ if __name__ == "__main__":
 
 def render_job_search():
     """Render job search page with enhanced features"""
-    st.title("🔍 Smart Job Search")
+    st.markdown("## 🔍 Smart Job Search")
     st.markdown("Find Your Dream Job Across Multiple Platforms")
     
     # Market Insights Section (Above Search)
