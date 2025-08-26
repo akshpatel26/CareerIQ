@@ -90,13 +90,13 @@ class ResumeApp:
             st.session_state.is_admin = False
 
         self.pages = {
-            "🏠 HOME": self.render_home,
-            "📝 RESUME BUILDER": self.render_builder,
-            "🔍 RESUME ANALYZER": self.render_analyzer,
-            "🎯 JOB SEARCH": self.render_job_search,
-            "📊 DASHBOARD": self.render_dashboard,
-            "💬 FEEDBACK": self.render_feedback_page,
-            "🤖 Smart Quiz ": self.render_quiz, 
+            " HOME": self.render_home,
+            " RESUME BUILDER": self.render_builder,
+            " RESUME ANALYZER": self.render_analyzer,
+            " JOB SEARCH": self.render_job_search,
+            " DASHBOARD": self.render_dashboard,
+            " FEEDBACK": self.render_feedback_page,
+            " Smart Quiz ": self.render_quiz, 
 
         }
 
@@ -2765,7 +2765,7 @@ class ResumeApp:
                     margin-bottom: 1rem; 
                     font-weight: 700;
                     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-                "> Smart Resume AI</h1>
+                ">Smart Resume AI</h1>
                 <p style="
                     color: rgba(255,255,255,0.9); 
                     font-size: 1.3rem; 
@@ -2773,7 +2773,7 @@ class ResumeApp:
                     margin: 0 auto;
                     line-height: 1.6;
                     font-weight: 300;
-                ">Transform your career with AI-powered resume analysis and building. Get personalized insights and create professional resumes that stand out in today's competitive market.</p>
+                ">Transform your career with AI-powered resume magic! Get personalized insights, build stunning resumes, find dream jobs, and master interviews with our next-level features.</p>
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -2789,9 +2789,9 @@ class ResumeApp:
                 font-weight: 600;
                 position: relative;
             ">
-                ✨ Why Choose Smart Resume AI?
+                Next-Level Features for Success
                 <div style="
-                    width: 100px;
+                    width: 120px;
                     height: 4px;
                     background: linear-gradient(90deg, #667eea, #764ba2);
                     margin: 1rem auto;
@@ -2801,18 +2801,18 @@ class ResumeApp:
         </div>
         """, unsafe_allow_html=True)
         
-       # Enhanced responsive grid with hover effects
-        col1, col2, col3 = st.columns(3, gap="large")
+   #     Enhanced responsive grid with hover effects - Main Features
+        col1, col2, col3, col4 = st.columns(4, gap="medium")
         
         with col1:
             st.markdown("""
             <div style="
                 background: linear-gradient(145deg, #ffffff, #f8f9fa);
-                padding: 2.5rem;
+                padding: 2.5rem 1.5rem;
                 border-radius: 20px;
                 box-shadow: 0 10px 40px rgba(0,0,0,0.1);
                 text-align: center;
-                height: 350px;
+                height: 400px;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -2833,18 +2833,19 @@ class ResumeApp:
                     font-size: 4rem; 
                     margin-bottom: 1.5rem;
                     color: #fd7e14;
-                ">🤖</div>
+                ">🎨</div>
                 <h3 style="
                     color: #2c3e50; 
                     margin-bottom: 1rem;
-                    font-size: 1.5rem;
+                    font-size: 1.4rem;
                     font-weight: 600;
-                ">AI-Powered Analysis</h3>
-                <p style="
-                    color: #6c757d; 
-                    line-height: 1.7;
-                    font-size: 1rem;
-                ">Get instant AI-powered feedback on your resume—highlight strengths and fix weaknesses fast.</p>
+                ">AI-Powered Resume Builder</h3>
+                <div style="color: #6c757d; font-size: 0.9rem; line-height: 1.6; text-align: left;">
+                    <strong>✨ Themes that Shine</strong><br>
+                    <strong>🤖 Smart Content Suggestions</strong><br>
+                    <strong>🛡️ ATS-Optimized Formatting</strong><br>
+                    <strong>🧩 Customizable Sections</strong>
+                </div>
             </div>
             """, unsafe_allow_html=True)
     
@@ -2853,11 +2854,11 @@ class ResumeApp:
             st.markdown("""
             <div style="
                 background: linear-gradient(145deg, #ffffff, #f8f9fa);
-                padding: 2.5rem;
+                padding: 2.5rem 1.5rem;
                 border-radius: 20px;
                 box-shadow: 0 10px 40px rgba(0,0,0,0.1);
                 text-align: center;
-                height: 350px;
+                height: 400px;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -2878,18 +2879,19 @@ class ResumeApp:
                     font-size: 4rem; 
                     margin-bottom: 1.5rem;
                     color: #28a745;
-                ">✨</div>
+                ">🕵️</div>
                 <h3 style="
                     color: #2c3e50; 
                     margin-bottom: 1rem;
-                    font-size: 1.5rem;
+                    font-size: 1.4rem;
                     font-weight: 600;
-                ">Smart Resume Builder</h3>
-                <p style="
-                    color: #6c757d; 
-                    line-height: 1.7;
-                    font-size: 1rem;
-                ">Create professional resumes with our intelligent builder that suggests optimal content and formatting tailored to your industry.</p>
+                ">Deep Resume Analysis</h3>
+                <div style="color: #6c757d; font-size: 0.9rem; line-height: 1.6; text-align: left;">
+                    <strong>🛡️ ATS Compatibility Score</strong><br>
+                    <strong>🔑 Keyword Gap Analysis</strong><br>
+                    <strong>🧩 Role-specific Feedback</strong><br>
+                    <strong>📊 Skills Gap Breakdown</strong><br><br>
+                </div>
             </div>
             """, unsafe_allow_html=True)
         
@@ -2897,11 +2899,11 @@ class ResumeApp:
             st.markdown("""
             <div style="
                 background: linear-gradient(145deg, #ffffff, #f8f9fa);
-                padding: 2.5rem;
+                padding: 2.5rem 1.5rem;
                 border-radius: 20px;
                 box-shadow: 0 10px 40px rgba(0,0,0,0.1);
                 text-align: center;
-                height: 350px;
+                height: 400px;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -2916,209 +2918,73 @@ class ResumeApp:
                     left: 0;
                     right: 0;
                     height: 4px;
-                    background: linear-gradient(90deg, #fd7e14, #e83e8c);
+                    background: linear-gradient(90deg, #6f42c1, #e83e8c);
+                "></div>
+                <div style="
+                    font-size: 4rem; 
+                    margin-bottom: 1rem;
+                    color: #6f42c1;
+                ">💼</div>
+                <h3 style="
+                    color: #2c3e50; 
+                    margin-bottom: 1rem;
+                    font-size: 1.4rem;
+                    font-weight: 600;
+                ">Job Application Portal</h3>
+                <div style="color: #6c757d; font-size: 0.9rem; line-height: 1.6; text-align: left;">
+                    <strong>🔍 Multi-Portal Search</strong><br>
+                    <strong>🤖 AI Match Score </strong><br>
+                    <strong>📊 Job Market Insights</strong>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+    
+        with col4:
+            st.markdown("""
+            <div style="
+                background: linear-gradient(145deg, #ffffff, #f8f9fa);
+                padding: 2.5rem 1.5rem;
+                border-radius: 20px;
+                box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+                text-align: center;
+                height: 400px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                border: 1px solid rgba(255,255,255,0.2);
+                transition: all 0.3s ease;
+                position: relative;
+                overflow: hidden;
+            ">
+                <div style="
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    height: 4px;
+                    background: linear-gradient(90deg, #17a2b8, #fd7e14);
                 "></div>
                 <div style="
                     font-size: 4rem; 
                     margin-bottom: 1.5rem;
-                    color: #fd7e14;
-                ">📈</div>
+                    color: #17a2b8;
+                ">🧮</div>
                 <h3 style="
                     color: #2c3e50; 
                     margin-bottom: 1rem;
-                    font-size: 1.5rem;
+                    font-size: 1.4rem;
                     font-weight: 600;
-                ">Career Insights</h3>
-                <p style="
-                    color: #6c757d; 
-                    line-height: 1.7;
-                    font-size: 1rem;
-                ">Access detailed analytics and personalized recommendations to enhance your career prospects and track your progress.</p>
-            </div>
-            """, unsafe_allow_html=True)
-    
-        # Enhanced Advanced Features Showcase - Card Based Layout
-        st.markdown("""
-        <div style="margin: 3rem 0;">
-            <h2 style="
-                text-align: center; 
-                margin-bottom: 3rem; 
-                color: #2c3e50; 
-                font-size: 2.8rem;
-                font-weight: 600;
-                position: relative;
-            ">
-                🎯 Advanced Features
-                <div style="
-                    width: 100px;
-                    height: 4px;
-                    background: linear-gradient(90deg, #667eea, #764ba2);
-                    margin: 1rem auto;
-                    border-radius: 2px;
-                "></div>
-            </h2>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        # Advanced Features Grid Layout - 3x2 Grid
-        feature_col1, feature_col2, feature_col3 = st.columns(3, gap="medium")
-        
-        # Row 1
-        with feature_col1:
-            st.markdown("""
-            <div style="
-                background: linear-gradient(145deg, #ffffff, #f8f9fa);
-                padding: 2rem;
-                border-radius: 15px;
-                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
-                text-align: center;
-                min-height: 300px;
-                height: auto;
-                border-left: 4px solid #667eea;
-                transition: transform 0.3s ease;
-            ">
-                <div style="font-size: 3rem; margin-bottom: 1rem;">🤖</div>
-                <h4 style="color: #2c3e50; margin-bottom: 1rem; font-size: 1.3rem;">AI-Powered Analysis</h4>
-                <div style="color: #6c757d; font-size: 0.9rem; line-height: 1.6;">
-                    • Keyword optimization<br>
-                    • Industry suggestions<br>
-                    • ATS compatibility<br>
-                    • Grammar review<br>
-                    • Format optimization
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-        
-        with feature_col2:
-            st.markdown("""
-            <div style="
-                background: linear-gradient(145deg, #ffffff, #f8f9fa);
-                padding: 2rem;
-                border-radius: 15px;
-                box-shadow: 0 8px 25px rgba(40, 167, 69, 0.15);
-                text-align: center;
-                min-height: 300px;
-                height: auto;
-                border-left: 4px solid #28a745;
-                transition: transform 0.3s ease;
-            ">
-                <div style="font-size: 3rem; margin-bottom: 1rem;">📊</div>
-                <h4 style="color: #2c3e50; margin-bottom: 1rem; font-size: 1.3rem;">Performance Analytics</h4>
-                <div style="color: #6c757d; font-size: 0.9rem; line-height: 1.6;">
-                    • Resume view tracking<br>
-                    • Success rate metrics<br>
-                    • Industry comparisons<br>
-                    • Time-to-hire stats<br>
-                    • Conversion analysis
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-        
-        with feature_col3:
-            st.markdown("""
-            <div style="
-                background: linear-gradient(145deg, #ffffff, #f8f9fa);
-                padding: 2rem;
-                border-radius: 15px;
-                box-shadow: 0 8px 25px rgba(253, 126, 20, 0.15);
-                text-align: center;
-                min-height: 300px;
-                height: auto;
-                border-left: 4px solid #fd7e14;
-                transition: transform 0.3s ease;
-            ">
-                <div style="font-size: 3rem; margin-bottom: 1rem;">🔧</div>
-                <h4 style="color: #2c3e50; margin-bottom: 1rem; font-size: 1.3rem;">Professional Tools</h4>
-                <div style="color: #6c757d; font-size: 0.9rem; line-height: 1.6;">
-                    • Real-time collaboration<br>
-                    • Version control<br>
-                    • Template customization<br>
-                    • Multi-format export<br>
-                    • Print optimization
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-        
-        # Add some space between rows
-        st.markdown("<div style='margin: 2rem 0;'></div>", unsafe_allow_html=True)
-        
-        # Row 2
-        feature_col4, feature_col5, feature_col6 = st.columns(3, gap="medium")
-        
-        with feature_col4:
-            st.markdown("""
-            <div style="
-                background: linear-gradient(145deg, #ffffff, #f8f9fa);
-                padding: 2rem;
-                border-radius: 15px;
-                box-shadow: 0 8px 25px rgba(232, 62, 140, 0.15);
-                text-align: center;
-                min-height: 300px;
-                height: auto;
-                border-left: 4px solid #e83e8c;
-                transition: transform 0.3s ease;
-            ">
-                <div style="font-size: 3rem; margin-bottom: 1rem;">💡</div>
-                <h4 style="color: #2c3e50; margin-bottom: 1rem; font-size: 1.3rem;">Smart Recommendations</h4>
-                <div style="color: #6c757d; font-size: 0.9rem; line-height: 1.6;">
-                    • Skills gap analysis<br>
-                    • Career path guidance<br>
-                    • Salary benchmarking<br>
-                    • Interview preparation<br>
-                    • Certification advice
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-        
-        with feature_col5:
-            st.markdown("""
-            <div style="
-                background: linear-gradient(145deg, #ffffff, #f8f9fa);
-                padding: 2rem;
-                border-radius: 15px;
-                box-shadow: 0 8px 25px rgba(32, 201, 151, 0.15);
-                text-align: center;
-                height: auto;
-                border-left: 4px solid #20c997;
-                transition: transform 0.3s ease;
-            ">
-                <div style="font-size: 3rem; margin-bottom: 1rem;">🎯</div>
-                <h4 style="color: #2c3e50; margin-bottom: 1rem; font-size: 1.3rem;">Optimization Suite</h4>
-                <div style="color: #6c757d; font-size: 0.9rem; line-height: 1.6;">
-                    • A/B testing versions<br>
-                    • Keyword density check<br>
-                    • Format performance<br>
-                    • Personal branding<br>
-                    • Mobile compatibility
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-        
-        with feature_col6:
-            st.markdown("""
-            <div style="
-                background: linear-gradient(145deg, #ffffff, #f8f9fa);
-                padding: 2rem;
-                border-radius: 15px;
-                box-shadow: 0 8px 25px rgba(111, 66, 193, 0.15);
-                text-align: center;
-                height: auto;
-                border-left: 4px solid #6f42c1;
-                transition: transform 0.3s ease;
-            ">
-                <div style="font-size: 3rem; margin-bottom: 1rem;">🌐</div>
-                <h4 style="color: #2c3e50; margin-bottom: 1rem; font-size: 1.3rem;">Integration Hub</h4>
-                <div style="color: #6c757d; font-size: 0.9rem; line-height: 1.6;">
-                    • LinkedIn profile sync<br>
-                    • Job board connections<br>
-                    • Portfolio integration<br>
-                    • Social media optimization<br>
-                    • Cloud storage sync
+                ">Smart Quiz Master</h3>
+                <div style="color: #6c757d; font-size: 0.9rem; line-height: 1.6; text-align: left;">
+                    <strong>🤖 AI-Generated Quizzes.</strong><br>
+                    <strong>⚡ Flexible Customization.</strong><br>
+                    <strong>🔄 Adaptive Practice.</strong><br>
+                    <strong>🎯 Wide Coverage.</strong><br><br>
                 </div>
             </div>
             """, unsafe_allow_html=True)
     
-        # Enhanced Call-to-Action with better button design
+    
         st.markdown("""
         <div style="
             text-align: center;
@@ -3130,25 +2996,25 @@ class ResumeApp:
         ">
             <h3 style="
                 color: white;
-                font-size: 2rem;
+                font-size: 2.2rem;
                 margin-bottom: 1rem;
                 font-weight: 600;
-            ">Ready to Transform Your Career?</h3>
+            ">Ready to Launch Your Dream Career?</h3>
             <p style="
                 color: rgba(255,255,255,0.9);
-                font-size: 1.1rem;
+                font-size: 1.2rem;
                 margin-bottom: 2rem;
-                max-width: 500px;
+                max-width: 600px;
                 margin-left: auto;
                 margin-right: auto;
-            ">Join thousands of professionals who have already enhanced their resumes with our AI-powered platform.</p>
+            ">Join thousands of professionals who've already transformed their careers with our AI-powered platform. Your next opportunity is just one click away!</p>
         </div>
         """, unsafe_allow_html=True)
         
         col1, col2, col3 = st.columns([1, 1, 1])
         with col2:
-            if st.button("🎯 Get Started Now", key="get_started_btn", 
-                        help="Click to start analyzing your resume",
+            if st.button("🎯 Start Your Journey Now!", key="get_started_btn", 
+                        help="Click to start analyzing your resume with AI magic",
                         type="primary",
                         use_container_width=True):
                 cleaned_name = "🔍 RESUME ANALYZER".lower().replace(" ", "_").replace("🔍", "").strip()
@@ -3157,7 +3023,7 @@ class ResumeApp:
     
         # Add some spacing at the bottom
         st.markdown("<div style='margin-bottom: 2rem;'></div>", unsafe_allow_html=True)
-
+    
     def render_job_search(self):
         """Render the job search page"""
         render_job_search()
