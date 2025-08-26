@@ -373,7 +373,7 @@ def setup_phase():
             st.rerun()
     
     with mode_col2:
-        if st.button("**🤖 AI-Generated Quiz**    \n*Fresh questions powered by Gemini AI*", 
+        if st.button("**⚙️ AI-Generated Quiz**    \n*AI-powered practice, always new*", 
                      key="ai_mode", use_container_width=True, type="primary"):
             st.session_state.quiz_state['quiz_mode'] = 'ai'
             st.rerun()
@@ -394,11 +394,11 @@ def static_quiz_setup():
     st.markdown("### Select Category:")
     
     categories = [
-        ('General Aptitude', '🧠', 'General Aptitude'),
-        ('Verbal and Reasoning', '🧩', 'Verbal and Reasoning'),
-        ('programming', '💻', 'Programming'),
+        ('General Aptitude', '📚', 'General Aptitude'),
+        ('Verbal and Reasoning', '📚', 'Verbal and Reasoning'),
+        ('programming', '📚', 'Programming'),
         ('Technical MCQs', '📚', 'Technical MCQs'),
-        ('Core Concepts(CE)', '🧮', 'Core Concepts(CE)'),
+        ('Core Concepts(CE)', '📚', 'Core Concepts(CE)'),
     ]
     
     # Create first row with 3 columns
@@ -496,7 +496,7 @@ def show_static_quiz_settings():
 
 def programming_language_selection():
     """Programming language selection interface"""
-    st.markdown("# 💻 Select Programming Language")
+    st.markdown("## 💻 Select Programming Language")
     st.markdown("Choose which programming language you'd like to be quizzed on:")
     
     languages = [
@@ -612,16 +612,16 @@ def programming_settings_phase():
 def ai_quiz_setup():
     """AI quiz setup interface"""
     st.markdown("---")
-    st.markdown("## 🤖 AI-Generated Quiz Setup")
+    st.markdown("## ⚙️AI-Generated Quiz Setup")
     st.markdown("### Select Topic:")
 
     ai_topics = [
-        ("Practice Set-1", "🔢", "Numerical Ability"),
-        ("Practice Set-2", "🧠", "Verbal and Reasoning"),
-        ("Practice Set-3", "🖥️", "Programming Logic"),
-        ("Practice Set-4", "📝", "Mock Test-1"),
-        ("Practice Set-5", "📝", "Mock Test-2"),
-        ("Practice Set-6", "📝", "Mock Test-3")
+        ("Practice Set-1", "📚", "Numerical Ability"),
+        ("Practice Set-2", "📚", "Verbal and Reasoning"),
+        ("Practice Set-3", "📚", "Programming Logic"),
+        ("Practice Set-4", "📚", "Mock Test-1"),
+        ("Practice Set-5", "📚", "Mock Test-2"),
+        ("Practice Set-6", "📚", "Mock Test-3")
     ]
 
     topic_row1 = st.columns(3)
@@ -652,7 +652,7 @@ def show_ai_quiz_settings():
     st.markdown("### ⚙️ AI Quiz Settings")
     
     topic = st.session_state.quiz_state['ai_topic']
-    st.success(f"✅ Selected Topic: 🤖 {topic}")
+    st.success(f"✅ Selected Topic: ⚙️{topic}")
     
     # Two columns instead of three
     col1, col2 = st.columns(2)
@@ -692,7 +692,7 @@ def show_ai_quiz_settings():
 
 def generating_phase():
     """Show loading screen during AI generation"""
-    st.markdown("# 🤖 Generating Your AI Quiz")
+    st.markdown("# ⚙️ Generating Your AI Quiz")
     
     topic = st.session_state.quiz_state['ai_topic']
     difficulty = st.session_state.quiz_state['difficulty']
