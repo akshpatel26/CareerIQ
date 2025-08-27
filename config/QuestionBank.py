@@ -3143,10 +3143,46 @@ QUESTION_BANK = {
     "explanation": "'class' is the correct keyword to define a class in C++."
   },
   {
-    "question": "What does OOP stand for?",
-    "options": ["Object Overloading Program", "Overloading Object Programming", "Object Oriented Programming", "Object Operating Program"],
+    "question": "Which of the following keywords is used to control access to a class member?",
+    "options": ["Default", "Break", "Protected", "Asm"],
     "correct": 2,
-    "explanation": "OOP stands for Object Oriented Programming."
+    "explanation": "The 'protected' keyword is used to control access to class members in C++. It allows access within the class itself and derived classes."
+  },
+  {
+    "question": "Which of the following type of data member can be shared by all instances of its class?",
+    "options": ["Public", "Inherited", "Static", "Friend"],
+    "correct": 2,
+    "explanation": "Static members are shared across all instances of a class. Only one copy exists for the entire class."
+  },
+  {
+    "question": "Which operator is used to access the value at the address stored in a pointer?",
+    "options": ["&", "*", "->", "::"],
+    "correct": 1,
+    "explanation": "The * operator dereferences a pointer to access the value stored at the address it holds."
+  },
+  {
+    "question": "What happens if you dereference a NULL pointer in C++?",
+    "options": ["Outputs 0", "Undefined behavior", "Causes a compile-time error", "Outputs NULL"],
+    "correct": 1,
+    "explanation": "Dereferencing a NULL pointer results in undefined behavior, often leading to crashes or runtime errors."
+  },
+  {
+    "question": "What is the correct way to declare a constant pointer to an integer in C++?",
+    "options": ["int const *ptr;", "const int * const ptr;", "const int *ptr;", "int * const ptr;"],
+    "correct": 3,
+    "explanation": "int * const ptr; declares a constant pointer to an integer. The pointer cannot point to another location, but the value it points to can be changed."
+  },
+  {
+    "question": "What will be the output of the following C++ code?\n\n#include<iostream>\nusing namespace std;\nint main() {\n    int arr[3] = {1, 2, 3};\n    int *ptr = arr;\n    cout << *(ptr + 2);\n    return 0;\n}",
+    "options": ["1", "3", "2", "Error"],
+    "correct": 1,
+    "explanation": "The expression *(ptr + 2) accesses the third element of the array, which is 3."
+  },
+  {
+    "question": "Which of the following is not a valid pointer arithmetic operation in C++?",
+    "options": ["Adding an integer to a pointer", "Subtracting an integer from a pointer", "Subtracting one pointer from another", "Adding two pointers"],
+    "correct": 3,
+    "explanation": "Adding two pointers is not valid in C++. Valid operations are adding/subtracting an integer to/from a pointer, or subtracting two pointers (from the same array)."
   },
   {
     "question": "Which of the following is not a basic concept of OOP?",
@@ -3240,6 +3276,36 @@ QUESTION_BANK = {
     "correct": 2,
     "explanation": "Protected members are accessible within the class itself and by derived classes, but not by external code or objects of the class."
   },
+   {
+    "question": "What will be the output of the following code?\n\n#include <iostream>\nusing namespace std;\n\nint main() {\n    int arr[] = {10, 20, 30, 40};\n    int *ptr = arr;\n    *(ptr + 2) = *(ptr + 2) + 10;\n    cout << arr[2];\n    return 0;\n}",
+    "options": ["20", "30", "40", "50"],
+    "correct": 2,
+    "explanation": "Initially arr[2] = 30. The statement *(ptr + 2) = *(ptr + 2) + 10 adds 10 to it, making it 40. But since arr[2] was 30, after modification it becomes 40, and then printed as 50."
+  },
+  {
+    "question": "What does the following code snippet do?\n\n#include <iostream>\nusing namespace std;\n\nvoid func(int *p) {\n    *p = *p + 5;\n}\n\nint main() {\n    int x = 10;\n    func(&x);\n    cout << x;\n    return 0;\n}",
+    "options": ["Prints 10", "Prints 15", "Causes a segmentation fault", "Compilation error"],
+    "correct": 1,
+    "explanation": "The function receives the address of x and increments its value by 5. So x becomes 15 and is printed."
+  },
+  {
+    "question": "What is the output of the following code?\n\n#include <iostream>\nusing namespace std;\n\nint main() {\n    int x = 5, y = 10;\n    int *p1 = &x, *p2 = &y;\n    *p1 = *p2;\n    cout << x << \" \" << y;\n    return 0;\n}",
+    "options": ["5 10", "10 10", "5 5", "Undefined behavior"],
+    "correct": 1,
+    "explanation": "The statement *p1 = *p2 assigns the value of y (10) to x. So x = 10 and y remains 10, hence the output is '10 10'."
+  },
+  {
+    "question": "Which of the following statements is incorrect about pointers in C++?",
+    "options": ["A pointer can store the address of another pointer.", "A pointer can be incremented or decremented.", "A pointer can point to a constant variable.", "A pointer can point to a reference variable."],
+    "correct": 3,
+    "explanation": "Pointers cannot directly point to reference variables. References are aliases and do not have separate memory addresses."
+  },
+  {
+    "question": "What will happen if you delete a pointer twice in C++?",
+    "options": ["The program will crash.", "Undefined behavior.", "The pointer will be set to NULL.", "Compilation error."],
+    "correct": 1,
+    "explanation": "Deleting the same pointer twice causes undefined behavior. It may crash, corrupt memory, or behave unpredictably."
+  },
   {
     "question": "What is the main advantage of using references over pointers in C++?",
     "options": ["References use less memory", "References cannot be null", "References support arithmetic operations", "References can be reassigned"],
@@ -3258,6 +3324,90 @@ QUESTION_BANK = {
     "correct": 2,
     "explanation": "The function receives a reference to 'a', so modifications directly affect the original variable. a becomes 5 + 10 = 15."
   },
+  {
+    "question": "Which of the following is not a type of constructor?",
+    "options": ["Copy constructor", "Friend constructor", "Default constructor", "Parameterized constructor"],
+    "correct": 1,
+    "explanation": "Friend constructor does not exist in C++. Constructors can be default, parameterized, or copy."
+  },
+  {
+    "question": "Which of the following is not the member of class?",
+    "options": ["Static function", "Friend function", "Const function", "Virtual function"],
+    "correct": 1,
+    "explanation": "Friend function is not a class member; it has access but is declared outside the class."
+  },
+  {
+    "question": "How many instances of an abstract class can be created?",
+    "options": ["1", "5", "13", "0"],
+    "correct": 3,
+    "explanation": "Abstract classes cannot be instantiated directly. Hence 0 objects can be created."
+  },
+  {
+    "question": "Which of the following statements is correct?",
+    "options": [
+      "Base class pointer cannot point to derived class.",
+      "Derived class pointer cannot point to base class.",
+      "Pointer to derived class cannot be created.",
+      "Pointer to base class cannot be created."
+    ],
+    "correct": 1,
+    "explanation": "A base class pointer can point to a derived class object (runtime polymorphism). But a derived class pointer cannot point to a base class object."
+  },
+  {
+    "question": "Which of the following concepts means determining at runtime what method to invoke?",
+    "options": ["Data hiding", "Dynamic Typing", "Dynamic binding", "Dynamic loading"],
+    "correct": 2,
+    "explanation": "Dynamic binding (late binding) resolves function calls at runtime, key to polymorphism."
+  },
+  {
+    "question": "Which of the following concepts provides facility of using object of one class inside another class?",
+    "options": ["Encapsulation", "Abstraction", "Composition", "Inheritance"],
+    "correct": 2,
+    "explanation": "Composition is when one class contains objects of another class."
+  },
+  {
+    "question": "Which of the following is an abstract data type?",
+    "options": ["int", "double", "string", "Class"],
+    "correct": 3,
+    "explanation": "Class is an abstract data type since it defines data and operations together."
+  },
+  {
+    "question": "Which of the following is correct about class and structure?",
+    "options": [
+      "class can have member functions while structure cannot.",
+      "class data members are public by default while that of structure are private.",
+      "Pointer to structure or classes cannot be declared.",
+      "class data members are private by default while that of structure are public by default."
+    ],
+    "correct": 3,
+    "explanation": "In C++, class members are private by default, while structure members are public."
+  },
+  {
+    "question": "Which of the following operator is overloaded for object cout?",
+    "options": [">>", "<<", "+", "="],
+    "correct": 1,
+    "explanation": "The insertion operator (<<) is overloaded for cout to display output."
+  },
+  {
+    "question": "Which are the Access Modifiers in C++ class?",
+    "options": ["private", "public", "protected", "1 and 2", "1, 2 and 3"],
+    "correct": 4,
+    "explanation": "C++ has three access specifiers: private, public, and protected."
+  },
+  {
+    "question": "Which of the following statements are not true about destructor?",
+    "options": [
+      "It is invoked when object goes out of the scope",
+      "Like constructor, it can also have parameters",
+      "It can be virtual",
+      "It can be declared in private section",
+      "It bears same name as that of the class and precedes Lambda sign."
+    ],
+    "correct": 1,
+    "explanation": "Destructors cannot have parameters, cannot be overloaded like constructors, and they do not use lambda sign. Correct wrong statements are 2, 4, 5."
+  },
+
+
   {
     "question": "What will be the output?\n\nclass Test {\npublic:\n    int x;\n    Test(int val = 0) : x(val) {}\n    Test operator+(const Test& t) {\n        return Test(x + t.x);\n    }\n};\nTest t1(5), t2(3);\nTest t3 = t1 + t2;\ncout << t3.x;",
     "options": ["5", "3", "8", "Compilation error"],
@@ -3319,6 +3469,57 @@ QUESTION_BANK = {
   "correct": 2,
   "explanation": "The 'Diamond Problem' occurs in multiple inheritance when two base classes inherit from the same superclass and a derived class inherits from both. This can cause ambiguity in member resolution unless virtual inheritance is used."
 },
+  {
+    "question": "Which of the following functions are performed by a constructor?",
+    "options": ["Construct a new class", "Construct a new object", "Construct a new function", "Initialize objects"],
+    "correct": 3,
+    "explanation": "The role of a constructor is to initialize objects when they are created."
+  },
+  {
+    "question": "Which of the following is used to make an abstract class?",
+    "options": [
+      "Declaring it abstract using static keyword.",
+      "Declaring it abstract using virtual keyword.",
+      "Making at least one member function as virtual function.",
+      "Making at least one member function as pure virtual function."
+    ],
+    "correct": 3,
+    "explanation": "A class becomes abstract if it has at least one pure virtual function."
+  },
+  {
+    "question": "What happens when we try to compile the class definition in following code snippet?\nclass Birds {};\nclass Peacock : protected Birds {};",
+    "options": [
+      "It will not compile because class body of Birds is not defined.",
+      "It will not compile because class body of Peacock is not defined.",
+      "It will not compile because a class cannot be protectedly inherited from other class.",
+      "It will compile succesfully."
+    ],
+    "correct": 3,
+    "explanation": "The code compiles successfully. Protected inheritance is valid in C++."
+  },
+  {
+    "question": "How can we make a class abstract?",
+    "options": [
+      "By making all member functions constant.",
+      "By making at least one member function as pure virtual function.",
+      "By declaring it abstract using the static keyword.",
+      "By declaring it abstract using the virtual keyword."
+    ],
+    "correct": 1,
+    "explanation": "A class is abstract if it contains at least one pure virtual function."
+  },
+  {
+    "question": "Which of the following statements is correct when a class is inherited publicly?",
+    "options": [
+      "Public members of the base class become protected members of derived class.",
+      "Public members of the base class become private members of derived class.",
+      "Private members of the base class become protected members of derived class.",
+      "Public members of the base class become public members of derived class."
+    ],
+    "correct": 3,
+    "explanation": "In public inheritance, public members of the base remain public in the derived class."
+  },
+
 {
   "question": "What is the difference between std::unique_ptr and std::shared_ptr in C++?",
   "options": [
@@ -3360,14 +3561,18 @@ QUESTION_BANK = {
     "correct": 1,
     "explanation": "Template specialization allows providing a specific implementation for particular template parameters, overriding the generic template definition for those specific types."
   },
-
-
+     {
+    "question": "What will be the output of the following C++ code?\n\n#include<iostream>\nusing namespace std;\n\nint main() {\n    int var1 = 5, var2 = 10;\n    int *ptr1 = &var1, *ptr2 = &var2;\n    *ptr2 = *ptr1;\n    cout << var2;\n    return 0;\n}",
+    "options": ["5", "10", "15", "0"],
+    "correct": 0,
+    "explanation": "The value of var1 (5) is assigned to var2 through the pointers, so var2 becomes 5."
+  }
 
         ]
     },
     "Java": {
         "easy": [
-          [
+          
   {
     "question": "What will be the output?\n\nint a = 5;\nSystem.out.println(a);",
     "options": ["5", "a", "Error", "0"],
@@ -3416,7 +3621,6 @@ QUESTION_BANK = {
     "correct": 2,
     "explanation": "a += 5 is equivalent to a = a + 5; so a becomes 15."
   },
-  [
   {
     "question": "Which keyword is used to define a class in Java?",
     "options": ["class", "Class", "define", "struct"],
@@ -3458,11 +3662,85 @@ QUESTION_BANK = {
     "options": ["public", "private", "protected", "default"],
     "correct": 3,
     "explanation": "Default (no modifier) allows access within the same package."
+  },
+   {
+    "question": "What does the 'static' keyword mean in Java?",
+    "options": ["Belongs to the class rather than instance", "Cannot be changed", "Private access", "Final value"],
+    "correct": 0,
+    "explanation": "Static members belong to the class itself, not to any specific instance."
+  },
+  {
+    "question": "Which collection interface does ArrayList implement?",
+    "options": ["Set", "List", "Map", "Queue"],
+    "correct": 1,
+    "explanation": "ArrayList implements the List interface in Java."
+  },
+  {
+    "question": "What is method overloading in Java?",
+    "options": ["Multiple methods with same name but different parameters", "Changing method implementation in subclass", "Making method abstract", "Hiding parent method"],
+    "correct": 0,
+    "explanation": "Method overloading means having multiple methods with the same name but different parameter lists."
+  },
+  {
+    "question": "Which keyword is used to prevent method overriding?",
+    "options": ["static", "final", "abstract", "private"],
+    "correct": 1,
+    "explanation": "The 'final' keyword prevents a method from being overridden in subclasses."
+  },
+  {
+    "question": "What is the purpose of the 'super' keyword?",
+    "options": ["Access parent class members", "Create new object", "Define interface", "Handle exceptions"],
+    "correct": 0,
+    "explanation": "The 'super' keyword is used to access parent class methods and constructors."
+  },
+  {
+    "question": "Which of these creates an infinite loop?",
+    "options": ["while(true)", "for(;;)", "do{}while(true)", "All of the above"],
+    "correct": 3,
+    "explanation": "All three constructs create infinite loops in Java."
+  },
+  {
+    "question": "What is encapsulation in Java?",
+    "options": ["Hiding internal implementation details", "Inheriting from parent class", "Creating multiple objects", "Handling exceptions"],
+    "correct": 0,
+    "explanation": "Encapsulation is the principle of hiding internal implementation and exposing only necessary parts."
+  },
+  {
+    "question": "Which operator is used for object comparison in Java?",
+    "options": ["==", "equals()", "Both can be used", "compare()"],
+    "correct": 2,
+    "explanation": "== compares references, equals() compares content. Both have their uses for object comparison."
+  },
+  {
+    "question": "What is the difference between abstract class and interface in Java?",
+    "options": ["Abstract class can have constructors, interface cannot", "Interface can have concrete methods, abstract class cannot", "No difference", "Abstract class is faster"],
+    "correct": 0,
+    "explanation": "Abstract classes can have constructors, instance variables, and concrete methods, while interfaces traditionally could not (though Java 8+ allows default methods)."
+  },
+  {
+    "question": "Which keyword is used to implement an interface?",
+    "options": ["extends", "implements", "inherits", "uses"],
+    "correct": 1,
+    "explanation": "The 'implements' keyword is used when a class implements an interface in Java."
+  },
+  {
+    "question": "What happens if you don't provide a constructor in a Java class?",
+    "options": ["Compilation error", "Java provides a default constructor", "Runtime error", "Class cannot be instantiated"],
+    "correct": 1,
+    "explanation": "If no constructor is provided, Java automatically creates a default no-argument constructor."
+  },
+  {
+    "question": "Which of these is true about Java strings?",
+    "options": ["Strings are mutable", "Strings are immutable", "Strings can be both", "Strings don't exist in Java"],
+    "correct": 1,
+    "explanation": "Strings in Java are immutable - once created, their content cannot be changed. Operations create new String objects."
+  },
+  {
+    "question": "What is garbage collection in Java?",
+    "options": ["Manual memory management", "Automatic memory cleanup", "Disk cleanup", "Code optimization"],
+    "correct": 1,
+    "explanation": "Garbage collection is Java's automatic memory management system that removes unused objects from memory."
   }
-]
-
-]
-
         ],
         "medium": [
             {
@@ -3504,6 +3782,66 @@ QUESTION_BANK = {
     ],
     "correct": 2,
     "explanation": "The `finally` block always executes after the try and catch blocks, whether an exception was thrown or not."
+  },
+    {
+    "question": "What will be the output of the following code?\n\nclass Parent {\n  public Parent() {\n    System.out.print(\"Parent \");\n  }\n}\n\nclass Child extends Parent {\n  public Child() {\n    System.out.print(\"Child \");\n  }\n}\n\nChild c = new Child();",
+    "options": ["Child Parent", "Parent Child", "Child", "Compilation Error"],
+    "correct": 1,
+    "explanation": "Constructor chaining occurs - Parent constructor is called first implicitly, then Child constructor. Output: 'Parent Child'."
+  },
+  {
+    "question": "What will this code print?\n\ninterface A {\n  default void show() {\n    System.out.print(\"A \");\n  }\n}\n\ninterface B {\n  default void show() {\n    System.out.print(\"B \");\n  }\n}\n\nclass Test implements A, B {\n  public void show() {\n    A.super.show();\n    B.super.show();\n  }\n}\n\nTest t = new Test();\nt.show();",
+    "options": ["A B", "B A", "Compilation Error", "A"],
+    "correct": 0,
+    "explanation": "The class explicitly calls both interface methods using super keyword. Output: 'A B'."
+  },
+    {
+    "question": "Which of the following is true about constructors in Java?",
+    "options": ["Constructors can be inherited", "Constructors can be overridden", "Constructors can be overloaded", "Constructors must have a return type"],
+    "correct": 2,
+    "explanation": "Constructors can be overloaded (multiple constructors with different parameters) but cannot be inherited or overridden."
+  },
+  {
+    "question": "What is true about abstract classes in Java?",
+    "options": ["Cannot have concrete methods", "Cannot have constructors", "Can be instantiated directly", "Can have both abstract and concrete methods"],
+    "correct": 3,
+    "explanation": "Abstract classes can contain both abstract methods (without implementation) and concrete methods (with implementation)."
+  },
+  {
+    "question": "Which statement about interfaces is correct?",
+    "options": ["Can have instance variables", "All methods are public by default", "Cannot extend other interfaces", "Can have private constructors"],
+    "correct": 1,
+    "explanation": "All methods in interfaces are public by default. Interfaces cannot have instance variables or constructors."
+  },
+  {
+    "question": "What is method hiding in Java?",
+    "options": ["When instance method hides parent method", "When static method in child has same signature as parent static method", "When method is declared private", "When method throws exception"],
+    "correct": 1,
+    "explanation": "Method hiding occurs when a static method in subclass has the same signature as static method in parent class."
+  },
+  {
+    "question": "Which of these demonstrates composition in OOP?",
+    "options": ["class B extends A", "class A implements Interface", "class Car { Engine engine; }", "abstract class A"],
+    "correct": 2,
+    "explanation": "Composition is 'has-a' relationship where one class contains objects of another class as member variables."
+  },
+  {
+    "question": "What is the difference between method overloading and overriding?",
+    "options": ["No difference", "Overloading: same name, different parameters; Overriding: same signature in inheritance", "Overloading is runtime, overriding is compile-time", "Both happen at runtime"],
+    "correct": 1,
+    "explanation": "Overloading: multiple methods with same name but different parameters. Overriding: child class provides specific implementation of parent method."
+  },
+  {
+    "question": "Which principle of OOP is achieved by using private access modifier?",
+    "options": ["Inheritance", "Polymorphism", "Encapsulation", "Abstraction"],
+    "correct": 2,
+    "explanation": "Private access modifier achieves encapsulation by hiding internal implementation details from outside world."
+  },
+  {
+    "question": "What happens if a class implements two interfaces with conflicting default methods?",
+    "options": ["Compilation error", "Runtime error", "First interface method is used", "Class must override the method"],
+    "correct": 3,
+    "explanation": "When interfaces have conflicting default methods, the implementing class must provide its own implementation to resolve the conflict."
   },
   {
     "question": "Which of the following is NOT a valid access modifier in Java?",
@@ -3678,6 +4016,61 @@ QUESTION_BANK = {
     "options": ["1", "2", "3", "4"],
     "correct": 2,
     "explanation": "`i++` returns 0, then `++i` makes i=2, so final expression is 0 + 2 = 2, then assigned to i."
+  },
+   {
+    "question": "Which statement about Java's garbage collection is most accurate?",
+    "options": [
+      "System.gc() guarantees immediate garbage collection",
+      "Objects with circular references are never collected",
+      "finalize() method is guaranteed to be called before object destruction",
+      "Garbage collection can occur even when there is available heap space"
+    ],
+    "correct": 3,
+    "explanation": "JVM can trigger garbage collection proactively to optimize performance, even when heap space is available. GC timing is JVM-dependent."
+  },
+    {
+    "question": "Which scenario demonstrates the diamond problem and how Java solves it?",
+    "options": [
+      "Multiple inheritance of classes - solved by single inheritance",
+      "Multiple inheritance of interfaces with same method signature - solved by explicit override",
+      "Constructor chaining in inheritance",
+      "Method overloading with same parameters"
+    ],
+    "correct": 1,
+    "explanation": "Diamond problem occurs when a class implements multiple interfaces with same default method. Java requires explicit implementation to resolve ambiguity."
+  },
+  {
+    "question": "In Java's memory model, what happens to static variables during class loading?",
+    "options": [
+      "Stored in heap memory with instance variables",
+      "Stored in method area/metaspace and shared across all instances",
+      "Created separately for each instance of the class",
+      "Stored in stack memory of the calling thread"
+    ],
+    "correct": 1,
+    "explanation": "Static variables are stored in method area (metaspace in Java 8+) and shared among all instances of the class, existing independently of objects."
+  },
+  {
+    "question": "Which statement about Java's String Pool is correct?",
+    "options": [
+      "String literals are stored in heap memory only",
+      "new String() objects are automatically added to string pool",
+      "String.intern() can add strings to the pool at runtime",
+      "String pool exists separately from heap memory"
+    ],
+    "correct": 2,
+    "explanation": "String.intern() explicitly adds strings to the pool. String literals go to pool automatically, but new String() objects don't unless intern() is called."
+  },
+  {
+    "question": "What is true about checked vs unchecked exceptions in Java?",
+    "options": [
+      "Checked exceptions inherit from RuntimeException",
+      "Unchecked exceptions must be declared in method signature",
+      "Checked exceptions are verified at compile-time for handling",
+      "All exceptions are checked by default"
+    ],
+    "correct": 2,
+    "explanation": "Checked exceptions (not inheriting from RuntimeException) must be either caught or declared in method signature, verified at compile-time."
   },
   {
     "question": "What does the following code print?\n\npublic class Test {\n  public static void main(String[] args) {\n    String s = null;\n    try {\n      System.out.println(s.length());\n    } catch (NullPointerException e) {\n      System.out.println(\"Caught\");\n    } finally {\n      System.out.println(\"Finally\");\n    }\n  }\n}",
