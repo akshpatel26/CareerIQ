@@ -87,13 +87,13 @@ class ResumeApp:
             st.session_state.is_admin = False
 
         self.pages = {
-            " HOME": self.render_home,
-            " RESUME BUILDER": self.render_builder,
-            " RESUME ANALYZER": self.render_analyzer,
-            " JOB SEARCH": self.render_job_search,
-            " Smart Quiz ": self.render_quiz, 
-            " DASHBOARD": self.render_dashboard,
-            " FEEDBACK": self.render_feedback_page,
+            "🏠 HOME": self.render_home,
+            "📝 RESUME BUILDER": self.render_builder,
+            "🔍 RESUME ANALYZER": self.render_analyzer,
+            "🎯 JOB SEARCH": self.render_job_search,
+            "🧩 Smart Quiz ": self.render_quiz, 
+            "📊 DASHBOARD": self.render_dashboard,
+            "💬 FEEDBACK": self.render_feedback_page,
 
         }
 
@@ -2637,55 +2637,68 @@ class ResumeApp:
     
         # Enhanced Hero Section with gradient background
         st.markdown("""
-        <div style="
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 4rem 2rem;
-            border-radius: 20px;
-            text-align: center;
-            margin-bottom: 3rem;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            position: relative;
-            overflow: hidden;
-        ">
-            <div style="
-                position: absolute;
-                top: -50px;
-                right: -50px;
-                width: 200px;
-                height: 200px;
-                background: rgba(255,255,255,0.1);
-                border-radius: 50%;
-                z-index: 1;
-            "></div>
-            <div style="
-                position: absolute;
-                bottom: -30px;
-                left: -30px;
-                width: 150px;
-                height: 150px;
-                background: rgba(255,255,255,0.08);
-                border-radius: 50%;
-                z-index: 1;
-            "></div>
-            <div style="position: relative; z-index: 2;">
-                <h1 style="
-                    color: white; 
-                    font-size: 3.5rem; 
-                    margin-bottom: 1rem; 
-                    font-weight: 700;
-                    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-                ">CareerIQ</h1>
-                <p style="
-                    color: rgba(255,255,255,0.9); 
-                    font-size: 1.3rem; 
-                    max-width: 600px; 
-                    margin: 0 auto;
-                    line-height: 1.6;
-                    font-weight: 300;
-                ">Transform your career with AI-powered resume magic! Get personalized insights, build stunning resumes, find dream jobs, and master interviews with our next-level features.</p>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+                    <div style="
+                        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                        padding: 4rem 2rem;
+                        border-radius: 20px;
+                        text-align: center;
+                        margin-bottom: 3rem;
+                        box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+                        position: relative;
+                        overflow: hidden;
+                    ">    
+                        <div style="
+                            position: absolute;
+                            top: -50px;
+                            right: -50px;
+                            width: 200px;
+                            height: 200px;
+                            background: rgba(255,255,255,0.1);
+                            border-radius: 50%;
+                            z-index: 1;
+                        "></div>
+                        <div style="
+                            position: absolute;
+                            bottom: -30px;
+                            left: -30px;
+                            width: 150px;
+                            height: 150px;
+                            background: rgba(255,255,255,0.08);
+                            border-radius: 50%;
+                            z-index: 1;
+                        "></div>
+                        <div style="position: relative; z-index: 2;">
+                            <h1 style="
+                                font-size: 3.5rem; 
+                                margin-bottom: 1rem; 
+                                font-weight: 700;
+                                text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+                                background: linear-gradient(90deg, #ff6ec4, #7873f5, #4ade80, #facc15, #f43f5e);
+                                background-size: 300% 300%;
+                                -webkit-background-clip: text;
+                                -webkit-text-fill-color: transparent;
+                                animation: gradientAnimation 6s ease infinite;
+                            ">CareerIQ</h1>
+                            <p style="
+                                color: rgba(255,255,255,0.9); 
+                                font-size: 1.3rem; 
+                                max-width: 600px; 
+                                margin: 0 auto;
+                                line-height: 1.6;
+                                font-weight: 300;
+                            ">Transform your career with AI-powered resume magic! Get personalized insights, build stunning resumes, find dream jobs, and master interviews with our next-level features.</p>
+                        </div>
+                    </div>
+                    
+                    <style>
+                    @keyframes gradientAnimation {
+                        0% {background-position: 0% 50%;}
+                        50% {background-position: 100% 50%;}
+                        100% {background-position: 0% 50%;}
+                    }
+                    </style>
+                    """, unsafe_allow_html=True)
+
     
         # Enhanced Features Section with animated cards
         st.markdown("""
@@ -2922,7 +2935,7 @@ class ResumeApp:
         
         col1, col2, col3 = st.columns([1, 1, 1])
         with col2:
-            if st.button("🎯 Start Your Journey Now!", key="get_started_btn", 
+            if st.button(" Start Your Journey Now!", key="get_started_btn", 
                         help="Click to start analyzing your resume with AI magic",
                         type="primary",
                         use_container_width=True):
