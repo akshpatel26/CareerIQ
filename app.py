@@ -1,5 +1,5 @@
 ﻿"""
-Smart Resume AI - Main Application
+CareerIQ - Main Application
 """
 import streamlit as st
 import time
@@ -49,8 +49,7 @@ if not google_api_key:
 
 # Set page config at the very beginning
 st.set_page_config(
-    page_title="Smart Resume AI",
-    page_icon="🚀",
+    page_title="CareerIQ",
     layout="wide"
 )
 
@@ -92,9 +91,9 @@ class ResumeApp:
             " RESUME BUILDER": self.render_builder,
             " RESUME ANALYZER": self.render_analyzer,
             " JOB SEARCH": self.render_job_search,
+            " Smart Quiz ": self.render_quiz, 
             " DASHBOARD": self.render_dashboard,
             " FEEDBACK": self.render_feedback_page,
-            " Smart Quiz ": self.render_quiz, 
 
         }
 
@@ -2675,7 +2674,7 @@ class ResumeApp:
                     margin-bottom: 1rem; 
                     font-weight: 700;
                     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-                ">Smart Resume AI</h1>
+                ">CareerIQ</h1>
                 <p style="
                     color: rgba(255,255,255,0.9); 
                     font-size: 1.3rem; 
@@ -3010,7 +3009,7 @@ class ResumeApp:
         # Admin login/logout in sidebar
         with st.sidebar:
             st_lottie(self.load_lottie_url("https://assets5.lottiefiles.com/packages/lf20_xyadoh9h.json"), height=200, key="sidebar_animation")
-            st.title("Smart Resume AI")
+            st.title("CareerIQ")
             st.markdown("---")
             
             # Navigation buttons
