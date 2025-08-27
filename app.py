@@ -1,6 +1,4 @@
-﻿
-
-"""
+﻿"""
 Smart Resume AI - Main Application
 """
 import streamlit as st
@@ -580,34 +578,6 @@ class ResumeApp:
         st.session_state.analytics_data = analytics
         return analytics
 
-    # def handle_resume_upload(self):
-    #     """Handle resume upload and analysis"""
-    #     uploaded_file = st.file_uploader(
-    #         "Upload your resume", type=['pdf', 'docx'])
-
-    #     if uploaded_file is not None:
-    #         try:
-                # Extract text from resume
-    #             if uploaded_file.type == "application/pdf":
-    #                 resume_text = extract_text_from_pdf(uploaded_file)
-    #             else:
-    #                 resume_text = extract_text_from_docx(uploaded_file)
-
-    #             # Store resume data
-    #             st.session_state.resume_data = {
-    #                 'filename': uploaded_file.name,
-    #                 'content': resume_text,
-    #                 'upload_time': datetime.now().isoformat()
-    #              }
-
-    #             # Analyze resume
-    #             analytics = self.analyze_resume(resume_text)
-
-    #             return True
-    #         except Exception as e:
-    #             st.error(f"Error processing resume: {str(e)}")
-    #             return False
-    #     return False
 
     def render_builder(self):
         apply_modern_styles()
@@ -963,7 +933,7 @@ class ResumeApp:
         if 'custom_sections' not in st.session_state.form_data:
             st.session_state.form_data['custom_sections'] = []
         
-        if st.button("Add More "):
+        if st.button("Add More Sections "):
             st.session_state.form_data['custom_sections'].append({
                 'section_name': '',
                 'items': []
@@ -1421,68 +1391,8 @@ class ResumeApp:
             
                     st.markdown("<br>", unsafe_allow_html=True)
             
-                    # === DETAILED ANALYSIS ROW ===
-                    details_col1, details_col2 = st.columns([1, 1])
             
-                    with details_col1:
-                        # Missing Skills Section
-                        if analysis['keyword_match']['missing_skills']:
-                            st.markdown("""
-                            <div style="background: linear-gradient(135deg, #2a1810, #3d2317); padding: 25px; border-radius: 15px; margin: 15px 0; border-left: 4px solid #FF6B6B; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                                <h3 style="color: #FF6B6B; margin-bottom: 15px; display: flex; align-items: center;">
-                                    <span style="margin-right: 10px;">⚠️</span> Missing Key Skills
-                                </h3>
-                            """, unsafe_allow_html=True)
-                            
-                            # Display missing skills in a grid
-                            skills_per_row = 2
-                            missing_skills = analysis['keyword_match']['missing_skills']
-                            
-                            for i in range(0, len(missing_skills), skills_per_row):
-                                skill_cols = st.columns(skills_per_row)
-                                for j, skill in enumerate(missing_skills[i:i+skills_per_row]):
-                                    with skill_cols[j]:
-                                        st.markdown(f"""
-                                        <div style=" padding: 6px 10px; 
-                                                    margin: 5px 0; text-align: center;"
-                                            <span style="color: white; font-weight: 400;">{skill}</span>
-                                        </div>
-                                        """, unsafe_allow_html=True)
-                            
-                            st.markdown("</div>", unsafe_allow_html=True)
-            
-                    with details_col2:
-                        # Quick Stats
-                        st.markdown("""
-                        <div style="background: linear-gradient(135deg, #1a2332, #243447); padding: 25px; border-radius: 15px; margin: 15px 0; border-left: 4px solid #4CAF50; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                            <h3 style="color: #4CAF50; margin-bottom: 15px; display: flex; align-items: center;">
-                                <span style="margin-right: 10px;">📈</span> Quick Insights
-                            </h3>
-                        """, unsafe_allow_html=True)
-                        
-                        # Create insights grid
-                        insight_col1, insight_col2 = st.columns(2)
-                        with insight_col1:
-                            total_skills_found = len(analysis.get('skills', []))
-                            st.markdown(f"""
-                            <div style="text-align: center; margin: 10px 0;">
-                                <div style="font-size: 1.8em; font-weight: bold; color: #64B5F6;">{total_skills_found}</div>
-                                <div style="color: #B0BEC5; font-size: 0.9em;">Skills Found</div>
-                            </div>
-                            """, unsafe_allow_html=True)
-                        
-                        with insight_col2:
-                            missing_count = len(analysis['keyword_match']['missing_skills'])
-                            st.markdown(f"""
-                            <div style="text-align: center; margin: 10px 0;">
-                                <div style="font-size: 1.8em; font-weight: bold; color: #FF6B6B;">{missing_count}</div>
-                                <div style="color: #B0BEC5; font-size: 0.9em;">Missing Skills</div>
-                            </div>
-                            """, unsafe_allow_html=True)
-                        
-                        st.markdown("</div>", unsafe_allow_html=True)
-
-                        # Main Feature Card Container
+                    # Main Feature Card Container
                     
                     st.markdown("## 📋 Resume Improvement Suggestions")
                     # Enhanced helper function to render each suggestion section
@@ -3114,37 +3024,6 @@ class ResumeApp:
             st.markdown("<br><br>", unsafe_allow_html=True)
             st.markdown("---")
 
-            # # Admin Login/Logout section at bottom
-            # if st.session_state.get('is_admin', False):
-            #     st.success(f"Logged in as: {st.session_state.get('current_admin_email')}")
-            #     if st.button("Logout", key="logout_button"):
-            #         try:
-            #             log_admin_action(st.session_state.get('current_admin_email'), "logout")
-            #             st.session_state.is_admin = False
-            #             st.session_state.current_admin_email = None
-            #             st.success("Logged out successfully!")
-            #             st.rerun()
-            #         except Exception as e:
-            #             st.error(f"Error during logout: {str(e)}")
-            # else:
-            #     with st.expander("👤 Admin Login"):
-            #         admin_email_input = st.text_input("Email", key="admin_email_input")
-            #         admin_password = st.text_input("Password", type="password", key="admin_password_input")
-            #         if st.button("Login", key="login_button"):
-            #                 try:
-            #                     if verify_admin(admin_email_input, admin_password):
-            #                         st.session_state.is_admin = True
-            #                         st.session_state.current_admin_email = admin_email_input
-            #                         log_admin_action(admin_email_input, "login")
-            #                         st.success("Logged in successfully!")
-            #                         st.rerun()
-            #                     else:
-            #                         st.error("Invalid credentials")
-            #                 except Exception as e:
-            #                     st.error(f"Error during login: {str(e)}")
-        
-            # Display the repository notification in the sidebar
-            # self.show_repo_notification()
 
         # Force home page on first load
         if 'initial_load' not in st.session_state:
