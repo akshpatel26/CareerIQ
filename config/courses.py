@@ -142,8 +142,8 @@ RESUME_VIDEOS = {
         ["ATS-Friendly Resume Guide", "https://youtu.be/BYUy1yvjHxE"]
     ],
     "Resume Design": [
-        ["Create a Modern Resume in Word", "https://youtu.be/3agP4x8LYFM"],
-        ["Professional Resume Design Tips", "https://youtu.be/KFaugkGVeNQ"],
+        ["Create a Modern Resume in Word", "https://www.youtube.com/watch?v=VB376MMEq38"],
+        ["Professional Resume Design Tips", "https://www.youtube.com/watch?v=QnUI3sLZ4hc"],
         ["Resume Templates and Formatting", "https://youtu.be/GyjzOKdaioU"]
     ]
 }
