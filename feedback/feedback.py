@@ -377,9 +377,9 @@ class FeedbackManager:
         cols = st.columns(4)
         metrics = [
             {"label": "🗣️ Total Responses", "value": f"{stats['total_responses']:,}", "delta": "↗️", "color": "#4CAF50"},
-            {"label": "⭐ Avg Rating", "value": f"{stats['avg_rating']:.1f}/5.0", "delta": "🌟", "color": "#FFD700"},
-            {"label": "🎯 Usability", "value": f"{stats['avg_usability']:.1f}/5.0", "delta": "🚀", "color": "#2196F3"},
-            {"label": "😊 Satisfaction", "value": f"{stats['avg_satisfaction']:.1f}/5.0", "delta": "💖", "color": "#9C27B0"}
+            {"label": "⭐ Avg Rating", "value": f"{stats['avg_rating']:.1f}/10.0", "delta": "🌟", "color": "#FFD700"},
+            {"label": "🎯 Usability", "value": f"{stats['avg_usability']:.1f}/10.0", "delta": "🚀", "color": "#2196F3"},
+            {"label": "😊 Satisfaction", "value": f"{stats['avg_satisfaction']:.1f}/10.0", "delta": "💖", "color": "#9C27B0"}
         ]
         
         for col, metric in zip(cols, metrics):
