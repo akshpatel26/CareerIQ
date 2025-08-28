@@ -198,11 +198,11 @@ class FeedbackManager:
         """, unsafe_allow_html=True)
     
         # Full Name
-        st.markdown('<label class="feedback-label">👤 Full Name <span class="required-field">*</span></label>', unsafe_allow_html=True)
+        st.markdown('<label class="feedback-label"> Full Name <span class="required-field">*</span></label>', unsafe_allow_html=True)
         full_name = st.text_input("", placeholder="Enter your full name", key="user_full_name", label_visibility="collapsed")
     
         # Contact Number
-        st.markdown('<label class="feedback-label">📞 Contact No</label>', unsafe_allow_html=True)
+        st.markdown('<label class="feedback-label"> Contact No</label>', unsafe_allow_html=True)
         contact_no = st.text_input("", placeholder="Enter your mobile number (Optional)", key="user_contact", label_visibility="collapsed")
         if contact_no and contact_no.strip():
             if self.validate_phone(contact_no):
@@ -211,7 +211,7 @@ class FeedbackManager:
                 st.markdown('<div style="color: #FF5722; font-size: 0.9em;">❌ Please enter a valid Indian mobile number</div>', unsafe_allow_html=True)
     
         # Email Address
-        st.markdown('<label class="feedback-label">📧 Email Address <span class="required-field">*</span></label>', unsafe_allow_html=True)
+        st.markdown('<label class="feedback-label"> Email Address <span class="required-field">*</span></label>', unsafe_allow_html=True)
         email = st.text_input("", placeholder="Enter your email address", key="user_email", label_visibility="collapsed")
         if email:
             if self.validate_email(email):
@@ -220,7 +220,7 @@ class FeedbackManager:
                 st.markdown('<div style="color: #FF5722; font-size: 0.9em;">❌ Please enter a valid email address</div>', unsafe_allow_html=True)
     
         # Branch
-        st.markdown('<label class="feedback-label">🎓 Branch <span class="required-field">*</span></label>', unsafe_allow_html=True)
+        st.markdown('<label class="feedback-label"> Branch <span class="required-field">*</span></label>', unsafe_allow_html=True)
         branch_options = [
             "Select your branch",
             "CE (Computer Engineering)",
@@ -236,23 +236,23 @@ class FeedbackManager:
         branch = st.selectbox("", options=branch_options, key="user_branch", label_visibility="collapsed")
     
         # Ratings Section
-        st.markdown("#### 🌟 Overall Experience Rating ? <span class='required-field'>*</span>", unsafe_allow_html=True)
+        st.markdown("####  Overall Experience Rating ? <span class='required-field'>*</span>", unsafe_allow_html=True)
         rating = self.render_vertical_0_to_10_rating("overall")
     
-        st.markdown("#### 🎯 How easy was it to use our app ? <span class='required-field'>*</span>", unsafe_allow_html=True)
+        st.markdown("####  How easy was it to use our app ? <span class='required-field'>*</span>", unsafe_allow_html=True)
         usability_score = self.render_vertical_0_to_10_rating("usability")
     
-        st.markdown("#### 💡 How satisfied are you with our features ? <span class='required-field'>*</span>", unsafe_allow_html=True)
+        st.markdown("####  How satisfied are you with our features ? <span class='required-field'>*</span>", unsafe_allow_html=True)
         feature_satisfaction = self.render_vertical_0_to_10_rating("features")
     
         # Detailed Feedback (Now Optional)
-        st.markdown('<label class="feedback-label">🚀 Missing Features</label>', unsafe_allow_html=True)
+        st.markdown('<label class="feedback-label"> Missing Features</label>', unsafe_allow_html=True)
         missing_features = st.text_area("", placeholder="What features would you like to see? (Optional)", key="missing_features", label_visibility="collapsed", height=100)
     
-        st.markdown('<label class="feedback-label">💫 Improvement Suggestions</label>', unsafe_allow_html=True)
+        st.markdown('<label class="feedback-label"> Improvement Suggestions</label>', unsafe_allow_html=True)
         improvement_suggestions = st.text_area("", placeholder="How can we make this better? (Optional)", key="improvements", label_visibility="collapsed", height=100)
     
-        st.markdown('<label class="feedback-label">🎉 Experience Journey</label>', unsafe_allow_html=True)
+        st.markdown('<label class="feedback-label"> Experience Journey</label>', unsafe_allow_html=True)
         user_experience = st.text_area("", placeholder="Tell us about your journey! (Optional)", key="experience", label_visibility="collapsed", height=120)
         st.markdown('</div>', unsafe_allow_html=True)
     
@@ -293,7 +293,7 @@ class FeedbackManager:
         # Submit Button
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
-            if st.button("🚀 Submit Feedback", key="submit_feedback", use_container_width=True, disabled=not required_fields_filled, type="primary"):
+            if st.button(" Submit Feedback", key="submit_feedback", use_container_width=True, disabled=not required_fields_filled, type="primary"):
                 try:
                     # Save feedback (handle optional fields with default empty strings)
                     feedback_data = {
@@ -310,7 +310,7 @@ class FeedbackManager:
                     }
                     self.save_feedback(feedback_data)
     
-                    st.success(f"🎉 Thank you {full_name.split()[0]}! Your feedback has been submitted successfully.")
+                    st.success(f" Thank you {full_name.split()[0]}! Your feedback has been submitted successfully.")
     
                     # Reset form
                     for key in ['user_full_name', 'user_contact', 'user_email', 'user_branch',
@@ -320,7 +320,7 @@ class FeedbackManager:
                             del st.session_state[key]
     
                 except Exception as e:
-                    st.error(f"🚨 Oops! Something went wrong: {str(e)}")
+                    st.error(f" Oops! Something went wrong: {str(e)}")
 
     def render_vertical_0_to_10_rating(self, key):
         """Render vertical 1-10 rating scale similar to Google Forms"""
