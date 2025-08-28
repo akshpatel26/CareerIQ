@@ -1007,9 +1007,10 @@ class ResumeApp:
                     st.rerun()
                 
                 st.markdown("---")
+                
 
         # Generate Resume button
-        if st.button("Generate Resume 📄", type="primary"):
+        if st.columns([1,2,1])[1].button("📄 Generate Resume", type="primary", use_container_width=True):
             print("Validating form data...")
             print(f"Session state form data: {st.session_state.form_data}")
             print(
@@ -1069,9 +1070,7 @@ class ResumeApp:
                             # Offer the resume for download
                             st.success("✅ Resume generated successfully!")
 
-                            # Show snowflake effect
-                            st.snow()
-
+                      
                             st.download_button(
                                 label="Download Resume 📥",
                                 data=resume_buffer,
@@ -1079,7 +1078,6 @@ class ResumeApp:
     current_name.replace(
         ' ', '_')}_resume.docx",
                                 mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                                on_click=lambda: st.balloons()
                             )
                         except Exception as db_error:
                             print(
@@ -1089,8 +1087,6 @@ class ResumeApp:
                             st.warning(
                                 "⚠️ Resume generated but couldn't be saved to database")
                             
-                            # Show balloons effect
-                            st.balloons()
 
                             st.download_button(
                                 label="Download Resume 📥",
@@ -1099,7 +1095,6 @@ class ResumeApp:
     current_name.replace(
         ' ', '_')}_resume.docx",
                                 mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                                on_click=lambda: st.balloons()
                             )
                     else:
                         st.error(
@@ -1286,8 +1281,6 @@ class ResumeApp:
                             st.error(analysis['error'])
                             return
 
-                        # Show snowflake effect
-                        # st.snow()
 
                         # Save resume data to database
                         resume_data = {
@@ -2248,9 +2241,7 @@ class ResumeApp:
                                             "job_role": job_role
                                         }
                                     )
-                                # show snowflake effect
-                                # st.snow()
-
+                            
                                 # Complete the progress
                                 progress_bar.progress(100)
                                 
@@ -2619,7 +2610,6 @@ class ResumeApp:
                                             file_name=f"resume_analysis_{datetime.now().strftime('%Y%m%d_%H%M')}.pdf",
                                             mime="application/pdf",
                                             use_container_width=True,
-                                            on_click=lambda: st.balloons()
                                         )
                                     else:
                                         st.error("PDF generation failed. Please try again later.")
