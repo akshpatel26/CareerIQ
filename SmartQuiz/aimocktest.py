@@ -1014,7 +1014,7 @@ def results_phase():
                 st.session_state.quiz_state['phase'] = 'quiz'
             
             st.rerun()
-   
+            
 def add_timer_css():
     """Add custom CSS for timer styling"""
     st.markdown("""

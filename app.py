@@ -2713,7 +2713,7 @@ class ResumeApp:
         </div>
         """, unsafe_allow_html=True)
         
-   #     Enhanced responsive grid with hover effects - Main Features
+        # Enhanced responsive grid with hover effects - Main Features
         col1, col2, col3, col4 = st.columns(4, gap="medium")
         
         with col1:
@@ -2753,10 +2753,10 @@ class ResumeApp:
                     font-weight: 600;
                 ">AI-Powered Resume Builder</h3>
                 <div style="color: #6c757d; font-size: 0.9rem; line-height: 1.6; text-align: left;">
-                    <strong>✨ Themes that Shine</strong><br>
-                    <strong>🤖 Smart Content Suggestions</strong><br>
-                    <strong>🛡️ ATS-Optimized Formatting</strong><br>
-                    <strong>🧩 Customizable Sections</strong>
+                    <strong>🢥 Themes that Shine.</strong><br>
+                    <strong>🢥 Content Suggestions.</strong><br>
+                    <strong>🢥 ATS-Optimized Formatting.</strong><br>
+                    <strong>🢥 Customizable Sections.</strong>
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -2799,10 +2799,10 @@ class ResumeApp:
                     font-weight: 600;
                 ">Deep Resume Analysis</h3>
                 <div style="color: #6c757d; font-size: 0.9rem; line-height: 1.6; text-align: left;">
-                    <strong>🛡️ ATS Compatibility Score</strong><br>
-                    <strong>🔑 Keyword Gap Analysis</strong><br>
-                    <strong>🧩 Role-specific Feedback</strong><br>
-                    <strong>📊 Skills Gap Breakdown</strong><br><br>
+                    <strong>🢥 ATS Compatibility Score.</strong><br>
+                    <strong>🢥 Keyword Gap Analysis.</strong><br>
+                    <strong>🢥 Role-specific Feedback.</strong><br>
+                    <strong>🢥 Skills Gap Breakdown.</strong><br><br>
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -2839,14 +2839,14 @@ class ResumeApp:
                 ">💼</div>
                 <h3 style="
                     color: #2c3e50; 
-                    margin-bottom: 1rem;
+                    margin-bottom: 1.5rem;
                     font-size: 1.4rem;
                     font-weight: 600;
                 ">Job Application Portal</h3>
-                <div style="color: #6c757d; font-size: 0.9rem; line-height: 1.6; text-align: left;">
-                    <strong>🔍 Multi-Portal Search</strong><br>
-                    <strong>🤖 AI Match Score </strong><br>
-                    <strong>📊 Job Market Insights</strong>
+                <div style="color: #6c757d; font-size: 0.9rem; line-height: 1.6; text-align: left; margin-bottom:1.7rem">
+                    <strong>🢥 Multi-Portal Search.</strong><br>
+                    <strong>🢥 AI Match Score.</strong><br>
+                    <strong>🢥 Job Market Insights.</strong><br>
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -2888,10 +2888,10 @@ class ResumeApp:
                     font-weight: 600;
                 ">Smart Quiz Master</h3>
                 <div style="color: #6c757d; font-size: 0.9rem; line-height: 1.6; text-align: left;">
-                    <strong>🤖 AI-Generated Quizzes.</strong><br>
-                    <strong>⚡ Flexible Customization.</strong><br>
-                    <strong>🔄 Adaptive Practice.</strong><br>
-                    <strong>🎯 Wide Coverage.</strong><br><br>
+                    <strong>🢥 AI-Generated Quizzes.</strong><br>
+                    <strong>🢥 Flexible Customization.</strong><br>
+                    <strong>🢥 Adaptive Practice.</strong><br>
+                    <strong>🢥 Wide Coverage.</strong><br><br>
                 </div>
             </div>
             """, unsafe_allow_html=True)

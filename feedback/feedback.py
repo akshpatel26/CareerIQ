@@ -344,15 +344,16 @@ class FeedbackManager:
             10: "Outstanding"
         }
         
-        
         # Create radio button-style selection for each rating 1-10
+        # Use index parameter to set default to None (no selection)
         selected_rating = st.radio(
             label="Rating",
             options=list(range(1, 11)),
             format_func=lambda x: f"{x} - {rating_descriptions.get(x, '')}",
             key=f"{key}_radio",
             label_visibility="collapsed",
-            horizontal=False
+            horizontal=False,
+            index=None  # This ensures no default selection
         )
         
         # Update session state
@@ -378,7 +379,7 @@ class FeedbackManager:
         metrics = [
             {"label": "🗣️ Total Responses", "value": f"{stats['total_responses']:,}", "delta": "↗️", "color": "#4CAF50"},
             {"label": "⭐ Avg Rating", "value": f"{stats['avg_rating']:.1f}/10.0", "delta": "🌟", "color": "#FFD700"},
-            {"label": "🎯 Usability", "value": f"{stats['avg_usability']:.1f}/10.0", "delta": "🚀", "color": "#2196F3"},
+            {"label": "🎯 Usability", "value": f"{stats['avg_usability']:.1f}/10.0", "delta": "👍", "color": "#2196F3"},
             {"label": "😊 Satisfaction", "value": f"{stats['avg_satisfaction']:.1f}/10.0", "delta": "💖", "color": "#9C27B0"}
         ]
         
