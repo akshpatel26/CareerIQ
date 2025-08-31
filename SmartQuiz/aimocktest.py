@@ -703,16 +703,16 @@ def generating_phase():
     status_container = st.container()
     spinner_container = st.container()
 
-    
     with status_container:
         status_info = st.empty()
     
-    # Custom centered loading circle
+    # Custom centered loading circle with message
     with spinner_container:
         st.markdown(
             """
-            <div style="display:flex; justify-content:center; align-items:center; height:100px;">
+            <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:150px;">
                 <div class="loader"></div>
+                <p style="margin-top:15px; font-size:18px; color:#555;"> Please wait a few seconds while we generate your quiz...</p>
             </div>
             <style>
             .loader {
@@ -774,6 +774,7 @@ def generating_phase():
             if st.button("⬅️ Back to Setup", use_container_width=True):
                 st.session_state.quiz_state['phase'] = 'setup'
                 st.rerun()
+
 
 
 def quiz_phase():
