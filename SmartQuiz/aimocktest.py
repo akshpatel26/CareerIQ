@@ -669,7 +669,7 @@ def show_ai_quiz_settings():
     with col2:
         timer_duration = st.selectbox(
             "⏱️ Timer (seconds)",
-            options=[30,45,60],
+            options=[30,45,60,90],
             index=0,
             key="ai_timer"
         )
@@ -692,7 +692,7 @@ def show_ai_quiz_settings():
 
 def generating_phase():
     """Show loading screen during AI generation"""
-    st.markdown("# ⚙️ Generating Your AI Quiz")
+    st.markdown("## Generating Your AI Quiz")
     
     topic = st.session_state.quiz_state['ai_topic']
     difficulty = st.session_state.quiz_state['difficulty']
@@ -700,13 +700,9 @@ def generating_phase():
     
     st.info(f"📋 **Topic:** {topic} | 🎯 **Difficulty:** {difficulty.capitalize()} | 📊 **Questions:** {num_questions}")
     
-    # Progress + status containers
-    progress_container = st.container()
     status_container = st.container()
     spinner_container = st.container()
-    
-    with progress_container:
-        progress_bar = st.progress(0, text="Initializing AI generation...")
+
     
     with status_container:
         status_info = st.empty()
@@ -736,19 +732,20 @@ def generating_phase():
             unsafe_allow_html=True
         )
     
-    # Steps for fake progress
-    steps = [
-        (20, "🔗 Connecting to Gemini AI..."),
-        (40, "🧠 Analyzing topic requirements..."),
-        (60, "✨ Generating creative questions..."),
-        (80, "✅ Validating question quality..."),
-        (100, "🎯 Finalizing your quiz...")
-    ]
+    SHOW_FAKE_PROGRESS = False  # Set to True to show fake progress
     
-    for progress, message in steps:
-        progress_bar.progress(progress / 100, text=message)
-        status_info.info(message)
-        time.sleep(0.8)
+    if SHOW_FAKE_PROGRESS:
+        steps = [
+            (20, "🔗 Connecting to Gemini AI..."),
+            (40, "🧠 Analyzing topic requirements..."),
+            (60, "✨ Generating creative questions..."),
+            (80, "✅ Validating question quality..."),
+            (100, "🎯 Finalizing your quiz...")
+        ]
+        
+        for message in steps:
+            status_info.info(message)
+            time.sleep(0.8)
     
     # Actual AI call
     questions = generate_aptitude_mcqs_gemini(
@@ -763,12 +760,10 @@ def generating_phase():
         st.session_state.quiz_state['start_time'] = datetime.now()
         st.session_state.quiz_state['question_start_time'] = datetime.now()
         
-        progress_bar.progress(100, text="✅ Quiz generated successfully!")
         status_info.success("🎉 Your AI quiz is ready! Starting now...")
         time.sleep(1)
         st.rerun()
     else:
-        progress_bar.progress(100, text="❌ Generation failed")
         status_info.error("❌ Failed to generate questions. Please try again.")
         
         col1, col2, col3 = st.columns([1, 1, 1])
