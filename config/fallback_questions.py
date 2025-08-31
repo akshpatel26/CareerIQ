@@ -1230,7 +1230,7 @@ def create_fallback_questions(num_questions, topic, difficulty):
     },
     {
   "question": "The average of 4 numbers is 25. If one number is removed, the new average becomes 20. The removed number is:",
-  "options": ["35", "40", "45", "50", "30"],
+  "options": ["35", "40", "45", "50"],
   "correct": 1,
   "explanation": "Total sum = 4*25 = 100. Sum of remaining 3 numbers = 3*20 = 60. Removed number = 100 - 60 = 40."
 },
