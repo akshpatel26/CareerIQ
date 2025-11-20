@@ -860,12 +860,7 @@ def create_fallback_questions(num_questions, topic, difficulty):
         "correct": 0,
         "explanation": "Boys:Girls = 3:2. If boys = 15, then 3 parts = 15, so 1 part = 5. Girls = 2×5 = 10. Total = 15+10 = 25."
     },
-    {
-        "question": "A dice shows 3 on top and 5 on the front face. If the dice is rolled to the right, what number will be on top?",
-        "options": ["1", "2", "4", "6"],
-        "correct": 1,
-        "explanation": "When dice is rolled right, the right face comes to top. In standard dice, if 3 is on top and 5 is front, then 2 is on the right face."
-    },
+
     {
         "question": "An article is sold at 20% profit. If the selling price is ₹600, what is the cost price?",
         "options": ["₹500", "₹480", "₹450", "₹520"],
@@ -1182,40 +1177,10 @@ def create_fallback_questions(num_questions, topic, difficulty):
         "explanation": "Let the number be x. 40% of x = 160, so x = 160/0.4 = 400. Therefore, 75% of 400 = 300."
     },
     {
-        "question": "In an artificial language, 'tim sod nap' means 'blue chair large', 'sod kul tim' means 'chair red blue', and 'nap kul' means 'red large'. What does 'kul' mean?",
-        "options": ["blue", "red", "chair", "large"],
-        "correct": 1,
-        "explanation": "From 'sod kul tim' = 'chair red blue' and 'nap kul' = 'red large', 'kul' is common and means 'red'."
-    },
-    {
-        "question": "Choose the word that is most similar in meaning to 'ABUNDANT':",
-        "options": ["Scarce", "Plentiful", "Limited", "Rare"],
-        "correct": 1,
-        "explanation": "Abundant means existing in large quantities; plentiful. The other options are antonyms or opposite in meaning."
-    },
-    {
-        "question": "Which SQL constraint ensures that all values in a column are different?",
-        "options": ["PRIMARY KEY", "UNIQUE", "NOT NULL", "CHECK"],
-        "correct": 1,
-        "explanation": "The UNIQUE constraint ensures that all values in a column are distinct. PRIMARY KEY also ensures uniqueness but additionally prevents NULL values."
-    },
-    {
         "question": "Complete the number series: 5, 8, 14, 26, 50, ?",
         "options": ["98", "94", "102", "86"],
         "correct": 0,
         "explanation": "Pattern: 5×2-2=8, 8×2-2=14, 14×2-2=26, 26×2-2=50, 50×2-2=98."
-    },
-    {
-        "question": "What is the time complexity of binary search on a sorted array?",
-        "options": ["O(n)", "O(log n)", "O(n log n)", "O(1)"],
-        "correct": 1,
-        "explanation": "Binary search repeatedly divides the search space in half, eliminating half of the remaining elements in each step. This results in O(log n) time complexity."
-    },
-    {
-        "question": "Find the synonym of 'METICULOUS':",
-        "options": ["Careless", "Careful", "Hasty", "Rough"],
-        "correct": 1,
-        "explanation": "Meticulous means showing great attention to detail; very careful and precise. Careful is the closest synonym."
     },
     {
         "question": "What will this Java code output?\n```java\nint a = 10;\nint b = ++a + a++;\nSystem.out.println(b);\n```",
@@ -1224,836 +1189,269 @@ def create_fallback_questions(num_questions, topic, difficulty):
         "explanation": "++a increments a to 11 and returns 11. Then a++ returns 11 but increments a to 12. So b = 11 + 11 = 22."
     },
     {
-        "question": "A train 200m long crosses a platform of 300m in 25 seconds. What is the speed of the train?",
-        "options": ["72 km/hr", "60 km/hr", "54 km/hr", "45 km/hr"],
-        "correct": 0,
-        "explanation": "Total distance = 200 + 300 = 500m. Speed = 500/25 = 20 m/s = 20×3.6 = 72 km/hr."
-    },
-    {
-        "question": "A is B's brother. C is A's father. D is C's mother. What is the relationship between B and D?",
-        "options": ["Grandmother-Grandson", "Mother-Son", "Aunt-Nephew", "Grandmother-Granddaughter"],
-        "correct": 0,
-        "explanation": "C is A's father, D is C's mother (so D is A's grandmother). Since A is B's brother, D is also B's grandmother. The relationship is Grandmother-Grandson."
-    },
-    {
-        "question": "Which word does NOT belong in the group: Book, Magazine, Newspaper, Television?",
-        "options": ["Book", "Magazine", "Newspaper", "Television"],
-        "correct": 3,
-        "explanation": "Book, Magazine, and Newspaper are all printed media, while Television is electronic media."
-    },
-    {
-        "question": "What will this C++ code output?\n```cpp\nint x = 10;\nint* p = &x;\n*p = 20;\ncout << x;\n```",
-        "options": ["10", "20", "Address of x", "Compilation error"],
-        "correct": 1,
-        "explanation": "p is a pointer to x. *p = 20 changes the value at the memory location pointed by p, which is x. So x becomes 20."
-    },
-    {
-        "question": "Which data structure is best suited for implementing BFS (Breadth-First Search)?",
-        "options": ["Stack", "Queue", "Array", "Linked List"],
-        "correct": 1,
-        "explanation": "BFS explores nodes level by level, requiring FIFO (First In First Out) behavior, which is provided by Queue data structure."
-    },
-    {
-        "question": "The average of 5 numbers is 30. If one number is excluded, the average becomes 25. What is the excluded number?",
-        "options": ["50", "45", "40", "55"],
-        "correct": 0,
-        "explanation": "Sum of 5 numbers = 5×30 = 150. Sum of 4 numbers = 4×25 = 100. Excluded number = 150-100 = 50."
-    },
-    {
-        "question": "Choose the correctly spelled word:",
-        "options": ["Accomodate", "Accommodate", "Acomodate", "Acommodate"],
-        "correct": 1,
-        "explanation": "The correct spelling is 'Accommodate' with double 'c' and double 'm'."
-    },
-    {
-        "question": "What will this Python code output?\n```python\ndef func(x=[]):\n    x.append(1)\n    return x\n\nprint(func())\nprint(func())\n```",
-        "options": ["[1] [1]", "[1] [1, 1]", "Error", "[] [1]"],
-        "correct": 1,
-        "explanation": "This demonstrates the mutable default argument trap. The same list object is reused across function calls, so each call appends to the same list."
-    },
-    {
-        "question": "In which direction is the hour hand of a clock moving at 3:15?",
-        "options": ["Towards 4", "Towards 3", "Towards 2", "Not moving"],
-        "correct": 0,
-        "explanation": "At 3:15, the hour hand is 1/4 of the way between 3 and 4, moving towards 4 as time progresses."
-    },
-    {
-        "question": "Which SQL command is used to remove duplicates from query results?",
-        "options": ["UNIQUE", "DISTINCT", "DIFFERENT", "SINGLE"],
-        "correct": 1,
-        "explanation": "The DISTINCT keyword is used in SELECT statements to return only unique rows, eliminating duplicates from the result set."
-    },
-    {
-        "question": "Complete the analogy: BOOK : PAGES :: COMPUTER : ?",
-        "options": ["Keyboard", "Screen", "Programs", "Mouse"],
-        "correct": 2,
-        "explanation": "A book contains pages as its fundamental components. Similarly, a computer contains programs as its fundamental functional components."
-    },
-    {
-        "question": "What will this JavaScript code output?\n```javascript\nlet x = \"5\" + 3;\nconsole.log(x);\n```",
-        "options": ["8", "\"8\"", "53", "\"53\""],
-        "correct": 3,
-        "explanation": "JavaScript performs string concatenation when the + operator is used with a string and a number. The number 3 is converted to string \"3\" and concatenated."
-    },
-    {
-        "question": "What is the compound interest on ₹5000 for 2 years at 10% per annum?",
-        "options": ["₹1050", "₹1000", "₹1100", "₹950"],
-        "correct": 0,
-        "explanation": "Amount = 5000(1.1)² = 5000×1.21 = ₹6050. CI = 6050 - 5000 = ₹1050."
-    },
-    {
-        "question": "Six people sit around a circular table. If A sits opposite to D, and B is second to the right of A, where does C sit relative to D?",
-        "options": ["Opposite to D", "Adjacent to D", "Second to left of D", "Cannot be determined"],
-        "correct": 3,
-        "explanation": "Given constraints don't provide enough information to determine C's exact position relative to D. More information is needed."
-    },
-    {
-        "question": "What is the space complexity of merge sort?",
-        "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
-        "correct": 2,
-        "explanation": "Merge sort requires O(n) additional space to store the temporary arrays used during the merging process."
-    },
-    {
-        "question": "Identify the part of speech of the underlined word: 'She runs *fast* every morning.'",
-        "options": ["Noun", "Verb", "Adjective", "Adverb"],
-        "correct": 3,
-        "explanation": "'Fast' modifies the verb 'runs', describing how she runs. Words that modify verbs are adverbs."
-    },
-    {
-        "question": "What will this C code output?\n```c\nchar str[] = \"Hello\";\nprintf(\"%d\", sizeof(str));\n```",
-        "options": ["5", "6", "4", "8"],
-        "correct": 1,
-        "explanation": "The string \"Hello\" has 5 characters, but the array includes the null terminator '\\0', making the total size 6 bytes."
-    },
-    {
-        "question": "A can do a work in 15 days, B can do it in 20 days. Working together, in how many days can they complete the work?",
-        "options": ["8.57 days", "7.5 days", "9 days", "10 days"],
-        "correct": 0,
-        "explanation": "A's rate = 1/15, B's rate = 1/20. Combined rate = 1/15 + 1/20 = 7/60. Time = 60/7 = 8.57 days."
-    },
-    {
-        "question": "Complete the letter series: ACE, FHJ, KMO, ?",
-        "options": ["PRT", "QSU", "PRS", "QRT"],
-        "correct": 0,
-        "explanation": "Each group has consecutive alternate letters. A(+2)C(+2)E, F(+2)H(+2)J, K(+2)M(+2)O. Next: P(+2)R(+2)T = PRT."
-    },
-    {
-        "question": "In Java, which keyword is used to prevent method overriding?",
-        "options": ["static", "final", "abstract", "private"],
-        "correct": 1,
-        "explanation": "The 'final' keyword prevents method overriding in subclasses. A final method cannot be overridden by any subclass."
-    },
-    {
-        "question": "Which operation is NOT efficient in a standard array?",
-        "options": ["Random access", "Insertion at beginning", "Finding length", "Accessing last element"],
-        "correct": 1,
-        "explanation": "Insertion at the beginning requires shifting all existing elements to the right, making it O(n) operation. Random access is O(1)."
-    },
-    {
-        "question": "Choose the antonym of 'OPTIMISTIC':",
-        "options": ["Hopeful", "Pessimistic", "Confident", "Positive"],
-        "correct": 1,
-        "explanation": "Optimistic means having a positive outlook. Pessimistic means having a negative outlook, making it the direct antonym."
-    },
-    {
-        "question": "What will this C++ code output?\n```cpp\nint arr[] = {1, 2, 3, 4};\nint *p = arr + 2;\ncout << *p;\n```",
-        "options": ["1", "2", "3", "4"],
-        "correct": 2,
-        "explanation": "arr + 2 points to the third element (index 2) of the array. *p dereferences this pointer, giving the value 3."
-    },
-    {
-        "question": "The ratio of boys to girls in a class is 3:2. If there are 15 boys, how many total students are there?",
-        "options": ["25", "30", "35", "20"],
-        "correct": 0,
-        "explanation": "Boys:Girls = 3:2. If boys = 15, then 3 parts = 15, so 1 part = 5. Girls = 2×5 = 10. Total = 15+10 = 25."
-    },
-    {
-        "question": "Five friends P, Q, R, S, T sit in a line. P is not at any end. Q is second from left. R is to the immediate right of S. Who could be at the right end?",
-        "options": ["T only", "R only", "T or R", "Cannot be determined"],
-        "correct": 2,
-        "explanation": "Given Q is 2nd from left and R is right of S, with P not at ends, possible arrangements allow either T or R at the right end."
-    },
-    {
-        "question": "In queue data structure, which operation removes an element?",
-        "options": ["pop", "dequeue", "delete", "remove"],
-        "correct": 1,
-        "explanation": "In queue terminology, 'dequeue' removes an element from the front of the queue, while 'enqueue' adds an element to the rear."
-    },
-    {
-        "question": "What will this JavaScript code output?\n```javascript\nfunction test() {\n    console.log(a);\n    var a = 5;\n}\ntest();\n```",
-        "options": ["5", "undefined", "ReferenceError", "null"],
-        "correct": 1,
-        "explanation": "Due to hoisting, the variable declaration is moved to the top, but the assignment stays in place. So 'a' is declared but undefined when console.log executes."
-    },
-    {
-        "question": "Complete the sentence: 'Neither John nor his friends _____ coming to the party.'",
-        "options": ["is", "are", "was", "were"],
-        "correct": 1,
-        "explanation": "With 'neither...nor', the verb agrees with the subject closest to it. 'Friends' is plural, so 'are' is correct."
-    },
-    {
-        "question": "What is the primary key constraint in SQL?",
-        "options": ["Allows duplicates", "Can be NULL", "Uniquely identifies each row", "Only for numeric columns"],
-        "correct": 2,
-        "explanation": "A primary key uniquely identifies each row in a table. It cannot contain NULL values and must be unique across all rows."
-    },
-    {
-        "question": "At 4:20, what is the angle between the hour and minute hands?",
-        "options": ["10°", "20°", "30°", "40°"],
-        "correct": 0,
-        "explanation": "At 4:20, minute hand is at 120°. Hour hand is at 4×30 + 20×0.5 = 130°. Angle = |130-120| = 10°."
-    },
-    {
-        "question": "What will this Python code output?\n```python\nprint(2 ** 3 ** 2)\n```",
-        "options": ["64", "512", "256", "128"],
-        "correct": 1,
-        "explanation": "Exponentiation is right-associative in Python. 2 ** 3 ** 2 = 2 ** (3 ** 2) = 2 ** 9 = 512."
-    },
-    {
-        "question": "Which sorting algorithm is stable and has O(n log n) time complexity in all cases?",
-        "options": ["QuickSort", "HeapSort", "MergeSort", "Selection Sort"],
-        "correct": 2,
-        "explanation": "MergeSort is stable (maintains relative order of equal elements) and has guaranteed O(n log n) time complexity in all cases."
-    },
-    {
-        "question": "Choose the word that best completes the analogy: DOCTOR : STETHOSCOPE :: CARPENTER : ?",
-        "options": ["Nail", "Wood", "Hammer", "House"],
-        "correct": 2,
-        "explanation": "A doctor uses a stethoscope as a primary tool. Similarly, a carpenter uses a hammer as a primary tool."
-    },
-    {
-        "question": "If CODING is written as 3-15-4-9-14-7, how is LOGIC written?",
-        "options": ["12-15-7-9-3", "11-14-6-8-2", "12-15-8-9-3", "11-15-7-9-4"],
-        "correct": 0,
-        "explanation": "Each letter is replaced by its position in alphabet: L=12, O=15, G=7, I=9, C=3."
-    },
-    {
-        "question": "What will this C code output?\n```c\nint a = 5, b = 2;\nprintf(\"%.2f\", (float)a/b);\n```",
-        "options": ["2.50", "2.00", "2", "2.5"],
-        "correct": 0,
-        "explanation": "The cast (float)a converts integer division to floating-point division. The result 2.5 is formatted to 2 decimal places as 2.50."
-    },
-    {
-        "question": "A sum doubles in 8 years at simple interest. In how many years will it become triple?",
-        "options": ["16 years", "12 years", "20 years", "24 years"],
-        "correct": 0,
-        "explanation": "If principal P becomes 2P in 8 years, SI = P in 8 years. Rate = 12.5%. For amount to become 3P, SI needed = 2P. Time = 16 years."
-    },
-    {
-        "question": "In OOP, what does encapsulation primarily achieve?",
-        "options": ["Code reusability", "Data hiding and bundling", "Multiple inheritance", "Dynamic binding"],
-        "correct": 1,
-        "explanation": "Encapsulation bundles data and methods that operate on that data within a single unit (class) and hides the internal implementation details."
-    },
-    {
-        "question": "Find the error in the sentence: 'Each of the students have submitted their assignments.'",
-        "options": ["'Each' should be 'All'", "'have' should be 'has'", "'their' should be 'his'", "No error"],
-        "correct": 1,
-        "explanation": "'Each' is singular, so it should take the singular verb 'has' instead of the plural verb 'have'."
-    },
-    {
-        "question": "What is the time complexity of accessing an element in a hash table (average case)?",
-        "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
-        "correct": 0,
-        "explanation": "Hash tables provide O(1) average case access time through direct indexing using hash functions. Worst case can be O(n) due to collisions."
-    },
-    {
-        "question": "A boat travels 24 km downstream in 3 hours and 16 km upstream in 4 hours. What is the speed of the current?",
-        "options": ["1 km/hr", "2 km/hr", "1.5 km/hr", "2.5 km/hr"],
-        "correct": 1,
-        "explanation": "Downstream speed = 8 km/hr, Upstream speed = 4 km/hr. Current speed = (8-4)/2 = 2 km/hr."
-    },
-    {
-        "question": "What will this Java code output?\n```java\nString s1 = new String(\"Hello\");\nString s2 = new String(\"Hello\");\nSystem.out.println(s1 == s2);\n```",
-        "options": ["true", "false", "Compilation error", "Runtime error"],
-        "correct": 1,
-        "explanation": "Both strings are created with 'new', so they are different objects in memory. == compares references, not content, so it returns false."
-    },
-    {
-        "question": "Starting from home, Ravi walks 20m south, then 30m east, then 20m north. In which direction is he from his starting point?",
-        "options": ["30m East", "20m East", "10m East", "At starting point"],
-        "correct": 0,
-        "explanation": "Net displacement: North-South = 0, East-West = 30m east. He is 30m east of starting point."
-    },
-    {
-        "question": "Which SQL function returns the number of rows in a table?",
-        "options": ["SUM()", "COUNT(*)", "LENGTH()", "SIZE()"],
-        "correct": 1,
-        "explanation": "COUNT(*) returns the total number of rows in a table, including rows with NULL values."
-    },
-    {
-        "question": "Choose the correct passive voice: 'The teacher explained the lesson.'",
-        "options": ["The lesson was explained by the teacher", "The lesson is explained by the teacher", "The lesson explained by the teacher", "The lesson has explained by the teacher"],
-        "correct": 0,
-        "explanation": "The correct passive voice uses 'was explained' (past tense) to match the original past tense 'explained'."
-    },
-    {
-        "question": "What will this Python code output?\n```python\nx = [1, 2, 3]\nprint(x[::2])\n```",
-        "options": ["[1, 2]", "[2, 3]", "[1, 3]", "[3, 1]"],
-        "correct": 2,
-        "explanation": "The slice [::2] starts from the beginning, goes to the end, with step size 2. It selects elements at indices 0 and 2."
-    },
-    {
-        "question": "If 3^x = 27, what is the value of 9^x?",
-        "options": ["729", "243", "81", "27"],
-        "correct": 0,
-        "explanation": "3^x = 27 = 3³, so x = 3. Therefore, 9^x = 9³ = (3²)³ = 3⁶ = 729."
-    },
-    {
-        "question": "In C++, what is the difference between 'delete' and 'delete[]'?",
-        "options": ["No difference", "delete[] is for arrays, delete is for single objects", "delete[] is faster", "delete[] is deprecated"],
-        "correct": 1,
-        "explanation": "delete is used to deallocate memory for a single object, while delete[] is used for arrays. Using the wrong one can lead to undefined behavior."
-    },
-    {
-        "question": "Find the odd one out: Mercury, Venus, Earth, Jupiter, Saturn",
-        "options": ["Mercury", "Venus", "Earth", "Jupiter"],
-        "correct": 2,
-        "explanation": "Earth is the only planet known to support life, making it different from the others."
-    },
-    {
-        "question": "What is the units digit of 3^47?",
-        "options": ["3", "9", "7", "1"],
-        "correct": 2,
-        "explanation": "Units digits of powers of 3 cycle: 3¹=3, 3²=9, 3³=7, 3⁴=1, then repeats. 47÷4 = 11 remainder 3. So units digit is 7."
-    },
-    {
-        "question": "Which SQL clause is used to filter groups in aggregate queries?",
-        "options": ["WHERE", "HAVING", "GROUP BY", "ORDER BY"],
-        "correct": 1,
-        "explanation": "HAVING is used to filter groups created by GROUP BY clause, typically with aggregate functions. WHERE filters individual rows before grouping."
-    },
-    {
-        "question": "Complete the sentence with the correct preposition: 'She is good _____ mathematics.'",
-        "options": ["in", "at", "on", "with"],
-        "correct": 1,
-        "explanation": "'Good at' is the correct prepositional phrase when referring to skill or ability in a subject."
-    },
-    {
-        "question": "What will this C code output?\n```c\nint x = 10;\nint y = x++ + ++x;\nprintf(\"%d\", y);\n```",
-        "options": ["21", "22", "23", "20"],
-        "correct": 1,
-        "explanation": "x++ returns 10, then increments x to 11. ++x increments x to 12 and returns 12. So y = 10 + 12 = 22."
-    },
-    {
-        "question": "A mixture contains milk and water in ratio 5:3. If 16 liters of water is added, the ratio becomes 5:7. What was the original quantity of milk?",
-        "options": ["40 liters", "50 liters", "30 liters", "20 liters"],
-        "correct": 0,
-        "explanation": "Let original quantities be 5x and 3x. After adding: 5x:(3x+16) = 5:7. Cross multiply: 35x = 15x+80. 20x = 80. x = 4. Milk = 20x = 40L."
-    },
-    {
-        "question": "In Python, what does the 'self' parameter represent?",
-        "options": ["The class itself", "The current instance of the class", "A static variable", "The parent class"],
-        "correct": 1,
-        "explanation": "'self' refers to the current instance of the class. It's used to access instance variables and methods within the class."
-    },
-    {
-        "question": "What does polymorphism mean in OOP?",
-        "options": ["Having multiple constructors", "Using multiple inheritance", "Same interface, different implementations", "Creating multiple objects"],
-        "correct": 2,
-        "explanation": "Polymorphism allows objects of different classes to be treated as objects of a common base class, with the same interface but different implementations."
-    },
-    {
-        "question": "Choose the correct sentence:",
-        "options": ["I have less friends than you", "I have fewer friends than you", "I have lesser friends than you", "I have few friends than you"],
-        "correct": 1,
-        "explanation": "'Fewer' is used with countable nouns like 'friends'. 'Less' is used with uncountable nouns."
-    },
-    {
-        "question": "What will this JavaScript code output?\n```javascript\nlet arr = [1, 2, 3];\narr.length = 2;\nconsole.log(arr);\n```",
-        "options": ["[1, 2, 3]", "[1, 2]", "[3]", "Error"],
-        "correct": 1,
-        "explanation": "Setting the length property truncates the array. Setting length to 2 keeps only the first 2 elements."
-    },
-    {
-        "question": "If today is Wednesday, what day was it 50 days ago?",
-        "options": ["Monday", "Tuesday", "Wednesday", "Thursday"],
-        "correct": 0,
-        "explanation": "50÷7 = 7 remainder 1. Going back 50 days = going back 1 day from Wednesday = Tuesday. Actually, going back 1 day in the weekly cycle from Wednesday gives us Monday (considering the direction)."
-    },
-    {
-        "question": "What is the worst-case time complexity of QuickSort?",
-        "options": ["O(n)", "O(n log n)", "O(n²)", "O(log n)"],
-        "correct": 2,
-        "explanation": "QuickSort's worst case occurs when the pivot is always the smallest or largest element, resulting in O(n²) time complexity."
-    },
-    {
-        "question": "In memory management, what is a memory leak?",
-        "options": ["Accessing freed memory", "Forgetting to allocate memory", "Allocated memory not being freed", "Stack overflow"],
-        "correct": 2,
-        "explanation": "A memory leak occurs when dynamically allocated memory is not freed/released back to the system, causing increasing memory consumption."
-    },
-    {
-        "question": "What will be the output of the following Python code?\n```python\nx = [1, 2, 3]\ny = x\ny.append(4)\nprint(x)\n```",
-        "options": ["[1, 2, 3]", "[1, 2, 3, 4]", "Error", "[4]"],
-        "correct": 1,
-        "explanation": "In Python, lists are mutable objects. When y = x, both variables reference the same list object in memory. Modifying y also modifies x since they point to the same object."
-    },
-    {
-        "question": "If 40% of a number is 160, what is 75% of the same number?",
-        "options": ["300", "250", "350", "400"],
-        "correct": 0,
-        "explanation": "Let the number be x. 40% of x = 160, so x = 160/0.4 = 400. Therefore, 75% of 400 = 300."
-    },
-    {
-        "question": "In an artificial language, 'tim sod nap' means 'blue chair large', 'sod kul tim' means 'chair red blue', and 'nap kul' means 'red large'. What does 'kul' mean?",
-        "options": ["blue", "red", "chair", "large"],
-        "correct": 1,
-        "explanation": "From 'sod kul tim' = 'chair red blue' and 'nap kul' = 'red large', 'kul' is common and means 'red'."
-    },
-    {
-        "question": "Choose the word that is most similar in meaning to 'ABUNDANT':",
-        "options": ["Scarce", "Plentiful", "Limited", "Rare"],
-        "correct": 1,
-        "explanation": "Abundant means existing in large quantities; plentiful. The other options are antonyms or opposite in meaning."
-    },
-    {
-        "question": "Which SQL constraint ensures that all values in a column are different?",
-        "options": ["PRIMARY KEY", "UNIQUE", "NOT NULL", "CHECK"],
-        "correct": 1,
-        "explanation": "The UNIQUE constraint ensures that all values in a column are distinct. PRIMARY KEY also ensures uniqueness but additionally prevents NULL values."
-    },
-    {
-        "question": "Complete the number series: 5, 8, 14, 26, 50, ?",
-        "options": ["98", "94", "102", "86"],
-        "correct": 0,
-        "explanation": "Pattern: 5×2-2=8, 8×2-2=14, 14×2-2=26, 26×2-2=50, 50×2-2=98."
-    },
-    {
-        "question": "What is the time complexity of binary search on a sorted array?",
-        "options": ["O(n)", "O(log n)", "O(n log n)", "O(1)"],
-        "correct": 1,
-        "explanation": "Binary search repeatedly divides the search space in half, eliminating half of the remaining elements in each step. This results in O(log n) time complexity."
-    },
-    {
-        "question": "Find the synonym of 'METICULOUS':",
-        "options": ["Careless", "Careful", "Hasty", "Rough"],
-        "correct": 1,
-        "explanation": "Meticulous means showing great attention to detail; very careful and precise. Careful is the closest synonym."
-    },
-    {
-        "question": "What will this Java code output?\n```java\nint a = 10;\nint b = ++a + a++;\nSystem.out.println(b);\n```",
-        "options": ["21", "22", "20", "23"],
-        "correct": 1,
-        "explanation": "++a increments a to 11 and returns 11. Then a++ returns 11 but increments a to 12. So b = 11 + 11 = 22."
-    },
-    {
-        "question": "A train 200m long crosses a platform of 300m in 25 seconds. What is the speed of the train?",
-        "options": ["72 km/hr", "60 km/hr", "54 km/hr", "45 km/hr"],
-        "correct": 0,
-        "explanation": "Total distance = 200 + 300 = 500m. Speed = 500/25 = 20 m/s = 20×3.6 = 72 km/hr."
-    },
-    {
-        "question": "A is B's brother. C is A's father. D is C's mother. What is the relationship between B and D?",
-        "options": ["Grandmother-Grandson", "Mother-Son", "Aunt-Nephew", "Grandmother-Granddaughter"],
-        "correct": 0,
-        "explanation": "C is A's father, D is C's mother (so D is A's grandmother). Since A is B's brother, D is also B's grandmother. The relationship is Grandmother-Grandson."
-    },
-    {
-        "question": "Which word does NOT belong in the group: Book, Magazine, Newspaper, Television?",
-        "options": ["Book", "Magazine", "Newspaper", "Television"],
-        "correct": 3,
-        "explanation": "Book, Magazine, and Newspaper are all printed media, while Television is electronic media."
-    },
-    {
-        "question": "What will this C++ code output?\n```cpp\nint x = 10;\nint* p = &x;\n*p = 20;\ncout << x;\n```",
-        "options": ["10", "20", "Address of x", "Compilation error"],
-        "correct": 1,
-        "explanation": "p is a pointer to x. *p = 20 changes the value at the memory location pointed by p, which is x. So x becomes 20."
-    },
-    {
-        "question": "Which data structure is best suited for implementing BFS (Breadth-First Search)?",
-        "options": ["Stack", "Queue", "Array", "Linked List"],
-        "correct": 1,
-        "explanation": "BFS explores nodes level by level, requiring FIFO (First In First Out) behavior, which is provided by Queue data structure."
-    },
-    {
-        "question": "The average of 5 numbers is 30. If one number is excluded, the average becomes 25. What is the excluded number?",
-        "options": ["50", "45", "40", "55"],
-        "correct": 0,
-        "explanation": "Sum of 5 numbers = 5×30 = 150. Sum of 4 numbers = 4×25 = 100. Excluded number = 150-100 = 50."
-    },
-    {
-        "question": "Choose the correctly spelled word:",
-        "options": ["Accomodate", "Accommodate", "Acomodate", "Acommodate"],
-        "correct": 1,
-        "explanation": "The correct spelling is 'Accommodate' with double 'c' and double 'm'."
-    },
-    {
-        "question": "What will this Python code output?\n```python\ndef func(x=[]):\n    x.append(1)\n    return x\n\nprint(func())\nprint(func())\n```",
-        "options": ["[1] [1]", "[1] [1, 1]", "Error", "[] [1]"],
-        "correct": 1,
-        "explanation": "This demonstrates the mutable default argument trap. The same list object is reused across function calls, so each call appends to the same list."
-    },
-    {
-        "question": "In which direction is the hour hand of a clock moving at 3:15?",
-        "options": ["Towards 4", "Towards 3", "Towards 2", "Not moving"],
-        "correct": 0,
-        "explanation": "At 3:15, the hour hand is 1/4 of the way between 3 and 4, moving towards 4 as time progresses."
-    },
-    {
-        "question": "Which SQL command is used to remove duplicates from query results?",
-        "options": ["UNIQUE", "DISTINCT", "DIFFERENT", "SINGLE"],
-        "correct": 1,
-        "explanation": "The DISTINCT keyword is used in SELECT statements to return only unique rows, eliminating duplicates from the result set."
-    },
-    {
-        "question": "Complete the analogy: BOOK : PAGES :: COMPUTER : ?",
-        "options": ["Keyboard", "Screen", "Programs", "Mouse"],
-        "correct": 2,
-        "explanation": "A book contains pages as its fundamental components. Similarly, a computer contains programs as its fundamental functional components."
-    },
-    {
-        "question": "What will this JavaScript code output?\n```javascript\nlet x = \"5\" + 3;\nconsole.log(x);\n```",
-        "options": ["8", "\"8\"", "53", "\"53\""],
-        "correct": 3,
-        "explanation": "JavaScript performs string concatenation when the + operator is used with a string and a number. The number 3 is converted to string \"3\" and concatenated."
-    },
-    {
-        "question": "What is the compound interest on ₹5000 for 2 years at 10% per annum?",
-        "options": ["₹1050", "₹1000", "₹1100", "₹950"],
-        "correct": 0,
-        "explanation": "Amount = 5000(1.1)² = 5000×1.21 = ₹6050. CI = 6050 - 5000 = ₹1050."
-    },
-    {
-        "question": "Six people sit around a circular table. If A sits opposite to D, and B is second to the right of A, where does C sit relative to D?",
-        "options": ["Opposite to D", "Adjacent to D", "Second to left of D", "Cannot be determined"],
-        "correct": 3,
-        "explanation": "Given constraints don't provide enough information to determine C's exact position relative to D. More information is needed."
-    },
-    {
-        "question": "What is the space complexity of merge sort?",
-        "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
-        "correct": 2,
-        "explanation": "Merge sort requires O(n) additional space to store the temporary arrays used during the merging process."
-    },
-    {
-        "question": "Identify the part of speech of the underlined word: 'She runs *fast* every morning.'",
-        "options": ["Noun", "Verb", "Adjective", "Adverb"],
-        "correct": 3,
-        "explanation": "'Fast' modifies the verb 'runs', describing how she runs. Words that modify verbs are adverbs."
-    },
-    {
-        "question": "What will this C code output?\n```c\nchar str[] = \"Hello\";\nprintf(\"%d\", sizeof(str));\n```",
-        "options": ["5", "6", "4", "8"],
-        "correct": 1,
-        "explanation": "The string \"Hello\" has 5 characters, but the array includes the null terminator '\\0', making the total size 6 bytes."
-    },
-    {
-        "question": "A can do a work in 15 days, B can do it in 20 days. Working together, in how many days can they complete the work?",
-        "options": ["8.57 days", "7.5 days", "9 days", "10 days"],
-        "correct": 0,
-        "explanation": "A's rate = 1/15, B's rate = 1/20. Combined rate = 1/15 + 1/20 = 7/60. Time = 60/7 = 8.57 days."
-    },
-    {
-        "question": "Complete the letter series: ACE, FHJ, KMO, ?",
-        "options": ["PRT", "QSU", "PRS", "QRT"],
-        "correct": 0,
-        "explanation": "Each group has consecutive alternate letters. A(+2)C(+2)E, F(+2)H(+2)J, K(+2)M(+2)O. Next: P(+2)R(+2)T = PRT."
-    },
-    {
-        "question": "In Java, which keyword is used to prevent method overriding?",
-        "options": ["static", "final", "abstract", "private"],
-        "correct": 1,
-        "explanation": "The 'final' keyword prevents method overriding in subclasses. A final method cannot be overridden by any subclass."
-    },
-    {
-        "question": "Which operation is NOT efficient in a standard array?",
-        "options": ["Random access", "Insertion at beginning", "Finding length", "Accessing last element"],
-        "correct": 1,
-        "explanation": "Insertion at the beginning requires shifting all existing elements to the right, making it O(n) operation. Random access is O(1)."
-    },
-    {
-        "question": "Choose the antonym of 'OPTIMISTIC':",
-        "options": ["Hopeful", "Pessimistic", "Confident", "Positive"],
-        "correct": 1,
-        "explanation": "Optimistic means having a positive outlook. Pessimistic means having a negative outlook, making it the direct antonym."
-    },
-    {
-        "question": "What will this C++ code output?\n```cpp\nint arr[] = {1, 2, 3, 4};\nint *p = arr + 2;\ncout << *p;\n```",
-        "options": ["1", "2", "3", "4"],
-        "correct": 2,
-        "explanation": "arr + 2 points to the third element (index 2) of the array. *p dereferences this pointer, giving the value 3."
-    },
-    {
-        "question": "The ratio of boys to girls in a class is 3:2. If there are 15 boys, how many total students are there?",
-        "options": ["25", "30", "35", "20"],
-        "correct": 0,
-        "explanation": "Boys:Girls = 3:2. If boys = 15, then 3 parts = 15, so 1 part = 5. Girls = 2×5 = 10. Total = 15+10 = 25."
-    },
-    {
-        "question": "Five friends P, Q, R, S, T sit in a line. P is not at any end. Q is second from left. R is to the immediate right of S. Who could be at the right end?",
-        "options": ["T only", "R only", "T or R", "Cannot be determined"],
-        "correct": 2,
-        "explanation": "Given Q is 2nd from left and R is right of S, with P not at ends, possible arrangements allow either T or R at the right end."
-    },
-    {
-        "question": "In queue data structure, which operation removes an element?",
-        "options": ["pop", "dequeue", "delete", "remove"],
-        "correct": 1,
-        "explanation": "In queue terminology, 'dequeue' removes an element from the front of the queue, while 'enqueue' adds an element to the rear."
-    },
-    {
-        "question": "What will this JavaScript code output?\n```javascript\nfunction test() {\n    console.log(a);\n    var a = 5;\n}\ntest();\n```",
-        "options": ["5", "undefined", "ReferenceError", "null"],
-        "correct": 1,
-        "explanation": "Due to hoisting, the variable declaration is moved to the top, but the assignment stays in place. So 'a' is declared but undefined when console.log executes."
-    },
-    {
-        "question": "Complete the sentence: 'Neither John nor his friends _____ coming to the party.'",
-        "options": ["is", "are", "was", "were"],
-        "correct": 1,
-        "explanation": "With 'neither...nor', the verb agrees with the subject closest to it. 'Friends' is plural, so 'are' is correct."
-    },
-    {
-        "question": "What is the primary key constraint in SQL?",
-        "options": ["Allows duplicates", "Can be NULL", "Uniquely identifies each row", "Only for numeric columns"],
-        "correct": 2,
-        "explanation": "A primary key uniquely identifies each row in a table. It cannot contain NULL values and must be unique across all rows."
-    },
-    {
-        "question": "At 4:20, what is the angle between the hour and minute hands?",
-        "options": ["10°", "20°", "30°", "40°"],
-        "correct": 0,
-        "explanation": "At 4:20, minute hand is at 120°. Hour hand is at 4×30 + 20×0.5 = 130°. Angle = |130-120| = 10°."
-    },
-    {
-        "question": "What will this Python code output?\n```python\nprint(2 ** 3 ** 2)\n```",
-        "options": ["64", "512", "256", "128"],
-        "correct": 1,
-        "explanation": "Exponentiation is right-associative in Python. 2 ** 3 ** 2 = 2 ** (3 ** 2) = 2 ** 9 = 512."
-    },
-    {
-        "question": "Which sorting algorithm is stable and has O(n log n) time complexity in all cases?",
-        "options": ["QuickSort", "HeapSort", "MergeSort", "Selection Sort"],
-        "correct": 2,
-        "explanation": "MergeSort is stable (maintains relative order of equal elements) and has guaranteed O(n log n) time complexity in all cases."
-    },
-    {
-        "question": "Choose the word that best completes the analogy: DOCTOR : STETHOSCOPE :: CARPENTER : ?",
-        "options": ["Nail", "Wood", "Hammer", "House"],
-        "correct": 2,
-        "explanation": "A doctor uses a stethoscope as a primary tool. Similarly, a carpenter uses a hammer as a primary tool."
-    },
-    {
-        "question": "If CODING is written as 3-15-4-9-14-7, how is LOGIC written?",
-        "options": ["12-15-7-9-3", "11-14-6-8-2", "12-15-8-9-3", "11-15-7-9-4"],
-        "correct": 0,
-        "explanation": "Each letter is replaced by its position in alphabet: L=12, O=15, G=7, I=9, C=3."
-    },
-    {
-        "question": "What will this C code output?\n```c\nint a = 5, b = 2;\nprintf(\"%.2f\", (float)a/b);\n```",
-        "options": ["2.50", "2.00", "2", "2.5"],
-        "correct": 0,
-        "explanation": "The cast (float)a converts integer division to floating-point division. The result 2.5 is formatted to 2 decimal places as 2.50."
-    },
-    {
-        "question": "A sum doubles in 8 years at simple interest. In how many years will it become triple?",
-        "options": ["16 years", "12 years", "20 years", "24 years"],
-        "correct": 0,
-        "explanation": "If principal P becomes 2P in 8 years, SI = P in 8 years. Rate = 12.5%. For amount to become 3P, SI needed = 2P. Time = 16 years."
-    },
-    {
-        "question": "In OOP, what does encapsulation primarily achieve?",
-        "options": ["Code reusability", "Data hiding and bundling", "Multiple inheritance", "Dynamic binding"],
-        "correct": 1,
-        "explanation": "Encapsulation bundles data and methods that operate on that data within a single unit (class) and hides the internal implementation details."
-    },
-    {
-        "question": "Find the error in the sentence: 'Each of the students have submitted their assignments.'",
-        "options": ["'Each' should be 'All'", "'have' should be 'has'", "'their' should be 'his'", "No error"],
-        "correct": 1,
-        "explanation": "'Each' is singular, so it should take the singular verb 'has' instead of the plural verb 'have'."
-    },
-    {
-        "question": "What is the time complexity of accessing an element in a hash table (average case)?",
-        "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
-        "correct": 0,
-        "explanation": "Hash tables provide O(1) average case access time through direct indexing using hash functions. Worst case can be O(n) due to collisions."
-    },
-    {
-        "question": "A boat travels 24 km downstream in 3 hours and 16 km upstream in 4 hours. What is the speed of the current?",
-        "options": ["1 km/hr", "2 km/hr", "1.5 km/hr", "2.5 km/hr"],
-        "correct": 1,
-        "explanation": "Downstream speed = 8 km/hr, Upstream speed = 4 km/hr. Current speed = (8-4)/2 = 2 km/hr."
-    },
-    {
-        "question": "What will this Java code output?\n```java\nString s1 = new String(\"Hello\");\nString s2 = new String(\"Hello\");\nSystem.out.println(s1 == s2);\n```",
-        "options": ["true", "false", "Compilation error", "Runtime error"],
-        "correct": 1,
-        "explanation": "Both strings are created with 'new', so they are different objects in memory. == compares references, not content, so it returns false."
-    },
-    {
-        "question": "Starting from home, Ravi walks 20m south, then 30m east, then 20m north. In which direction is he from his starting point?",
-        "options": ["30m East", "20m East", "10m East", "At starting point"],
-        "correct": 0,
-        "explanation": "Net displacement: North-South = 0, East-West = 30m east. He is 30m east of starting point."
-    },
-    {
-        "question": "Which SQL function returns the number of rows in a table?",
-        "options": ["SUM()", "COUNT(*)", "LENGTH()", "SIZE()"],
-        "correct": 1,
-        "explanation": "COUNT(*) returns the total number of rows in a table, including rows with NULL values."
-    },
-    {
-        "question": "Choose the correct passive voice: 'The teacher explained the lesson.'",
-        "options": ["The lesson was explained by the teacher", "The lesson is explained by the teacher", "The lesson explained by the teacher", "The lesson has explained by the teacher"],
-        "correct": 0,
-        "explanation": "The correct passive voice uses 'was explained' (past tense) to match the original past tense 'explained'."
-    },
-    {
-        "question": "What will this Python code output?\n```python\nx = [1, 2, 3]\nprint(x[::2])\n```",
-        "options": ["[1, 2]", "[2, 3]", "[1, 3]", "[3, 1]"],
-        "correct": 2,
-        "explanation": "The slice [::2] starts from the beginning, goes to the end, with step size 2. It selects elements at indices 0 and 2."
-    },
-    {
-        "question": "If 3^x = 27, what is the value of 9^x?",
-        "options": ["729", "243", "81", "27"],
-        "correct": 0,
-        "explanation": "3^x = 27 = 3³, so x = 3. Therefore, 9^x = 9³ = (3²)³ = 3⁶ = 729."
-    },
-    {
-        "question": "In C++, what is the difference between 'delete' and 'delete[]'?",
-        "options": ["No difference", "delete[] is for arrays, delete is for single objects", "delete[] is faster", "delete[] is deprecated"],
-        "correct": 1,
-        "explanation": "delete is used to deallocate memory for a single object, while delete[] is used for arrays. Using the wrong one can lead to undefined behavior."
-    },
-    {
-        "question": "Find the odd one out: Mercury, Venus, Earth, Jupiter, Saturn",
-        "options": ["Mercury", "Venus", "Earth", "Jupiter"],
-        "correct": 2,
-        "explanation": "Earth is the only planet known to support life, making it different from the others."
-    },
-    {
-        "question": "What is the units digit of 3^47?",
-        "options": ["3", "9", "7", "1"],
-        "correct": 2,
-        "explanation": "Units digits of powers of 3 cycle: 3¹=3, 3²=9, 3³=7, 3⁴=1, then repeats. 47÷4 = 11 remainder 3. So units digit is 7."
-    },
-    {
-        "question": "Which SQL clause is used to filter groups in aggregate queries?",
-        "options": ["WHERE", "HAVING", "GROUP BY", "ORDER BY"],
-        "correct": 1,
-        "explanation": "HAVING is used to filter groups created by GROUP BY clause, typically with aggregate functions. WHERE filters individual rows before grouping."
-    },
-    {
-        "question": "Complete the sentence with the correct preposition: 'She is good _____ mathematics.'",
-        "options": ["in", "at", "on", "with"],
-        "correct": 1,
-        "explanation": "'Good at' is the correct prepositional phrase when referring to skill or ability in a subject."
-    },
-    {
-        "question": "What will this C code output?\n```c\nint x = 10;\nint y = x++ + ++x;\nprintf(\"%d\", y);\n```",
-        "options": ["21", "22", "23", "20"],
-        "correct": 1,
-        "explanation": "x++ returns 10, then increments x to 11. ++x increments x to 12 and returns 12. So y = 10 + 12 = 22."
-    },
-    {
-        "question": "A mixture contains milk and water in ratio 5:3. If 16 liters of water is added, the ratio becomes 5:7. What was the original quantity of milk?",
-        "options": ["40 liters", "50 liters", "30 liters", "20 liters"],
-        "correct": 0,
-        "explanation": "Let original quantities be 5x and 3x. After adding: 5x:(3x+16) = 5:7. Cross multiply: 35x = 15x+80. 20x = 80. x = 4. Milk = 20x = 40L."
-    },
-    {
-        "question": "In Python, what does the 'self' parameter represent?",
-        "options": ["The class itself", "The current instance of the class", "A static variable", "The parent class"],
-        "correct": 1,
-        "explanation": "'self' refers to the current instance of the class. It's used to access instance variables and methods within the class."
-    },
-     {
-        "question": "Fill in the blank: 'She not only sings beautifully _____ dances gracefully.'",
-        "options": ["and also", "but also", "and", "but"],
-        "correct": 1,
-        "explanation": "The correlative conjunction 'not only...but also' is used to emphasize two related qualities or actions."
-    },
-    {
-        "question": "Complete the sentence: 'If I _____ you, I would accept the job offer immediately.'",
-        "options": ["am", "was", "were", "will be"],
-        "correct": 2,
-        "explanation": "This is a second conditional (hypothetical situation). 'If I were you' is the correct subjunctive form used in unreal conditional statements."
-    },
-    {
-        "question": "What does polymorphism mean in OOP?",
-        "options": ["Having multiple constructors", "Using multiple inheritance", "Same interface, different implementations", "Creating multiple objects"],
-        "correct": 2,
-        "explanation": "Polymorphism allows objects of different classes to be treated as objects of a common base class, with the same interface but different implementations."
-    },
-    {
-        "question": "Choose the correct sentence:",
-        "options": ["I have less friends than you", "I have fewer friends than you", "I have lesser friends than you", "I have few friends than you"],
-        "correct": 1,
-        "explanation": "'Fewer' is used with countable nouns like 'friends'. 'Less' is used with uncountable nouns."
-    },
-    {
-        "question": "What will this JavaScript code output?\n```javascript\nlet arr = [1, 2, 3];\narr.length = 2;\nconsole.log(arr);\n```",
-        "options": ["[1, 2, 3]", "[1, 2]", "[3]", "Error"],
-        "correct": 1,
-        "explanation": "Setting the length property truncates the array. Setting length to 2 keeps only the first 2 elements."
-    },
-    {
-        "question": "If today is Wednesday, what day was it 50 days ago?",
-        "options": ["Monday", "Tuesday", "Wednesday", "Thursday"],
-        "correct": 0,
-        "explanation": "50÷7 = 7 remainder 1. Going back 50 days = going back 1 day from Wednesday = Tuesday. Actually, going back 1 day in the weekly cycle from Wednesday gives us Monday (considering the direction)."
-    },
-    {
-        "question": "What is the worst-case time complexity of QuickSort?",
-        "options": ["O(n)", "O(n log n)", "O(n²)", "O(log n)"],
-        "correct": 2,
-        "explanation": "QuickSort's worst case occurs when the pivot is always the smallest or largest element, resulting in O(n²) time complexity."
-    },
-    {
-        "question": "In memory management, what is a memory leak?",
-        "options": ["Accessing freed memory", "Forgetting to allocate memory", "Allocated memory not being freed", "Stack overflow"],
-        "correct": 2,
-        "explanation": "A memory leak occurs when dynamically allocated memory is not freed/released back to the system, causing increasing memory consumption."
-    },
-    {
-        "question": "Complete the analogy: BIRD : FLY :: FISH : ?",
-        "options": ["Water", "Swim", "Scales", "Ocean"],
-        "correct": 1,
-        "explanation": "Birds fly (action), so fish swim (action). The analogy relates to the primary action/movement of each creature."
-    },
-    {
-        "question": "What will this C code output?\n```c\nint a[] = {1, 2, 3, 4, 5};\nint *p = &a[2];\nprintf(\"%d\", *(p-1));\n```",
-        "options": ["1", "2", "3", "4"],
-        "correct": 1,
-        "explanation": "p points to a[2] (value 3). p-1 points to a[1]. *(p-1) gives the value at a[1], which is 2."
-    },
-    {
-        "question": "Fill in the blank: 'Despite the heavy rain, the match _____ as scheduled.'",
-        "options": ["proceeded", "preceded", "receded", "exceeded"],
-        "correct": 0,
-        "explanation": "'Proceeded' means continued or went forward, which fits the context of the match continuing despite difficulties."
-    },
-    {
-        "question": "Complete the sentence: 'The committee _____ reached a unanimous decision after hours of discussion.'",
-        "options": ["have", "has", "had", "having"],
-        "correct": 1,
-        "explanation": "'Committee' is a collective noun treated as singular when acting as one unit. Therefore, 'has' is the correct singular verb form."
-    },
-     {
-    "question": "A, B, C invest Rs. 3000, Rs. 4000, Rs. 5000 respectively. A gets 20% of the profit for managing. Find A's share if the total profit is Rs. 2400.",
-    "options": ["Rs. 800", "Rs. 980", "Rs. 900", "Rs. 1080"],
+    "question": "Show all students with their college names.",
+    "options": [
+      "SELECT StudentName, CollegeName FROM STUDENT INNER JOIN COLLEGE ON STUDENT.StudentId = COLLEGE.CollegeId;",
+      "SELECT StudentName, CollegeName FROM STUDENT LEFT JOIN COLLEGE ON STUDENT.CollegeId = COLLEGE.CollegeId;",
+      "SELECT StudentName, CollegeName FROM STUDENT RIGHT JOIN COLLEGE ON STUDENT.StudentId = COLLEGE.CollegeId;",
+      "SELECT StudentName, CollegeName FROM STUDENT FULL JOIN COLLEGE ON STUDENT.CollegeId = COLLEGE.CollegeId;"
+    ],
     "correct": 1,
-    "explanation": "Management share for A = 20% of 2400 = Rs. 480. Remaining profit = 2400 - 480 = Rs. 1920. Investment ratio = 3000:4000:5000 = 3:4:5. A's investment share = (3/12) × 1920 = Rs. 480. Total for A = 480 + 480 = Rs. 960, which is closest to Rs. 980 considering rounding in options."
+    "explanation": "LEFT JOIN ensures all students are listed even if CollegeId is NULL."
+  },
+  {
+    "question": "List all students who study in Alpha College.",
+    "options": [
+      "SELECT StudentName FROM STUDENT INNER JOIN COLLEGE ON STUDENT.CollegeId = COLLEGE.CollegeId WHERE CollegeName = 'Alpha College';",
+      "SELECT StudentName FROM STUDENT LEFT JOIN COLLEGE ON STUDENT.StudentId = COLLEGE.CollegeId WHERE CollegeName = 'Alpha College';",
+      "SELECT StudentName FROM STUDENT WHERE CollegeName = 'Alpha College';",
+      "SELECT StudentName FROM COLLEGE WHERE CollegeName = 'Alpha College';"
+    ],
+    "correct": 0,
+    "explanation": "Join is needed to match CollegeId with CollegeName."
+  },
+    {
+  "question": "Two trains are running at 60 km/hr and 30 km/hr respectively in the same direction. The faster train completely passes a man sitting in the slower train in 60 seconds. What is the length of the fast train?",
+  "options": ["300 meters", "400 meters", "500 meters", "600 meters"],
+  "correct": 2,
+  "explanation": "Relative speed = 60 - 30 = 30 km/hr = (30 × 1000/3600) m/s = 50/6 m/s. Length of faster train = Relative Speed × Time = (50/6) × 60 = 500 meters."
 },
     {
-        "question": "Complete the analogy: BIRD : FLY :: FISH : ?",
-        "options": ["Water", "Swim", "Scales", "Ocean"],
-        "correct": 1,
-        "explanation": "Birds fly (action), so fish swim (action). The analogy relates to the primary action/movement of each creature."
+        "question": "A is B's brother. C is A's father. D is C's mother. What is the relationship between B and D?",
+        "options": ["Grandmother-Grandson", "Mother-Son", "Aunt-Nephew", "Grandmother-Granddaughter"],
+        "correct": 0,
+        "explanation": "C is A's father, D is C's mother (so D is A's grandmother). Since A is B's brother, D is also B's grandmother. The relationship is Grandmother-Grandson."
     },
     {
-        "question": "What will this C code output?\n```c\nint a[] = {1, 2, 3, 4, 5};\nint *p = &a[2];\nprintf(\"%d\", *(p-1));\n```",
-        "options": ["1", "2", "3", "4"],
+        "question": "What will this C++ code output?\n```cpp\nint x = 10;\nint* p = &x;\n*p = 20;\ncout << x;\n```",
+        "options": ["10", "20", "Address of x", "Compilation error"],
         "correct": 1,
-        "explanation": "p points to a[2] (value 3). p-1 points to a[1]. *(p-1) gives the value at a[1], which is 2."
-    }
+        "explanation": "p is a pointer to x. *p = 20 changes the value at the memory location pointed by p, which is x. So x becomes 20."
+    },
+    {
+  "question": "The average of 4 numbers is 25. If one number is removed, the new average becomes 20. The removed number is:",
+  "options": ["35", "40", "45", "50"],
+  "correct": 1,
+  "explanation": "Total sum = 4*25 = 100. Sum of remaining 3 numbers = 3*20 = 60. Removed number = 100 - 60 = 40."
+},
+    {
+        "question": "What will this Python code output?\n```python\ndef func(x=[]):\n    x.append(1)\n    return x\n\nprint(func())\nprint(func())\n```",
+        "options": ["[1] [1]", "[1] [1, 1]", "Error", "[] [1]"],
+        "correct": 1,
+        "explanation": "This demonstrates the mutable default argument trap. The same list object is reused across function calls, so each call appends to the same list."
+    },
+    {
+        "question": "What is the compound interest on ₹5000 for 2 years at 10% per annum?",
+        "options": ["₹1050", "₹1000", "₹1100", "₹950"],
+        "correct": 0,
+        "explanation": "Amount = 5000(1.1)² = 5000×1.21 = ₹6050. CI = 6050 - 5000 = ₹1050."
+    },
+    {
+        "question": "Six people sit around a circular table. If A sits opposite to D, and B is second to the right of A, where does C sit relative to D?",
+        "options": ["Opposite to D", "Adjacent to D", "Second to left of D", "Cannot be determined"],
+        "correct": 3,
+        "explanation": "Given constraints don't provide enough information to determine C's exact position relative to D. More information is needed."
+    },
+{
+  "question": "A can finish a work in 24 days, B in 9 days, and C in 12 days. B and C start the work but leave after 3 days. How many days will A take to finish the remaining work?",
+  "options": ["5 days", "6 days", "10 days", "10.5 days"],
+  "correct": 2,
+  "explanation": "B's 1 day work = 1/9, C's 1 day work = 1/12 → combined = 1/9 + 1/12 = 7/36 per day. In 3 days, they do 3*(7/36)=7/12 of the work. Remaining work = 1 - 7/12 = 5/12. A's 1 day work = 1/24. Days A takes = (5/12)/(1/24) = 10 days."
+},
+    {
+        "question": "Complete the letter series: ACE, FHJ, KMO, ?",
+        "options": ["PRT", "QSU", "PRS", "QRT"],
+        "correct": 0,
+        "explanation": "Each group has consecutive alternate letters. A(+2)C(+2)E, F(+2)H(+2)J, K(+2)M(+2)O. Next: P(+2)R(+2)T = PRT."
+    },
+       {
+        "question": "Starting from home, Ravi walks 20m south, then 30m east, then 20m north. In which direction is he from his starting point?",
+        "options": ["30m East", "20m East", "10m East", "At starting point"],
+        "correct": 0,
+        "explanation": "Net displacement: North-South = 0, East-West = 30m east. He is 30m east of starting point."
+    },
+    {
+  "question": "Show all students with their respective college names.",
+  "options": [
+    "SELECT StudentName, CollegeName FROM STUDENT INNER JOIN COLLEGE ON STUDENT.StudentId = COLLEGE.CollegeId;",
+    "SELECT StudentName, CollegeName FROM STUDENT LEFT JOIN COLLEGE ON STUDENT.CollegeId = COLLEGE.CollegeId;",
+    "SELECT StudentName, CollegeName FROM STUDENT RIGHT JOIN COLLEGE ON STUDENT.StudentId = COLLEGE.CollegeId;",
+    "SELECT StudentName, CollegeName FROM STUDENT FULL JOIN COLLEGE ON STUDENT.CollegeId = COLLEGE.CollegeId;"
+  ],
+  "correct": 1,
+  "explanation": "LEFT JOIN ensures all students are listed even if CollegeId is NULL."
+},
+    {
+  "question": "Spot the error in this code snippet:\n#include <stdio.h>\nint main() {\nconst int age; age = 30;\nprintf(\"%d\", age);\nreturn 0;\n}",
+  "options": ["Uninitialized constant", "Missing return statement", "Syntax error in printf statement", "No error"],
+  "correct": 0,
+  "explanation": "A 'const' variable in C must be initialized at the time of declaration. The code tries to assign a value to 'age' after declaration, which causes an error."
+},
+    {
+        "question": "In Java, which keyword is used to prevent method overriding?",
+        "options": ["static", "final", "abstract", "private"],
+        "correct": 1,
+        "explanation": "The 'final' keyword prevents method overriding in subclasses. A final method cannot be overridden by any subclass."
+    },
+    {
+        "question": "What will this C++ code output?\n```cpp\nint arr[] = {1, 2, 3, 4};\nint *p = arr + 2;\ncout << *p;\n```",
+        "options": ["1", "2", "3", "4"],
+        "correct": 2,
+        "explanation": "arr + 2 points to the third element (index 2) of the array. *p dereferences this pointer, giving the value 3."
+    },
+   {
+  "question": "Two numbers are in the ratio 3:5. If 9 is subtracted from each, the new numbers are in the ratio 12:23. What is the smaller number?",
+  "options": ["27", "33", "49", "55"],
+  "correct": 1,
+  "explanation": "Let the numbers be 3x and 5x. After subtracting 9: (3x - 9)/(5x - 9) = 12/23 → 23*(3x-9) = 12*(5x-9) → 69x - 207 = 60x - 108 → 9x = 99 → x = 11. Smaller number = 3*11 = 33."
+},
+      {
+    "question": "What is the difference between abstract class and interface?",
+    "options": [
+      "Abstract class can have concrete methods, interface cannot",
+      "Interface can have concrete methods, abstract class cannot",
+      "There is no difference",
+      "Abstract class is faster than interface"
+    ],
+    "correct": 0,
+    "explanation": "An abstract class can have both abstract and concrete methods, while interfaces traditionally only had abstract methods (Java 8+ allows default methods)."
+  },
+      {
+  "question": "If April 11, 1911 was a Tuesday, what was the day on September 17, 1915?",
+  "options": ["Friday", "Thursday", "Sunday", "Tuesday"],
+  "correct": 0,
+  "explanation": "Calculate total odd days from April 11, 1911 to September 17, 1915. Accounting for leap years and days in each month, the total odd days = 3. Adding 3 days to Tuesday gives Friday."
+},
+  {
+    "question": "malloc() function in C is used for:",
+    "options": [
+      "Static memory allocation",
+      "Dynamic memory allocation",
+      "File handling",
+      "Input/Output operations"
+    ],
+    "correct": 1,
+    "explanation": "malloc() allocates memory dynamically at runtime and returns a pointer to the allocated memory."
+  },
+    {
+        "question": "Five friends P, Q, R, S, T sit in a line. P is not at any end. Q is second from left. R is to the immediate right of S. Who could be at the right end?",
+        "options": ["T only", "R only", "T or R", "Cannot be determined"],
+        "correct": 2,
+        "explanation": "Given Q is 2nd from left and R is right of S, with P not at ends, possible arrangements allow either T or R at the right end."
+    },
+    
+    {
+        "question": "At 4:20, what is the angle between the hour and minute hands?",
+        "options": ["10°", "20°", "30°", "40°"],
+        "correct": 0,
+        "explanation": "At 4:20, minute hand is at 120°. Hour hand is at 4×30 + 20×0.5 = 130°. Angle = |130-120| = 10°."
+    },
+    {
+  "question": "What is incorrect in the SQL statement:\nSELECT COALESCE(FirstName, LastName, 'Unknown') FROM Authors;",
+  "options": [
+    "Replace 'COALESCE' with 'NVL'",
+    "Change 'Unknown' to 'NULL'",
+    "Add 'AS FullName' for clarity",
+    "No error"
+  ],
+  "correct": 2,
+  "explanation": "Including an alias for the COALESCE result is more descriptive. The correct statement is:\nSELECT COALESCE(FirstName, LastName, 'Unknown') AS FullName FROM Authors;\nThis provides a clear label for the combined name."
+},
+    {
+        "question": "What will this Python code output?\n```python\nprint(2 ** 3 ** 2)\n```",
+        "options": ["64", "512", "256", "128"],
+        "correct": 1,
+        "explanation": "Exponentiation is right-associative in Python. 2 ** 3 ** 2 = 2 ** (3 ** 2) = 2 ** 9 = 512."
+    },
+    {
+        "question": "Which sorting algorithm is stable and has O(n log n) time complexity in all cases?",
+        "options": ["QuickSort", "HeapSort", "MergeSort", "Selection Sort"],
+        "correct": 2,
+        "explanation": "MergeSort is stable (maintains relative order of equal elements) and has guaranteed O(n log n) time complexity in all cases."
+    },
 
+    {
+        "question": "A boat travels 24 km downstream in 3 hours and 16 km upstream in 4 hours. What is the speed of the current?",
+        "options": ["1 km/hr", "2 km/hr", "1.5 km/hr", "2.5 km/hr"],
+        "correct": 1,
+        "explanation": "Downstream speed = 8 km/hr, Upstream speed = 4 km/hr. Current speed = (8-4)/2 = 2 km/hr."
+    },
+    {
+    "question": "Which type of polymorphism is resolved at compile time?",
+    "options": [
+      "Method overriding",
+      "Method overloading",
+      "Runtime polymorphism",
+      "Dynamic polymorphism"
+    ],
+    "correct": 1,
+    "explanation": "Method overloading is resolved at compile time (static polymorphism)."
+  },
+  {
+    "question": "In method overloading, which method is called?",
+    "options": [
+      "The first method defined",
+      "The last method defined",
+      "The method with matching signature",
+      "A random method"
+    ],
+    "correct": 2,
+    "explanation": "The method with a matching signature is chosen during compile time."
+  }, 
+  
+    {
+        "question": "What is the units digit of 3^47?",
+        "options": ["3", "9", "7", "1"],
+        "correct": 2,
+        "explanation": "Units digits of powers of 3 cycle: 3¹=3, 3²=9, 3³=7, 3⁴=1, then repeats. 47÷4 = 11 remainder 3. So units digit is 7."
+    },
+    {
+        "question": "Which SQL clause is used to filter groups in aggregate queries?",
+        "options": ["WHERE", "HAVING", "GROUP BY", "ORDER BY"],
+        "correct": 1,
+        "explanation": "HAVING is used to filter groups created by GROUP BY clause, typically with aggregate functions. WHERE filters individual rows before grouping."
+    },
+
+    {
+        "question": "A mixture contains milk and water in ratio 5:3. If 16 liters of water is added, the ratio becomes 5:7. What was the original quantity of milk?",
+        "options": ["40 liters", "50 liters", "30 liters", "20 liters"],
+        "correct": 0,
+        "explanation": "Let original quantities be 5x and 3x. After adding: 5x:(3x+16) = 5:7. Cross multiply: 35x = 15x+80. 20x = 80. x = 4. Milk = 20x = 40L."
+    },
+    {
+        "question": "In Python, what does the 'self' parameter represent?",
+        "options": ["The class itself", "The current instance of the class", "A static variable", "The parent class"],
+        "correct": 1,
+        "explanation": "'self' refers to the current instance of the class. It's used to access instance variables and methods within the class."
+    },
+
+    {
+        "question": "Which SQL constraint ensures that all values in a column are different?",
+        "options": ["PRIMARY KEY", "UNIQUE", "NOT NULL", "CHECK"],
+        "correct": 1,
+        "explanation": "The UNIQUE constraint ensures that all values in a column are distinct. PRIMARY KEY also ensures uniqueness but additionally prevents NULL values."
+    },
+    {
+        "question": "Complete the number series: 5, 8, 14, 26, 50, ?",
+        "options": ["98", "94", "102", "86"],
+        "correct": 0,
+        "explanation": "Pattern: 5×2-2=8, 8×2-2=14, 14×2-2=26, 26×2-2=50, 50×2-2=98."
+    }
+  
          ],  
+  
          'Practice Set-6': [
+           {
+  "question": "Can an interface have variables?",
+  "options": [
+    "No, interfaces cannot have variables",
+    "Yes, but they are implicitly public, static, and final",
+    "Yes, and they can be private or protected",
+    "Yes, and they can be instance variables"
+  ],
+  "correct": 1,
+  "explanation": "In Java, any variable declared in an interface is implicitly public, static, and final (constant)."
+},  
            {
         "question": "In C, what does a pointer variable store?",
         "options": ["A memory address", "A variable name", "The size of a variable", "The value of a variable"],
@@ -2089,47 +1487,29 @@ def create_fallback_questions(num_questions, topic, difficulty):
         "explanation": "This is a Fibonacci function. mystery(5) = mystery(4) + mystery(3) = 3 + 2 = 5. Wait, let me trace: mystery(5) calls mystery(4) and mystery(3). Eventually computes the 5th Fibonacci number which is 8."
     },
     {
-        "question": "A clock gains 5 minutes every hour. If it shows correct time at 6 AM, what time will it show when the actual time is 9 PM?",
-        "options": ["10:15 PM", "10:05 PM", "9:75 PM", "10:75 PM"],
-        "correct": 0,
-        "explanation": "From 6 AM to 9 PM = 15 hours. Clock gains 5 min/hour × 15 hours = 75 minutes = 1 hour 15 minutes. So clock shows 9:00 PM + 1:15 = 10:15 PM."
-    },
-    {
         "question": "In a certain code, if SUMMER is written as TVNNFS, how is WINTER written?",
         "options": ["XJOUFS", "XJOUFS", "WJOUFS", "XKPUFS"],
         "correct": 1,
         "explanation": "Each letter is shifted by +1 in the alphabet: S→T, U→V, M→N, M→N, E→F, R→S. Applying to WINTER: W→X, I→J, N→O, T→U, E→F, R→S = XJOUFS."
     },
+   {
+  "question": "The principal amount that becomes Rs. 4913 in 3 years at an interest rate of 25/4% per annum when interest is compounded annually is:",
+  "options": ["4306", "4396", "4096", "4809"],
+  "correct": 2,
+  "explanation": "Using the compound interest formula A = P(1 + R/100)^n, where A = 4913, R = 25/4 = 6.25%, n = 3 years: P = 4913 / (1 + 6.25/100)^3 ≈ 4096. Thus, the principal amount is Rs. 4096."
+}
+,
     {
-        "question": "Choose the grammatically correct sentence:",
-        "options": ["Between you and I, this is wrong", "Between you and me, this is wrong", "Among you and I, this is wrong", "Among you and me, this is wrong"],
-        "correct": 1,
-        "explanation": "'Between' is a preposition that requires object pronouns. 'Me' is the correct object pronoun, not 'I' which is a subject pronoun."
-    },
-    {
-        "question": "What will this Java code output?\n```java\npublic class Test {\n    static int count = 0;\n    public Test() { count++; }\n    public static void main(String[] args) {\n        Test t1 = new Test();\n        Test t2 = new Test();\n        System.out.println(count);\n    }\n}",
-        "options": ["0", "1", "2", "Compilation error"],
-        "correct": 2,
-        "explanation": "Each time a Test object is created, the constructor increments the static variable count. Two objects are created, so count becomes 2."
-    },
-    {
-        "question": "Which searching algorithm has the best average-case time complexity for unsorted data?",
-        "options": ["Binary Search", "Linear Search", "Hash Table Search", "Jump Search"],
-        "correct": 2,
-        "explanation": "Hash Table Search provides O(1) average-case time complexity for unsorted data, making it the most efficient for average cases."
-    },
-    {
-        "question": "A person invested ₹10,000 at 12% compound interest. What will be the amount after 3 years?",
-        "options": ["₹14,049", "₹13,600", "₹14,400", "₹13,824"],
-        "correct": 0,
-        "explanation": "Amount = P(1 + r/100)^n = 10000(1.12)³ = 10000 × 1.404928 = ₹14,049."
-    },
-    {
-        "question": "What is the relationship: If A > B, B > C, and C > D, what can we conclude about A and D?",
-        "options": ["A = D", "A < D", "A > D", "Cannot determine"],
-        "correct": 2,
-        "explanation": "This demonstrates transitivity. If A > B > C > D, then by transitivity, A > D."
-    },
+  "question": "Correct the syntax error in the SQL statement:\nSELECT Name, (SELECT MAX(Salary) FROM Employees) AS MaxSalary FROM Employees WHERE DepartmentID = (SELECT DepartmentID FROM Departments WHERE Name = 'HR');",
+  "options": [
+    "Change the inner 'SELECT MAX(Salary)' to 'SUM(Salary)'",
+    "Remove 'AS MaxSalary'",
+    "Replace the second 'SELECT' with 'IN'",
+    "No error"
+  ],
+  "correct": 1,
+  "explanation": "The alias 'AS MaxSalary' is redundant in this context and may cause an error in some SQL dialects. The corrected statement is:\nSELECT Name, (SELECT MAX(Salary) FROM Employees) FROM Employees WHERE DepartmentID = (SELECT DepartmentID FROM Departments WHERE Name = 'HR');"
+},
     {
         "question": "What will this C code output?\n```c\n#include <stdio.h>\nint main() {\n    int a = 1, b = 2, c = 3;\n    printf(\"%d\", a < b < c);\n    return 0;\n}\n```",
         "options": ["0", "1", "3", "Compilation error"],
@@ -2137,17 +1517,16 @@ def create_fallback_questions(num_questions, topic, difficulty):
         "explanation": "The expression evaluates left to right: (a < b) < c becomes (1 < 2) < 3 becomes 1 < 3, which is true (1)."
     },
     {
-        "question": "Identify the figure of speech: 'The classroom was a zoo during the break.'",
-        "options": ["Simile", "Metaphor", "Personification", "Hyperbole"],
-        "correct": 1,
-        "explanation": "This is a metaphor because it directly compares the classroom to a zoo without using 'like' or 'as', implying chaos and noise."
-    },
-    {
-        "question": "In which data structure is insertion and deletion possible at both ends?",
-        "options": ["Stack", "Queue", "Deque", "Array"],
-        "correct": 2,
-        "explanation": "Deque (Double-ended queue) allows insertion and deletion operations at both front and rear ends, unlike stack (one end) or queue (different ends for insertion/deletion)."
-    },
+  "question": "If 1st January 2000 was a Saturday, what day of the week was 1st January 2010?",
+  "options": [
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday"
+  ],
+  "correct": 1,
+  "explanation": "From 2000 to 2010, there are 10 years including 3 leap years (2000, 2004, 2008). Total extra days = 10*365 + 3 = 3653 days → 3653 % 7 = 6 days. Saturday + 6 days = Friday."
+},
     {
         "question": "A sum of money becomes 4 times in 20 years at simple interest. In how many years will it become 7 times?",
         "options": ["40 years", "35 years", "42 years", "45 years"],
@@ -2155,23 +1534,18 @@ def create_fallback_questions(num_questions, topic, difficulty):
         "explanation": "If amount becomes 4P in 20 years, SI = 3P in 20 years. Rate = 15%. For 7P, SI needed = 6P. Time = (6P × 100)/(P × 15) = 40 years."
     },
     {
-        "question": "What will this JavaScript code output?\n```javascript\nconsole.log(0.1 + 0.2 === 0.3);\n```",
-        "options": ["true", "false", "undefined", "Error"],
-        "correct": 1,
-        "explanation": "Due to floating-point precision issues, 0.1 + 0.2 equals 0.30000000000000004, not exactly 0.3, so the comparison returns false."
-    },
-    {
         "question": "A car covers 60 km in the first hour, 40 km in the second hour, and 20 km in the third hour. What is the average speed?",
         "options": ["40 km/hr", "45 km/hr", "35 km/hr", "50 km/hr"],
         "correct": 0,
         "explanation": "Total distance = 60 + 40 + 20 = 120 km. Total time = 3 hours. Average speed = 120/3 = 40 km/hr."
     },
-    {
-        "question": "Complete the pattern: 2, 6, 12, 20, 30, ?",
-        "options": ["42", "40", "38", "44"],
-        "correct": 0,
-        "explanation": "Pattern: n(n+1) where n = 1,2,3,4,5,6. So: 1×2=2, 2×3=6, 3×4=12, 4×5=20, 5×6=30, 6×7=42."
-    },
+    
+  {
+  "question": "Complete the series: QAR, RAS, SAT, TAU, _____",
+  "options": ["TAT", "UAT", "UAV", "TAS"],
+  "correct": 2,
+  "explanation": "In this series, the third letter of each term becomes the first letter of the next term. The middle letter 'A' remains constant. Following this pattern, the next term is 'UAV'."
+},
     {
         "question": "Which SQL command is used to modify existing data in a table?",
         "options": ["ALTER", "UPDATE", "MODIFY", "CHANGE"],
@@ -2179,89 +1553,45 @@ def create_fallback_questions(num_questions, topic, difficulty):
         "explanation": "UPDATE command is used to modify existing records in a table. ALTER is used to modify table structure, not data."
     },
     {
-        "question": "What will this Python code output?\n```python\nlist1 = [1, 2, 3]\nlist2 = list1.copy()\nlist1.append(4)\nprint(len(list2))\n```",
-        "options": ["3", "4", "Error", "0"],
-        "correct": 0,
-        "explanation": "copy() creates a shallow copy of the list. Changes to list1 don't affect list2. list2 remains [1, 2, 3] with length 3."
-    },
-    {
-        "question": "Find the missing word: 'His _____ attitude towards work impressed everyone.'",
-        "options": ["casual", "careless", "diligent", "lazy"],
-        "correct": 2,
-        "explanation": "'Diligent' means hardworking and careful, which would impress people. The other options suggest negative work attitudes."
-    },
-    {
         "question": "In C++, what is the difference between struct and class by default?",
         "options": ["No difference", "struct members are public, class members are private", "struct is faster", "class supports inheritance"],
         "correct": 1,
         "explanation": "In C++, the only difference between struct and class is the default access level: struct members are public by default, class members are private by default."
     },
-    {
-        "question": "How many triangles can be formed using 6 non-collinear points?",
-        "options": ["15", "20", "18", "12"],
-        "correct": 1,
-        "explanation": "Number of triangles = C(6,3) = 6!/(3!×3!) = (6×5×4)/(3×2×1) = 20 triangles."
-    },
-    {
-        "question": "What is the next number in the sequence: 1, 4, 27, 256, ?",
-        "options": ["3125", "2500", "3000", "2187"],
-        "correct": 0,
-        "explanation": "Pattern: 1¹=1, 2²=4, 3³=27, 4⁴=256, so next is 5⁵=3125."
-    },
-    {
-        "question": "Which data structure uses hashing for O(1) average insertion and search?",
-        "options": ["Binary Tree", "Array", "Hash Table", "Linked List"],
-        "correct": 2,
-        "explanation": "Hash Table uses hash functions to map keys to array indices, providing O(1) average time for insertion, deletion, and search operations."
-    },
-    {
-        "question": "What will this C code output?\n```c\nint x = 5;\nprintf(\"%d\", x++ * ++x);\n```",
-        "options": ["30", "35", "42", "Undefined behavior"],
-        "correct": 3,
-        "explanation": "Multiple modifications to the same variable between sequence points results in undefined behavior in C."
-    },
-    {
-        "question": "Complete the sentence: 'The number of students _____ increased significantly this year.'",
-        "options": ["have", "has", "are", "were"],
-        "correct": 1,
-        "explanation": "'The number of students' is a singular subject (the number), so it takes the singular verb 'has'."
-    },
+ {
+    "question": "Display NAME, LOCATION, PHONE_NUMBER of students from DATABASE table whose section is 'A'.",
+    "options": [
+      "SELECT NAME, LOCATION, PHONE_NUMBER FROM DATABASE WHERE ROLL_NO IN (SELECT ROLL_NO FROM STUDENT WHERE SECTION='A');",
+      "SELECT NAME, LOCATION, PHONE_NUMBER FROM DATABASE WHERE ROLL_NO NOT IN (SELECT ROLL_NO FROM STUDENT WHERE SECTION='A');",
+      "SELECT NAME, LOCATION, PHONE_NUMBER FROM DATABASE WHERE ROLL_NO IN (SELECT ROLL_NO, SECTION FROM STUDENT WHERE SECTION='A');",
+      "SELECT NAME, LOCATION, PHONE_NUMBER FROM DATABASE WHERE ROLL_NO EXISTS (SELECT ROLL_NO FROM STUDENT WHERE SECTION='A');"
+    ],
+    "correct": 0,
+    "explanation": "Option A correctly selects students whose ROLL_NO matches entries in STUDENT table with SECTION='A'."
+  }, 
     {
         "question": "A rectangular field is 80m long and 60m wide. What is the cost of fencing it at ₹15 per meter?",
         "options": ["₹4200", "₹3600", "₹4800", "₹5000"],
         "correct": 0,
         "explanation": "Perimeter = 2(80 + 60) = 280m. Cost = 280 × 15 = ₹4200."
     },
-    {
-        "question": "What will this JavaScript code output?\n```javascript\nconst arr = [1, 2, 3];\narr.push(4);\nconsole.log(arr.length);\n```",
-        "options": ["3", "4", "Error", "undefined"],
-        "correct": 1,
-        "explanation": "Despite being declared as const, arrays are mutable. push() adds an element, making the length 4."
-    },
-    {
-        "question": "In binary representation, what is the decimal value of 1101?",
-        "options": ["11", "13", "15", "9"],
-        "correct": 1,
-        "explanation": "1101₂ = 1×2³ + 1×2² + 0×2¹ + 1×2⁰ = 8 + 4 + 0 + 1 = 13."
-    },
-    {
-        "question": "Which word is spelled incorrectly?",
-        "options": ["Necessary", "Occassion", "Beginning", "Separate"],
-        "correct": 1,
-        "explanation": "The correct spelling is 'Occasion' with one 'c' and two 's'. 'Occassion' has an extra 'c'."
-    },
-    {
-        "question": "What is the minimum number of comparisons needed to find both maximum and minimum in an array of n elements?",
-        "options": ["2n", "3n/2", "n", "n-1"],
-        "correct": 1,
-        "explanation": "By comparing elements in pairs and then comparing winners for max and losers for min, we need 3n/2 - 2 comparisons, which is approximately 3n/2."
-    },
-    {
-        "question": "What will this Java code output?\n```java\nint[] arr = {1, 2, 3, 4, 5};\nSystem.out.println(arr[arr.length - 1]);\n```",
-        "options": ["4", "5", "IndexOutOfBoundsException", "0"],
-        "correct": 1,
-        "explanation": "arr.length is 5, so arr[arr.length - 1] is arr[4], which contains the value 5 (last element)."
-    },
+{
+  "question": "The principal amount that becomes Rs. 4913 in 3 years at an interest rate of 25/4% per annum when interest is compounded annually is:",
+  "options": ["4306", "4396", "4096", "4809"],
+  "correct": 2,
+  "explanation": "Using the compound interest formula A = P(1 + R/100)^n, where A = 4913, R = 25/4 = 6.25%, n = 3 years: P = 4913 / (1 + 6.25/100)^3 ≈ 4096. Thus, the principal amount is Rs. 4096."
+},
+{
+  "question": "In SQL, how does the compound operator '+=' function?",
+  "options": [
+    "Adds two values",
+    "Adds a value to a column's existing value",
+    "Subtracts one value from another",
+    "Concatenates strings"
+  ],
+  "correct": 1,
+  "explanation": "The '+=' operator adds a value to the current value of a column. For example, 'UPDATE table SET column += 5;' increases the column's value by 5."
+},
     {
         "question": "A pipe can fill a tank in 6 hours. A leak can empty it in 8 hours. If both operate together, in how many hours will the tank be filled?",
         "options": ["24 hours", "14 hours", "12 hours", "18 hours"],
@@ -2275,41 +1605,28 @@ def create_fallback_questions(num_questions, topic, difficulty):
         "explanation": "Multiple inheritance occurs when a class inherits from more than one base class. Class C inheriting from both A and B is multiple inheritance."
     },
     {
-        "question": "Choose the correct indirect speech: Direct: 'I will come tomorrow,' he said.",
-        "options": ["He said that he will come tomorrow", "He said that he would come tomorrow", "He said that he would come the next day", "He said that he will come the next day"],
-        "correct": 2,
-        "explanation": "In indirect speech: 'will' changes to 'would', and 'tomorrow' changes to 'the next day'."
-    },
-    {
-        "question": "What will this C++ code output?\n```cpp\n#include <iostream>\nusing namespace std;\nint main() {\n    int a = 5;\n    int& ref = a;\n    ref = 10;\n    cout << a;\n    return 0;\n}\n```",
-        "options": ["5", "10", "Compilation error", "Undefined"],
-        "correct": 1,
-        "explanation": "ref is a reference to a. When ref = 10, it changes the value of a to 10 since references are aliases for the original variable."
-    },
-    {
-        "question": "Find the value of x: 2^(x+1) = 32",
-        "options": ["4", "5", "6", "3"],
-        "correct": 0,
-        "explanation": "2^(x+1) = 32 = 2⁵. Therefore, x+1 = 5, so x = 4."
-    },
-    {
-        "question": "What is the maximum number of edges in a simple graph with n vertices?",
-        "options": ["n", "n-1", "n(n-1)/2", "n²"],
-        "correct": 2,
-        "explanation": "In a simple graph (no self-loops, no multiple edges), maximum edges = C(n,2) = n(n-1)/2, which occurs in a complete graph."
-    },
-    {
-        "question": "Which preposition correctly completes: 'She is afraid _____ spiders'?",
-        "options": ["from", "of", "with", "by"],
-        "correct": 1,
-        "explanation": "'Afraid of' is the correct prepositional phrase when expressing fear about something."
-    },
-    {
-        "question": "What will this Python code output?\n```python\nfor i in range(3):\n    print(i, end=\" \")\nelse:\n    print(\"Done\")\n```",
-        "options": ["0 1 2", "0 1 2 Done", "Done", "Error"],
-        "correct": 1,
-        "explanation": "The else clause in a for loop executes when the loop completes normally (not broken). Output: '0 1 2 Done'."
-    },
+    "question": "Which query correctly fetches departments with employees whose salary is missing (NULL)?",
+    "options": [
+      "SELECT DeptName FROM DEPARTMENT D WHERE EXISTS (SELECT 1 FROM EMPLOYEE E WHERE D.DeptID = E.DeptID AND E.Salary = NULL);",
+      "SELECT DeptName FROM DEPARTMENT D WHERE EXISTS (SELECT 1 FROM EMPLOYEE E WHERE D.DeptID = E.DeptID AND E.Salary IS NULL);",
+      "SELECT DeptName FROM DEPARTMENT WHERE DeptID IN (SELECT DeptID FROM EMPLOYEE WHERE Salary IS NULL);",
+      "Both B and C"
+    ],
+    "correct": 3,
+    "explanation": "Option A is wrong since = NULL fails. Options B and C correctly identify departments with employees having NULL salary."
+  },
+  {
+    "question": "Retrieve the customer with the 2nd highest total amount from SALES table.",
+    "options": [
+      "SELECT Customer FROM (SELECT Customer, RANK() OVER(ORDER BY SUM(Amount) DESC) rnk FROM SALES GROUP BY Customer) t WHERE rnk = 2;",
+      "SELECT Customer FROM SALES GROUP BY Customer HAVING SUM(Amount) = (SELECT MAX(SUM(Amount)) FROM SALES GROUP BY Customer WHERE SUM(Amount) < (SELECT MAX(SUM(Amount)) FROM SALES GROUP BY Customer));",
+      "SELECT Customer FROM SALES WHERE Amount = (SELECT MAX(Amount) FROM SALES WHERE Amount < (SELECT MAX(Amount) FROM SALES));",
+      "Both A and B"
+    ],
+    "correct": 3,
+    "explanation": "Option C is wrong as it only finds the 2nd highest single Amount, not total. Both A and B correctly fetch the 2nd highest total amount."
+  },
+ 
     {
         "question": "A shopkeeper marks an item 50% above cost price and gives 20% discount. What is his profit percentage?",
         "options": ["20%", "25%", "30%", "15%"],
@@ -2329,58 +1646,10 @@ def create_fallback_questions(num_questions, topic, difficulty):
         "explanation": "MEDIAN() function returns the middle value in a sorted list of values. Note: Not all SQL databases support MEDIAN() natively."
     },
     {
-        "question": "What will this C code output?\n```c\nint arr[5] = {1, 2};\nprintf(\"%d\", arr[3]);\n```",
-        "options": ["Garbage value", "0", "3", "Compilation error"],
+        "question": "What will this Python code output?\n```python\nfor i in range(3):\n    print(i, end=\" \")\nelse:\n    print(\"Done\")\n```",
+        "options": ["0 1 2", "0 1 2 Done", "Done", "Error"],
         "correct": 1,
-        "explanation": "In C, when an array is partially initialized, unspecified elements are automatically initialized to 0."
-    },
-    {
-        "question": "Choose the correct spelling:",
-        "options": ["Recieve", "Receive", "Recive", "Receieve"],
-        "correct": 1,
-        "explanation": "The correct spelling is 'Receive'. Remember the rule: 'i before e except after c'."
-    },
-    {
-        "question": "In Dynamic Programming, what is memoization?",
-        "options": ["Memory allocation", "Storing results of subproblems", "Memory deallocation", "Cache invalidation"],
-        "correct": 1,
-        "explanation": "Memoization is an optimization technique where results of expensive function calls are stored and reused when the same inputs occur again."
-    },
-    {
-        "question": "Three dice are thrown simultaneously. What is the probability of getting a sum of 10?",
-        "options": ["1/8", "1/6", "1/4", "27/216"],
-        "correct": 3,
-        "explanation": "Favorable outcomes for sum 10: (1,3,6), (1,4,5), (1,5,4), (1,6,3), (2,2,6), (2,3,5), (2,4,4), (2,5,3), (2,6,2), (3,1,6), (3,2,5), (3,3,4), (3,4,3), (3,5,2), (3,6,1), (4,1,5), (4,2,4), (4,3,3), (4,4,2), (4,5,1), (5,1,4), (5,2,3), (5,3,2), (5,4,1), (6,1,3), (6,2,2), (6,3,1) = 27 ways. Total outcomes = 6³ = 216. Probability = 27/216."
-    },
-    {
-        "question": "What will this JavaScript code output?\n```javascript\nlet a = [1, 2, 3];\nlet b = a.slice();\na.push(4);\nconsole.log(b.length);\n```",
-        "options": ["3", "4", "undefined", "Error"],
-        "correct": 0,
-        "explanation": "slice() creates a shallow copy of the array. Changes to original array 'a' don't affect the copy 'b'. b remains [1, 2, 3] with length 3."
-    },
-    {
-        "question": "What is the LCM of 12, 18, and 24?",
-        "options": ["72", "144", "36", "216"],
-        "correct": 0,
-        "explanation": "Prime factorization: 12=2²×3, 18=2×3², 24=2³×3. LCM = 2³×3² = 8×9 = 72."
-    },
-    {
-        "question": "In linked list, what is the advantage over arrays?",
-        "options": ["Random access", "Cache performance", "Dynamic size", "Less memory usage"],
-        "correct": 2,
-        "explanation": "Linked lists can grow or shrink during runtime (dynamic size), while arrays have fixed size. However, arrays provide better random access and cache performance."
-    },
-    {
-        "question": "Identify the type of sentence: 'What a beautiful sunset!'",
-        "options": ["Declarative", "Interrogative", "Imperative", "Exclamatory"],
-        "correct": 3,
-        "explanation": "Exclamatory sentences express strong emotion or surprise and typically end with an exclamation mark."
-    },
-    {
-        "question": "What will this Java code output?\n```java\nboolean a = true;\nboolean b = false;\nSystem.out.println(a && b || a);\n```",
-        "options": ["true", "false", "Compilation error", "Runtime error"],
-        "correct": 0,
-        "explanation": "Due to operator precedence, this evaluates as (a && b) || a = (true && false) || true = false || true = true."
+        "explanation": "The else clause in a for loop executes when the loop completes normally (not broken). Output: '0 1 2 Done'."
     },
     {
         "question": "A man is 24 years older than his son. In 2 years, his age will be twice the age of his son. What is the son's current age?",
@@ -2389,41 +1658,12 @@ def create_fallback_questions(num_questions, topic, difficulty):
         "explanation": "Let son's age = x. Man's age = x + 24. In 2 years: x + 24 + 2 = 2(x + 2). Solving: x + 26 = 2x + 4. x = 22."
     },
     {
-        "question": "Which tree traversal visits root node first?",
-        "options": ["Inorder", "Preorder", "Postorder", "Level order"],
-        "correct": 1,
-        "explanation": "Preorder traversal visits nodes in the order: Root → Left subtree → Right subtree, so root is visited first."
-    },
-    {
-        "question": "What will this C++ code output?\n```cpp\nclass Base {\npublic:\n    virtual void show() { cout << \"Base\"; }\n};\nclass Derived : public Base {\npublic:\n    void show() { cout << \"Derived\"; }\n};\nBase* ptr = new Derived();\nptr->show();\n```",
-        "options": ["Base", "Derived", "Compilation error", "Runtime error"],
-        "correct": 1,
-        "explanation": "This demonstrates polymorphism. The virtual function ensures that the derived class's version of show() is called, even through a base class pointer."
-    },
-    {
         "question": "Find the median of: 15, 23, 8, 42, 17, 19, 31",
         "options": ["19", "17", "23", "15"],
         "correct": 0,
         "explanation": "First sort the data: 8, 15, 17, 19, 23, 31, 42. The median (middle value) of 7 numbers is the 4th value = 19."
     },
-    {
-        "question": "What is the correct plural form of 'analysis'?",
-        "options": ["analysises", "analysies", "analyses", "analysis"],
-        "correct": 2,
-        "explanation": "Words ending in '-sis' form plurals by changing to '-ses'. Analysis becomes analyses."
-    },
-    {
-        "question": "What will this Python code output?\n```python\nx = {1, 2, 3}\ny = {3, 4, 5}\nprint(len(x & y))\n```",
-        "options": ["1", "2", "3", "6"],
-        "correct": 0,
-        "explanation": "The & operator performs set intersection. x & y = {3}, which has length 1."
-    },
-    {
-        "question": "In how many ways can 5 people be arranged in a circle?",
-        "options": ["120", "24", "60", "5"],
-        "correct": 1,
-        "explanation": "Circular arrangements = (n-1)! = (5-1)! = 4! = 24 ways. We fix one person and arrange the rest."
-    },
+
     {
         "question": "Which query returns employees who earn more than the average salary of their department?",
         "options": [
@@ -2445,7 +1685,6 @@ def create_fallback_questions(num_questions, topic, difficulty):
          ],
             
           
-        
     }
     # Pick the right bank or default to Mixed Aptitude
     if topic not in fallback_banks:
