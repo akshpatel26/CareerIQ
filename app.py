@@ -49,7 +49,7 @@ if not google_api_key:
 
 # Set page config at the very beginning
 st.set_page_config(
-    page_title="CareerIQ",
+    page_title="AI-Powered Resume Analyzer",
     layout="wide"
 )
 
@@ -92,8 +92,8 @@ class ResumeApp:
             "🔍 RESUME ANALYZER": self.render_analyzer,
             "🎯 JOB SEARCH": self.render_job_search,
             "🧩 Smart Quiz ": self.render_quiz, 
-            "📊 DASHBOARD": self.render_dashboard,
             "💬 FEEDBACK": self.render_feedback_page,
+            "📊 DASHBOARD": self.render_dashboard
 
         }
 
@@ -786,35 +786,35 @@ class ResumeApp:
                                                      'description', ''),
                                                  help="Brief overview of the project and its goals")
 
-                # Project Responsibilities
-                st.markdown("##### Key Responsibilities")
-                proj_resp_text = st.text_area("Enter responsibilities (one per line)",
-                                            key=f"proj_resp_{idx}",
-                                            value='\n'.join(
-                                                proj.get('responsibilities', [])),
-                                            height=100,
-                                            help="List your main responsibilities in the project")
-                proj['responsibilities'] = [r.strip()
-                                                    for r in proj_resp_text.split('\n') if r.strip()]
+                # # Project Responsibilities
+                # st.markdown("##### Key Responsibilities")
+                # proj_resp_text = st.text_area("Enter responsibilities (one per line)",
+                #                             key=f"proj_resp_{idx}",
+                #                             value='\n'.join(
+                #                                 proj.get('responsibilities', [])),
+                #                             height=100,
+                #                             help="List your main responsibilities in the project")
+                # proj['responsibilities'] = [r.strip()
+                #                                     for r in proj_resp_text.split('\n') if r.strip()]
 
-                # Project Achievements
-                st.markdown("##### Key Achievements")
-                proj_achv_text = st.text_area("Enter achievements (one per line)",
-                                            key=f"proj_achv_{idx}",
-                                            value='\n'.join(
-                                                proj.get('achievements', [])),
-                                            height=100,
-                                            help="List the project's key achievements and your contributions")
-                proj['achievements'] = [a.strip()
-                                                for a in proj_achv_text.split('\n') if a.strip()]
+                # # Project Achievements
+                # st.markdown("##### Key Achievements")
+                # proj_achv_text = st.text_area("Enter achievements (one per line)",
+                #                             key=f"proj_achv_{idx}",
+                #                             value='\n'.join(
+                #                                 proj.get('achievements', [])),
+                #                             height=100,
+                #                             help="List the project's key achievements and your contributions")
+                # proj['achievements'] = [a.strip()
+                #                                 for a in proj_achv_text.split('\n') if a.strip()]
 
-                proj['link'] = st.text_input("Project Link (optional)", key=f"proj_link_{idx}",
-                                           value=proj.get('link', ''),
-                                           help="Link to the project repository, demo, or documentation")
+                # proj['link'] = st.text_input("Project Link (optional)", key=f"proj_link_{idx}",
+                #                            value=proj.get('link', ''),
+                #                            help="Link to the project repository, demo, or documentation")
 
-                if st.button("Remove Project", key=f"remove_proj_{idx}"):
-                    st.session_state.form_data['projects'].pop(idx)
-                    st.rerun()
+                # if st.button("Remove Project", key=f"remove_proj_{idx}"):
+                #     st.session_state.form_data['projects'].pop(idx)
+                #     st.rerun()
 
         # Education Section
         st.subheader("Education")
@@ -2668,7 +2668,7 @@ class ResumeApp:
                                 -webkit-background-clip: text;
                                 -webkit-text-fill-color: transparent;
                                 animation: gradientAnimation 6s ease infinite;
-                            ">CareerIQ</h1>
+                            ">AI-Powered Resume Analyzer</h1>
                             <p style="
                                 color: rgba(255,255,255,0.9); 
                                 font-size: 1.3rem; 
@@ -3012,7 +3012,7 @@ class ResumeApp:
         # Admin login/logout in sidebar
         with st.sidebar:
             st_lottie(self.load_lottie_url("https://assets5.lottiefiles.com/packages/lf20_xyadoh9h.json"), height=200, key="sidebar_animation")
-            st.title("CareerIQ")
+            st.title("AI-Powered Resume Analyzer")
             st.markdown("---")
             
             # Navigation buttons
