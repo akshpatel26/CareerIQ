@@ -38,7 +38,7 @@ import json
 import datetime
 from dotenv import load_dotenv
 import os
-from SmartQuiz.aimocktest import run_quiz 
+from smartQuiz.aimocktest import run_quiz 
 
 load_dotenv()  # Load from .env file
 google_api_key = os.getenv("GOOGLE_API_KEY")
@@ -49,7 +49,7 @@ if not google_api_key:
 
 # Set page config at the very beginning
 st.set_page_config(
-    page_title="AI-Powered Resume Analyzer",
+    page_title="CareerIQ",
     layout="wide"
 )
 
@@ -78,7 +78,7 @@ class ResumeApp:
                 }
             }
 
-        # Initialize navigation state
+        # Initialize navigation state 
         if 'page' not in st.session_state:
             st.session_state.page = 'home'
 
@@ -88,13 +88,12 @@ class ResumeApp:
 
         self.pages = {
             "🏠 HOME": self.render_home,
+            "📊 DASHBOARD": self.render_dashboard,
             "📝 RESUME BUILDER": self.render_builder,
             "🔍 RESUME ANALYZER": self.render_analyzer,
             "🎯 JOB SEARCH": self.render_job_search,
             "🧩 Smart Quiz ": self.render_quiz, 
-            "💬 FEEDBACK": self.render_feedback_page,
-            "📊 DASHBOARD": self.render_dashboard
-
+            "💬 FEEDBACK": self.render_feedback_page
         }
 
         # Initialize dashboard manager
@@ -2668,7 +2667,7 @@ class ResumeApp:
                                 -webkit-background-clip: text;
                                 -webkit-text-fill-color: transparent;
                                 animation: gradientAnimation 6s ease infinite;
-                            ">AI-Powered Resume Analyzer</h1>
+                            ">CareerIQ</h1>
                             <p style="
                                 color: rgba(255,255,255,0.9); 
                                 font-size: 1.3rem; 
@@ -3012,7 +3011,7 @@ class ResumeApp:
         # Admin login/logout in sidebar
         with st.sidebar:
             st_lottie(self.load_lottie_url("https://assets5.lottiefiles.com/packages/lf20_xyadoh9h.json"), height=200, key="sidebar_animation")
-            st.title("AI-Powered Resume Analyzer")
+            st.title("CareerIQ")
             st.markdown("---")
             
             # Navigation buttons
