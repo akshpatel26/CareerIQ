@@ -1058,12 +1058,6 @@ QUESTION_BANK = {
       "explanation": "A is 2nd from left, C is 2nd from right (4th from left), so B must be in middle (3rd position)"
     },
     {
-      "question": "What time will it be 3 hours after 2:30 PM?",
-      "options": ["5:30 PM", "6:30 PM", "5:00 PM", "6:00 PM"],
-      "correct": 0,
-      "explanation": "2:30 PM + 3 hours = 5:30 PM"
-    },
-    {
       "question": "If today is Wednesday, what day will it be after 10 days?",
       "options": ["Thursday", "Friday", "Saturday", "Sunday"],
       "correct": 2,
@@ -2220,12 +2214,6 @@ QUESTION_BANK = {
       "options": ["GROUP BY", "SORT", "ORDER BY", "ARRANGE"],
       "correct": 2,
       "explanation": "ORDER BY is used to sort the results in ascending/descending order."
-    },
-    {
-      "question": "Which of the following is NOT a property of ACID in DBMS?",
-      "options": ["Atomicity", "Consistency", "Isolation", "Durability", "Flexibility"],
-      "correct": 4,
-      "explanation": "ACID properties are Atomicity, Consistency, Isolation, Durability."
     },
     {
       "question": "Which process scheduling algorithm gives the minimum average waiting time?",
